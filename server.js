@@ -1,4 +1,4 @@
-
+#!/bin/env node
 var express = require('express');
 var app = express();
 var ipaddress = process.env.OPENSHIFT_NODEJS_IP;
