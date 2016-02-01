@@ -7,7 +7,21 @@ var port = process.env.OPENSHIFT_NODEJS_PORT || 3000;
 // serve static assignment directory
 app.use(express.static('public'));
 
-app.get('/hello', function(req, res){
-    res.send('hello world');
+// quick routes for static pages
+app.get('/register', function(req, res){
+    res.sendFile(__dirname + '/public/assignment/register.html')
 });
+app.get('/login', function(req, res){
+    res.sendFile(__dirname + '/public/assignment/login.html')
+});
+app.get('/forms', function(req, res){
+    res.sendFile(__dirname + '/public/assignment/forms.html')
+});
+app.get('/', function(req, res){
+    res.sendFile(__dirname + '/public/assignment/home.html')
+});
+app.get('/profile', function(req, res){
+    res.sendFile(__dirname + '/public/assignment/profile.html')
+});
+
 app.listen(port, ipaddress);
