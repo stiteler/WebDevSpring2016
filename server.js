@@ -23,5 +23,10 @@ app.get('/', function(req, res){
 app.get('/profile', function(req, res){
     res.sendFile(__dirname + '/public/assignment/profile.html')
 });
+app.get('/admin', function(req, res){
+    res.sendFile(__dirname + '/public/assignment/admin.html')
+});
+// end routes for static pages
+
 
 app.listen(port, ipaddress);
