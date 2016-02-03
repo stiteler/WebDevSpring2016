@@ -14,6 +14,8 @@
 
     <!-- Bootstrap core CSS -->
     <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet">
+    <!-- FontAwesome for table drop downs -->
+    <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet">
 
     <!-- Custom styles for this template -->
     <link href="/assignment/css/dashboard.css" rel="stylesheet">
@@ -64,18 +66,36 @@
                 <table class="table table-striped">
                     <thead>
                         <tr>
-                            <td>Username</td>
-                            <td>Password</td>
-                            <td>Role</td>
-                            <td>Action</td>
+                            <td><i class="fa fa-fw fa-sort-down"></i>Username</td>
+                            <td><i class="fa fa-fw fa-sort-down"></i>Password</td>
+                            <td><i class="fa fa-fw fa-sort-down"></i>Role</td>
+                            <td><i class="fa fa-fw fa-sort-down"></i>Action</td>
                         </tr>
                     </thead>
                     <tbody>
                         <tr>
+                            <td><input type="text" class="input-sm form-control" id="admin_username" name="admin_username" placeholder="userame"></td>
+                            <td><input type="password" class="input-sm form-control" id="admin_password" name="admin_password" placeholder="password"></td>
+                            <td><input type="text" class="input-sm form-control" id="admin_roles" name="admin_roles" placeholder="role1, role2"></td>
+                            <td><span class="glyphicon glyphicon-plus-sign gi-admin-table"></span><span class="glyphicon glyphicon-ok-sign gi-admin-table"></span></td>
+                        </tr>
+                        <tr>
                             <td>alice</td>
                             <td></td>
                             <td>student</td>
-                            <td>insert_action_here</td>
+                            <td><span class="glyphicon glyphicon-pencil gi-admin-table"></span><span class="glyphicon glyphicon-remove gi-admin-table"></span></td>
+                        </tr>
+                        <tr>
+                            <td>bob</td>
+                            <td></td>
+                            <td>faculty | admin</td>
+                            <td><span class="glyphicon glyphicon-pencil gi-admin-table"></span><span class="glyphicon glyphicon-remove gi-admin-table"></span></td>
+                        </tr>
+                        <tr>
+                            <td>charlie</td>
+                            <td></td>
+                            <td></td>
+                            <td><span class="glyphicon glyphicon-pencil gi-admin-table"></span><span class="glyphicon glyphicon-remove gi-admin-table"></span></td>
                         </tr>
                     </tbody>
                 </table>

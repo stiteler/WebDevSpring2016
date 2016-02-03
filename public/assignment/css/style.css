@@ -1,3 +1,10 @@
 thead {
     font-weight: bold;
 }
+.gi-admin-table {
+    font-size: 1.5em;
+    padding-left: 0.75em;
+    padding-right: 0.75em;
+    padding-top: 0.1em;
+    padding-bottom: 0.1em;
+}
