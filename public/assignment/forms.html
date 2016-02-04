@@ -52,53 +52,60 @@
             <ul class="nav nav-sidebar">
                 <li><a href="/">Home</a></li>
                 <li><a href="profile">Profile</a></li>
-                <li class="active"><a href="admin">Admin<span class="sr-only">(current)</span></a></li>
-                <li><a href="forms">Forms</a></li>
+                <li><a href="admin">Admin</a></li>
+                <li class="active"><a href="forms">Forms<span class="sr-only">(current)</span></a></li>
             </ul>
         </div>
         <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
-            <h1>Admin</h1>
-            <h2>Users</h2>
+            <h1 class="page-header">Forms</h1>
 
-            <div class="table-responsive">
-                <table class="table table-striped">
-                    <thead>
-                        <tr>
-                            <td><i class="fa fa-fw fa-sort-down"></i>Username</td>
-                            <td><i class="fa fa-fw fa-sort-down"></i>Password</td>
-                            <td><i class="fa fa-fw fa-sort-down"></i>Role</td>
-                            <td><i class="fa fa-fw fa-sort-down"></i>Action</td>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td><input type="text" class="input-sm form-control" id="admin_username" name="admin_username" placeholder="userame"></td>
-                            <td><input type="password" class="input-sm form-control" id="admin_password" name="admin_password" placeholder="password"></td>
-                            <td><input type="text" class="input-sm form-control" id="admin_roles" name="admin_roles" placeholder="role1, role2"></td>
-                            <td><span class="glyphicon glyphicon-plus-sign gi-admin-table"></span><span class="glyphicon glyphicon-ok-sign gi-admin-table"></span></td>
-                        </tr>
-                        <tr>
-                            <td>alice</td>
-                            <td></td>
-                            <td>student</td>
-                            <td><span class="glyphicon glyphicon-pencil gi-admin-table"></span><span class="glyphicon glyphicon-remove gi-admin-table"></span></td>
-                        </tr>
-                        <tr>
-                            <td>bob</td>
-                            <td></td>
-                            <td>faculty | admin</td>
-                            <td><span class="glyphicon glyphicon-pencil gi-admin-table"></span><span class="glyphicon glyphicon-remove gi-admin-table"></span></td>
-                        </tr>
-                        <tr>
-                            <td>charlie</td>
-                            <td></td>
-                            <td></td>
-                            <td><span class="glyphicon glyphicon-pencil gi-admin-table"></span><span class="glyphicon glyphicon-remove gi-admin-table"></span></td>
-                        </tr>
-                    </tbody>
-                </table>
+            <!-- Begin Tabs -->
+            <ul class="nav nav-tabs">
+                <li role="presentation" class="active"><a data-toggle="tab" href="#forms-pane">Forms</a></li>
+                <!-- <li role="presentation"><a data-toggle="tab" href="#fields-pane">Fields</a></li> -->
+                <li role="presentation"><a href="fields">Fields</a></li>
+            </ul>
+
+            <!-- Begin Tab Content -->
+            <div class="tab-content">
+                <div class="tab-pane fade in active" id="forms-pane">
+                    <!-- Begin FORMS Table -->
+                    <div class="table-responsive">
+                        <table class="table table-striped">
+                            <thead>
+                                <tr>
+                                    <td><i class="fa fa-fw fa-sort-down"></i>Form Name</td>
+                                    <td><i class="fa fa-fw fa-sort-down"></i>Action</td>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td><input type="text" class="input-sm form-control" placeholder="username" id="input-form-name"></td>
+                                    <td>
+                                        <span class="glyphicon glyphicon-plus-sign gi-form-table"></span>
+                                        <span class="glyphicon glyphicon-ok-sign gi-form-table"></span>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>Registration Form</td>
+                                    <td>
+                                        <span class="glyphicon glyphicon-remove gi-form-table"></span>
+                                        <span class="glyphicon glyphicon-pencil gi-form-table"></span>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <!-- End Users Table -->
+                </div>
+                <!-- Not dynamic yet!
+                <div class="tab-pane fade" id="fields-pane">
+                    fields
+                </div> -->
             </div>
-            <!-- End Users Table -->
+
+
+
 
         </div>
     </div>

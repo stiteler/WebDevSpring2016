@@ -26,6 +26,12 @@ app.get('/profile', function(req, res){
 app.get('/admin', function(req, res){
     res.sendFile(__dirname + '/public/assignment/admin.html')
 });
+app.get('/logout', function(req, res){
+    res.sendFile(__dirname + '/public/assignment/home.html')
+});
+app.get('/fields', function(req, res){
+    res.sendFile(__dirname + '/public/assignment/fields.html')
+});
 // end routes for static pages
 
 
