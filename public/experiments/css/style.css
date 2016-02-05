@@ -1,0 +1,23 @@
+thead {
+    font-weight: bold;
+}
+.gi-admin-table, .gi-form-table {
+    font-size: 1.5em;
+    padding-left: 0.75em;
+    padding-right: 0.75em;
+    padding-top: 0.1em;
+    padding-bottom: 0.1em;
+}
+
+.gi-field-table {
+    font-size: 1.5em;
+}
+
+.field-obj-container {
+    padding-top: 5px;
+    padding-bottom: 5px;
+}
+
+#fields-table td, #fields-table th {
+    border-top: none;
+}
