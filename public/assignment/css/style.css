@@ -8,3 +8,13 @@ thead {
     padding-top: 0.1em;
     padding-bottom: 0.1em;
 }
+
+.gi-field-table {
+    font-size: 1.5em;
+}
+
+.field-obj-container {
+    padding-top: 5px;
+    padding-bottom: 5px;
+}
+
