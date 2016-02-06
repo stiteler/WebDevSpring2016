@@ -19,25 +19,25 @@ app.get('/register', function(req, res){
     res.sendfile('public/assignment/register.html')
 });
 app.get('/login', function(req, res){
-    res.sendFile(dir + '/public/assignment/login.html')
+    res.sendfile('public/assignment/login.html')
 });
 app.get('/forms', function(req, res){
-    res.sendFile(dir + '/public/assignment/forms.html')
+    res.sendfile('public/assignment/forms.html')
 });
 app.get('/', function(req, res){
-    res.sendFile(dir + '/public/assignment/home.html')
+    res.sendfile('public/assignment/home.html')
 });
 app.get('/profile', function(req, res){
-    res.sendFile(dir + '/public/assignment/profile.html')
+    res.sendfile('public/assignment/profile.html')
 });
 app.get('/admin', function(req, res){
-    res.sendFile(dir + '/public/assignment/admin.html')
+    res.sendfile('public/assignment/admin.html')
 });
 app.get('/logout', function(req, res){
-    res.sendFile(dir + '/public/assignment/home.html')
+    res.sendfile('public/assignment/home.html')
 });
 app.get('/fields', function(req, res){
-    res.sendFile(dir + '/public/assignment/fields.html')
+    res.sendfile('public/assignment/fields.html')
 });
 // end routes for static pages
 
