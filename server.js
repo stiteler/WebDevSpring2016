@@ -15,7 +15,7 @@ if (typeof process.env.OPENSHIFT_HOMEDIR != 'undefined') {
 
 // quick routes for static pages
 app.get('/register', function(req, res){
-    res.sendFile(dir + '/public/assignment/register.html')
+    res.sendfile(dir + '/public/assignment/register.html')
 });
 app.get('/login', function(req, res){
     res.sendFile(dir + '/public/assignment/login.html')
