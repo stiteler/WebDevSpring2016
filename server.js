@@ -9,8 +9,9 @@ if (typeof process.env.OPENSHIFT_HOMEDIR != 'undefined') {
   dir = process.env.OPENSHIFT_HOMEDIR;
 } else {
   console.log("local environment detected");
-  dir = __dirname
+  dir = __dirname;
 }
+console.log("Directory is " + dir);
 
 
 // quick routes for static pages
