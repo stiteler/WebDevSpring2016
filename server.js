@@ -16,7 +16,7 @@ console.log("Directory is " + dir);
 
 // quick routes for static pages
 app.get('/register', function(req, res){
-    res.sendfile(dir + 'public/assignment/register.html')
+    res.sendfile('public/assignment/register.html')
 });
 app.get('/login', function(req, res){
     res.sendFile(dir + '/public/assignment/login.html')
