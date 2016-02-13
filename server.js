@@ -11,35 +11,23 @@ if (typeof process.env.OPENSHIFT_HOMEDIR != 'undefined') {
   console.log("local environment detected");
   dir = __dirname;
 }
-console.log("Directory is " + dir);
 
+var routes = {
+  '/register': 'public/assignment/register.view.html',
+  '/login': 'public/assignment/login.view.html',
+  '/forms': 'public/assignment/forms.view.html',
+  '/': 'public/assignment/home.view.html',
+  '/profile': 'public/assignment/profile.view.html',
+  '/admin': 'public/assignment/admin.view.html',
+  '/logout': 'public/assignment/home.view.html',
+  '/fields': 'public/assignment/fields.view.html'
+};
 
-// quick routes for static pages
-app.get('/register', function(req, res){
-    res.sendfile('public/assignment/register.html')
-});
-app.get('/login', function(req, res){
-    res.sendfile('public/assignment/login.html')
-});
-app.get('/forms', function(req, res){
-    res.sendfile('public/assignment/forms.html')
-});
-app.get('/', function(req, res){
-    res.sendfile('public/assignment/home.html')
-});
-app.get('/profile', function(req, res){
-    res.sendfile('public/assignment/profile.html')
-});
-app.get('/admin', function(req, res){
-    res.sendfile('public/assignment/admin.html')
-});
-app.get('/logout', function(req, res){
-    res.sendfile('public/assignment/home.html')
-});
-app.get('/fields', function(req, res){
-    res.sendfile('public/assignment/fields.html')
-});
-// end routes for static pages
+for(var route in routes) {
+  app.get(route, function(req, res) {
+    res.sendfile(routes[route]);
+  });
+};
 
 // serve static assignment directory
 app.use(express.static('public'));
