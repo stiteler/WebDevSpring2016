@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en" 
+
+  ng-app="FormBuilderApp">
+
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Form Maker</title>
+
+    <!-- JS Dependencies -->
+    <!-- Angular JS -->
+    <script 
+      src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.9/angular.min.js">
+    </script>
+    <script 
+      src="https://ajax.googleapis.com/ajax/libs/angularjs/X.Y.Z/angular-route.js">
+    </script>
+    
+    <!-- jquery -->
+    <script 
+      src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js">
+    </script>
+    <!-- bootstrap -->
+    <script 
+      src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js">
+    </script>
+    <script
+      src="app.js">
+    </script>
+    <script
+      src="config.js">
+    </script>
+
+    <!-- Controllers -->
+
+
+
+    <!-- Style Dependencies-->
+    <!-- Bootstrap CSS -->
+    <link 
+      href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" 
+      rel="stylesheet">
+    <!-- FontAwesome for table drop downs -->
+    <link 
+      href="//maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" 
+      rel="stylesheet">
+    <!-- Custom styles -->
+    <link 
+      href="/assignment/css/dashboard.css" 
+      rel="stylesheet">
+    <link 
+      href="/assignment/css/style.css" 
+      rel="stylesheet"/>
+  </head>
+  <body ng-controller="MainController"> 
+    <div ng-include="'views/header/header.view.html'"></div>
+    <div ng-include="'views/sidebar/sidebar.view.html'"></div>
+    <div ng-view></div>
+  </body>
+</html>
