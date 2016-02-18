@@ -20,12 +20,16 @@
         </div>
         <div id="navbar" class="navbar-collapse collapse">
             <ul class="nav navbar-nav navbar-right">
-                <li><a href="#/register">Register</a></li>
-                <li><a href="#/login">Login</a></li>
+                <li ng-class="{ active : isActive('/register') }">
+                    <a href="#/register">Register</a></li>
+                <li ng-class="{ active : isActive('/login') }">
+                    <a href="#/login">Login</a></li>
                 <li><a href="#/home">Logout</a></li>
                 <li><a href="#/profile">Username</a></li>
-                <li><a href="#/profile">Profile</a></li>
-                <li><a href="#/admin">Admin</a></li>
+                <li ng-class="{ active : isActive('/profile') }">
+                    <a href="#/profile">Profile</a></li>
+                <li ng-class="{ active : isActive('/admin') }">
+                    <a href="#/admin">Admin</a></li>
             </ul>
         </div>
     </div>

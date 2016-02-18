@@ -3,7 +3,7 @@
         .module("FormBuilderApp")
         .controller("HeaderController", HeaderController);
 
-    function HeaderController($scope) {
-        
+    function HeaderController($scope, UtilsService) {
+        $scope.isActive = UtilsService.isActive;
     }
 }());
