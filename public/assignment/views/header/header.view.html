@@ -1,4 +1,6 @@
-<nav class="navbar navbar-inverse navbar-fixed-top">
+<nav 
+    class="navbar navbar-inverse navbar-fixed-top"
+    ng-controller="HeaderController">
     <div class="container-fluid">
         <div class="navbar-header">
             <button 
@@ -18,8 +20,12 @@
         </div>
         <div id="navbar" class="navbar-collapse collapse">
             <ul class="nav navbar-nav navbar-right">
-                <li><a href="profile">Username</a></li>
-                <li><a href="logout">Logout</a></li>
+                <li><a href="#/register">Register</a></li>
+                <li><a href="#/login">Login</a></li>
+                <li><a href="#/home">Logout</a></li>
+                <li><a href="#/profile">Username</a></li>
+                <li><a href="#/profile">Profile</a></li>
+                <li><a href="#/admin">Admin</a></li>
             </ul>
         </div>
     </div>
