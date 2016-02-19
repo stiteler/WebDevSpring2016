@@ -3,7 +3,7 @@
         .module("FormBuilderApp")
         .factory("UserService", UserService);
 
-    function UserService($location) {
+    function UserService() {
         var users = _getUsers();
 
         var api = {
