@@ -5,12 +5,17 @@
 
     function UtilsService($location) {
         var api = {
-            isActive: isActive
+            isActive: isActive,
+            navigate: navigate,
         };
         return api;
 
         function isActive(location) {
             return $location.path() == location;
+        };
+
+        function navigate(location) {
+            $location.path(location);
         };
     }
 }());

@@ -1,0 +1,34 @@
+(function(){
+    angular
+        .module("FormBuilderApp")
+        .controller("ProfileController", ProfileController);
+
+    function ProfileController($scope, $rootScope, UserService, UtilsService) {
+        user = $rootScope.user;
+        if (typeof(user) != 'undefined') {
+            $scope.username = user.username;
+            $scope.email = user.email;
+            $scope.firstName = user.firstName;
+            $scope.lastName = user.lastName;
+            $scope.password = user.password;
+        }
+
+        $scope.update = update;
+        function update() {
+            // could error check here but should never be
+            // in this context if user is not in rootScope.
+            new_user =  {
+                username: $scope.username,
+                firstName: $scope.firstName,
+                lastName: $scope.lastName,
+                email: $scope.email,
+                password: $scope.password,
+            }
+
+            UserService.updateUser(user._id, new_user, function(result) {
+                console.log("in update callback." + result);
+                $rootScope.user = result;
+            });
+        }
+    }
+}());

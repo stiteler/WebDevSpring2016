@@ -17,15 +17,16 @@
 
         function findUserByUsernameAndPassword(username, password, callback) {
             retr = null;
-            for(user in users) {
+            for(i in users) {
+                user = users[i]
                 if( username === user.username && password === user.password ) {
                     retr = user;
-                };
+                }
             };
             callback(retr);
         };
 
-        function findAllusers(callback) {
+        function findAllUsers(callback) {
             callback(users);
         }
 
