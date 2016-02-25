@@ -49,10 +49,9 @@
         function updateUser(userId, user, callback) {
             existing = _getUserById(userId);
             if(existing) {
-                existing = user;
-                // i believe this works..
-                // need to make sure this works
-                // with regards to pointers/references
+                for (attr in user) {
+                    existing[attr] = user[attr];
+                }
                 callback(existing);
             }
             callback(null);
