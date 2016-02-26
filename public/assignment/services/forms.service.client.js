@@ -56,7 +56,8 @@
             // returns forms where the given attr
             // ie. userId or _id match value.
             rtn = [];
-            for(form in forms) {
+            for(ind in forms) {
+                form = forms[ind];
                 if(form[attr] === value ) {
                     rtn.push(form);
                 };
