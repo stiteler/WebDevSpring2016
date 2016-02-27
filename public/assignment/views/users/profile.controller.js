@@ -8,7 +8,12 @@
     function ProfileController($scope, $rootScope, UserService, UtilsService) {
 
         $scope.update = update;
-        var userId = $rootScope.user._id;
+        if (UtilsService.isLoggedIn()) {
+            var userId = $rootScope.user._id;
+        } else {
+            // is there a better way to control being on #/profile and refreshing the page?
+            UtilsService.navigate('#/home');
+        }
 
         function init() {
             // if we made any changes to the profile, and didn't click update, we

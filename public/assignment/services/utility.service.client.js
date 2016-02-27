@@ -5,12 +5,24 @@
         .module('FormBuilderApp')
         .factory('UtilsService', UtilsService);
 
-    function UtilsService($location) {
+    function UtilsService($rootScope, $location) {
         var api = {
             isActive: isActive,
             navigate: navigate,
+            isLoggedIn: isLoggedIn,
+            isAdmin: isAdmin,
         };
         return api;
+
+        function isLoggedIn() {
+            return $rootScope.user ? true : false;
+        }
+
+        function isAdmin() {
+            if (isLoggedIn()) {
+                return ($rootScope.user.roles.indexOf('admin') > -1) ? true : false;
+            }
+        }
 
         function isActive(location) {
             return $location.path() === location;

@@ -7,25 +7,15 @@
 
     function HeaderController($scope, $rootScope, UtilsService) {
         $scope.isActive = UtilsService.isActive;
+        $scope.loggedIn = UtilsService.isLoggedIn;
+        $scope.isAdmin = UtilsService.isAdmin;
         $scope.logout = logout;
-        $scope.loggedIn = loggedIn;
-        $scope.isAdmin = isAdmin;
 
         (function () {
-            if (loggedIn()) {
+            if (UtilsService.isLoggedIn()) {
                 $scope.user = $rootScope.user;
             }
         })();
-
-        function loggedIn() {
-            return $rootScope.user ? true : false;
-        }
-
-        function isAdmin() {
-            if (loggedIn()) {
-                return ($rootScope.user.roles.indexOf('admin') > -1) ? true : false;
-            }
-        }
 
         function logout() {
             $rootScope.user = null;
