@@ -20,7 +20,7 @@
             form._id = (new Date()).getTime();
             form.userId = userId;
             forms.push(form);
-            callback(form);
+            callback(_copyForm(form));
         }
 
         function findAllFormsForUser(userId, callback) {
@@ -36,6 +36,7 @@
                 var index = forms.indexOf(match);
                 forms.splice(index, 1);
             }
+            // this is a vuln. if alice can get bob's forms.
             callback(forms);
         }
 
@@ -50,10 +51,19 @@
                         match[attr] = newForm[attr];
                     }
                 }
-                callback(match);
+                callback(_copyForm(match));
             } else {
                 callback(null);
             }
+        }
+
+        function _copyForm(form) {
+            var copy = {
+                _id: form._id,
+                title: form.title,
+                userId: form.userId,
+            };
+            return copy;
         }
 
         function _searchForms(attr, value) {

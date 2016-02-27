@@ -21,7 +21,9 @@
                 </thead>
                 <tbody>
                     <tr>
-                        <td><input ng-model="form.name" type="text" class="input-sm form-control" placeholder="name" id="input-form-name"></td>
+                        <td><input ng-model="active.title" 
+                            type="text" class="input-sm form-control"
+                            placeholder="name" id="input-form-name"></td>
                         <td>
                             <span ng-click="addForm()" class="glyphicon glyphicon-plus-sign gi-form-table"></span>
                             <span ng-click="updateForm()" class="glyphicon glyphicon-ok-sign gi-form-table"></span>
@@ -30,8 +32,8 @@
                     <tr ng-repeat="form in forms">
                         <td>{{form.title}}</td>
                         <td>
-                            <span ng-click="deleteForm()" class="glyphicon glyphicon-remove gi-form-table"></span>
-                            <span ng-click="selectForm()"  class="glyphicon glyphicon-pencil gi-form-table"></span>
+                            <span ng-click="deleteForm(form._id)" class="glyphicon glyphicon-remove gi-form-table"></span>
+                            <span ng-click="selectForm(form._id)"  class="glyphicon glyphicon-pencil gi-form-table"></span>
                         </td>
                     </tr>
                 </tbody>
