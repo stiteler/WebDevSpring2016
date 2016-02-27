@@ -1,7 +1,7 @@
-(function(){
+(function () {
     angular
-        .module("FormBuilderApp")
-        .factory("UtilsService", UtilsService);
+        .module('FormBuilderApp')
+        .factory('UtilsService', UtilsService);
 
     function UtilsService($location) {
         var api = {
@@ -11,11 +11,11 @@
         return api;
 
         function isActive(location) {
-            return $location.path() == location;
-        };
+            return $location.path() === location;
+        }
 
         function navigate(location) {
             $location.path(location);
-        };
+        }
     }
 }());

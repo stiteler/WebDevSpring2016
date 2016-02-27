@@ -8,18 +8,18 @@
 
         function login() {
             var user = null;
-            un = $scope.username;
-            pw = $scope.password;
+            var un = $scope.username;
+            var pw = $scope.password;
 
             UserService.findUserByUsernameAndPassword(un, pw, function (res) {
-                if (typeof(res) != 'undefined') {
+                if (typeof(res) !== 'undefined') {
                     $rootScope.user = res;
                     UtilsService.navigate('/profile');
                 } else {
                     console.log('no such user');
                     // for the love of god
                     // don't 'alert' anyone. just handle it.
-                    alert('Please try again');
+                    console.alert('Please try again');
                 }
             });
         }

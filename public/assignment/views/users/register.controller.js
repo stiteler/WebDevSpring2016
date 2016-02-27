@@ -9,7 +9,7 @@
 
         function register() {
             // verify password's match here, when required.
-            newUser = {
+            var newUser = {
                 password: $scope.password,
                 username: $scope.username,
                 email: $scope.email,

@@ -19,7 +19,7 @@
         function update() {
             // could error check here but should never be
             // in this context if user is not in rootScope.
-            newUser =  {
+            var newUser =  {
                 username: $scope.username,
                 firstName: $scope.firstName,
                 lastName: $scope.lastName,
