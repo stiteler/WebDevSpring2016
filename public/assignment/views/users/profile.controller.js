@@ -19,7 +19,7 @@
         function update() {
             // could error check here but should never be
             // in this context if user is not in rootScope.
-            new_user =  {
+            newUser =  {
                 username: $scope.username,
                 firstName: $scope.firstName,
                 lastName: $scope.lastName,
@@ -27,8 +27,8 @@
                 password: $scope.password,
             };
 
-            UserService.updateUser(user._id, new_user, function (result) {
-                console.log('in update callback.' + new_user);
+            UserService.updateUser(user._id, newUser, function (result) {
+                console.log('in update callback.' + newUser);
                 console.log('result is: ' + result);
                 $rootScope.user = result;
             });

@@ -9,7 +9,7 @@
 
         function register() {
             // verify password's match here, when required.
-            new_user = {
+            newUser = {
                 password: $scope.password,
                 username: $scope.username,
                 email: $scope.email,
@@ -17,7 +17,7 @@
                 _id: _uid++,
             };
 
-            UserService.createUser(new_user, function (created) {
+            UserService.createUser(newUser, function (created) {
                 // put new user in root scope.
                 $rootScope.user = created;
                 UtilsService.navigate('/profile');
