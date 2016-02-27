@@ -1,4 +1,6 @@
 (function () {
+    'use strict';
+
     angular
         .module('FormBuilderApp')
         .factory('UserService', UserService);
@@ -12,17 +14,18 @@
             createUser: createUser,
             deleteUserById: deleteUserById,
             updateUser: updateUser,
+            getUserByUserId: getUserByUserId,
         };
         return api;
 
         function findUserByUsernameAndPassword(username, password, callback) {
             var retr = null;
             for (var i in users) {
-                if(users[i]) {
+                if (users[i]) {
                     var user = users[i];
                     if (username === user.username && password === user.password) {
                         retr = user;
-                    }            
+                    }
                 }
             }
             callback(retr);
@@ -32,10 +35,22 @@
             callback(users);
         }
 
+        function getUserByUserId(userId, callback) {
+            var user = _getUserById(userId);
+            if (user) {
+                callback(_copyUser(user));
+            } else {
+                callback(null);
+            }
+        }
+
         function createUser(user, callback) {
             var uid = (new Date()).getTime();
             user._id = uid;
-            users.push(user);
+
+            // we want to make a copy here to avoid
+            // $scope.user pointer issues.
+            users.push(_copyUser(user));
             callback(user);
         }
 
@@ -56,9 +71,11 @@
                         existing[attr] = user[attr];
                     }
                 }
-                callback(existing);
+                // copy user here again to avoid scoping issues
+                callback(_copyUser(existing));
+            } else {
+                callback(null);
             }
-            callback(null);
         }
 
         function _getUserById(userId) {
@@ -71,6 +88,19 @@
                 }
             }
             return null;
+        }
+
+        function _copyUser(user) {
+            var copy = {
+                _id: user._id,
+                firstName: user.firstName,
+                lastName: user.lastName,
+                username: user.username,
+                password: user.password,
+                email: user.email,
+                roles: user.roles,
+            };
+            return copy;
         }
 
         function _getUsers() {

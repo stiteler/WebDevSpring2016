@@ -1,4 +1,6 @@
 (function () {
+    'use strict';
+
     angular
         .module('FormBuilderApp')
         .factory('FormService', FormService);
@@ -64,7 +66,7 @@
                     if (form[attr] === value) {
                         rtn.push(form);
                     }
-                } 
+                }
             }
             return rtn;
         }

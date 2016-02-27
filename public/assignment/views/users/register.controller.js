@@ -1,4 +1,6 @@
 (function () {
+    'use strict';
+
     angular
         .module('FormBuilderApp')
         .controller('RegisterController', RegisterController);
@@ -10,17 +12,23 @@
         function register() {
             // verify password's match here, when required.
             var newUser = {
-                password: $scope.password,
                 username: $scope.username,
+                password: $scope.password,
                 email: $scope.email,
-                // eventually going to be retrieved from model
+                firstName: '',
+                lastName: '',
+                // we'll assign student as a default role for now.
+                roles: ['student'],
+                // eventually _id is going to be retrieved from model
                 _id: _uid++,
             };
 
             UserService.createUser(newUser, function (created) {
                 // put new user in root scope.
-                $rootScope.user = created;
-                UtilsService.navigate('/profile');
+                if (created) {
+                    $rootScope.user = created;
+                    UtilsService.navigate('/profile');
+                }
             });
         }
     }
