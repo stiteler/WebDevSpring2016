@@ -1,7 +1,7 @@
-(function(){
+(function () {
     angular
-        .module("FormBuilderApp")
-        .controller("SidebarController", SidebarController);
+        .module('FormBuilderApp')
+        .controller('SidebarController', SidebarController);
 
     function SidebarController($scope, UtilsService) {
         $scope.isActive = UtilsService.isActive;

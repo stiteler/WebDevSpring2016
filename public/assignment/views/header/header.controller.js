@@ -1,9 +1,16 @@
-(function(){
-    angular
-        .module("FormBuilderApp")
-        .controller("HeaderController", HeaderController);
+(function () {
+    'use strict';
 
-    function HeaderController($scope, UtilsService) {
+    angular
+        .module('FormBuilderApp')
+        .controller('HeaderController', HeaderController);
+
+    function HeaderController($scope, $rootScope, UtilsService) {
         $scope.isActive = UtilsService.isActive;
+        $scope.logout = logout;
+
+        function logout() {
+            $rootScope.user = null;
+        }
     }
 }());

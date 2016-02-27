@@ -48,8 +48,10 @@
 
         function updateUser(userId, user, callback) {
             existing = _getUserById(userId);
+            console.log("Found existing user: " + existing);
             if(existing) {
                 for (attr in user) {
+                    console.log("updating: " + attr, existing[attr]);
                     existing[attr] = user[attr];
                 }
                 callback(existing);
@@ -58,7 +60,10 @@
         }
 
         function _getUserById(userId) {
-            for(user in users) {
+            for(i in users) {
+                user = users[i]
+                console.log("i is: " + i)
+                console.log(user);
                 if( user._id === userId ) {
                     return user;
                 };

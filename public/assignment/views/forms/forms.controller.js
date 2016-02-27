@@ -1,7 +1,7 @@
-(function(){
+(function () {
     angular
-        .module("FormBuilderApp")
-        .controller("FormController", FormController);
+        .module('FormBuilderApp')
+        .controller('FormController', FormController);
 
     function FormController($scope, $rootScope, FormService, UtilsService) {
         $scope.deleteForm = deleteForm;
@@ -9,27 +9,27 @@
         $scope.selectForm = selectForm;
         $scope.updateForm = updateForm;
 
-        (function() {
+        (function () {
             // on init form controller.
-            FormService.findAllFormsForUser(123, function(res) {
+            FormService.findAllFormsForUser(123, function (res) {
                 $scope.forms = res;
             });
         })();
 
         function deleteForm() {
-            console.log("delete form");
+            console.log('delete form');
         }
 
         function addForm() {
-            console.log("add form");
+            console.log('add form');
         }
 
         function updateForm() {
-            console.log("update form");
+            console.log('update form');
         }
 
         function selectForm() {
-            console.log("select form");
+            console.log('select form');
         }
     }
 }());

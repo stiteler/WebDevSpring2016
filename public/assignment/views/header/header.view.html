@@ -24,7 +24,7 @@
                     <a href="#/register">Register</a></li>
                 <li ng-class="{ active : isActive('/login') }">
                     <a href="#/login">Login</a></li>
-                <li><a href="#/home">Logout</a></li>
+                <li><a ng-click="logout()" href="#/home">Logout</a></li>
                 <li><a href="#/profile">Username</a></li>
                 <li ng-class="{ active : isActive('/profile') }">
                     <a href="#/profile">Profile</a></li>

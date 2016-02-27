@@ -1,11 +1,13 @@
-(function(){
+(function () {
+    'use strict';
+
     angular
-        .module("FormBuilderApp")
-        .controller("ProfileController", ProfileController);
+        .module('FormBuilderApp')
+        .controller('ProfileController', ProfileController);
 
     function ProfileController($scope, $rootScope, UserService, UtilsService) {
-        user = $rootScope.user;
-        if (typeof(user) != 'undefined') {
+        var user = $rootScope.user;
+        if (user) {
             $scope.username = user.username;
             $scope.email = user.email;
             $scope.firstName = user.firstName;
@@ -23,10 +25,11 @@
                 lastName: $scope.lastName,
                 email: $scope.email,
                 password: $scope.password,
-            }
+            };
 
-            UserService.updateUser(user._id, new_user, function(result) {
-                console.log("in update callback." + result);
+            UserService.updateUser(user._id, new_user, function (result) {
+                console.log('in update callback.' + new_user);
+                console.log('result is: ' + result);
                 $rootScope.user = result;
             });
         }
