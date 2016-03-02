@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en" 
+
+  ng-app="FlairdropApp">
+
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Flairdrop</title>
+
+    <!-- JS Dependencies -->
+    <!-- Angular JS -->
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.9/angular.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.9/angular-route.js"></script>
+    <!-- jquery -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+    <!-- bootstrap -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+    <script src="app.js"></script>
+
+    <!-- Controllers -->
+    <script src="views/main/main.controller.js"></script>
+
+    <!-- Services -->
+    <!-- <script src="services/utility.service.client.js"></script> -->
+
+    <!-- Style Dependencies-->
+    <!-- Bootstrap CSS -->
+    <link 
+      href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" 
+      rel="stylesheet">
+    <!-- FontAwesome for table drop downs -->
+    <link 
+      href="//maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" 
+      rel="stylesheet">
+
+    <!-- material bootstrap styles and fonts -->
+    <link rel="stylesheet" type="text/css" href="css/bootstrap-material-design.min.css">
+    <link rel="stylesheet" type="text/css" href="css/ripples.min.css">
+    <link href="//fezvrasta.github.io/snackbarjs/dist/snackbar.min.css" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="//fonts.googleapis.com/css?family=Roboto:300,400,500,700">
+    <link rel="stylesheet" type="text/css" href="//fonts.googleapis.com/icon?family=Material+Icons">
+
+    <!-- Custom styles -->
+    <link href="/assignment/css/style.css" rel="stylesheet"/>
+
+    <!-- bootstrap material -->
+    <script src="js/dist/arrive.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/bootstrap-material-design/0.5.9/js/ripples.min.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/bootstrap-material-design/0.5.9/js/material.min.js"></script>
+    <script src="//fezvrasta.github.io/snackbarjs/dist/snackbar.min.js"></script>
+    <script src="config.js"></script>
+
+
+  </head>
+
+  <body ng-controller="MainController"> 
+    <div ng-include="'views/header/header.view.html'"></div>
+        <div class="container-fluid">
+          <div class="row">
+              <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
+          <div ng-view></div>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>
