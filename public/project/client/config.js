@@ -9,6 +9,19 @@
           .when('/home', {
               templateUrl: 'views/home/home.view.html'
           })
+      // example of resolve:
+      // see jose's code in proj/client/omdb/config.js
+      //  .when("/profile", {
+      //    templateUrl: "template.html",
+      //    controller: "ProfileContoller",
+      //    controllerAs: "model",
+      //    resolve: { 
+      //      checkLoggedIn: checkLoggedIn 
+      //    }
+      //
+      //    underneath
+      //    declare
+      //    function checkLoggedIn(UserService) {$http.get("/api/project/loggedin");}
           // .when('/profile', {
           //     templateUrl: 'views/users/profile.view.html',
           //     controller: 'ProfileController',

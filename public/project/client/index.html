@@ -18,9 +18,12 @@
     <!-- bootstrap -->
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
     <script src="app.js"></script>
+    <!-- embedly platform -->
+    <script async src="//cdn.embedly.com/widgets/platform.js" charset="UTF-8"></script>
 
     <!-- Controllers -->
     <script src="views/main/main.controller.js"></script>
+    <script src="views/header/navigation.controller.js"></script>
 
     <!-- Services -->
     <!-- <script src="services/utility.service.client.js"></script> -->
@@ -51,17 +54,11 @@
     <script src="//cdnjs.cloudflare.com/ajax/libs/bootstrap-material-design/0.5.9/js/material.min.js"></script>
     <script src="//fezvrasta.github.io/snackbarjs/dist/snackbar.min.js"></script>
     <script src="config.js"></script>
-
-
   </head>
-
   <body ng-controller="MainController"> 
-    <div ng-include="'views/header/header.view.html'"></div>
+    <div ng-include="'views/header/navigation.view.html'"></div>
         <div class="container-fluid">
-          <div class="row">
-              <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
           <div ng-view></div>
-        </div>
       </div>
     </div>
   </body>
