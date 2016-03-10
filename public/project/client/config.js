@@ -14,7 +14,7 @@
                     controllerAs: 'model',
                 })
                 .when('/poc/profile', {
-                  templateUrl: 'views/user/profile.view.html'
+                  templateUrl: 'views/users/profile.view.html',
                   controller: 'ProfileController',
                   controllerAs: 'model',
                 })
