@@ -1,0 +1,50 @@
+<div class="container">
+    <div class="panel panel-primary">
+        <div class="panel-heading">
+            <p>User CRUD proof of concept</p>
+        </div>
+        <div class="panel-body">
+            <div class="table-responsive">
+                <table class="table table-striped">
+                    <thead>
+                        <tr>
+                            <td>Username</td>
+                            <td>Name</td>
+                            <td>Email</td>
+                            <td>Region</td>
+                            <td>Primary Flair</td>
+                            <td>Secondary Flair</td>
+                            <td>Tertiary Flair</td>
+                            <td>Media</td>
+                        </tr>
+                    </thead>
+                    <tbody>
+        <!--                 <tr>
+                            <td><input ng-model="model.active.title" 
+                                type="text" class="input-sm form-control"
+                                placeholder="name" id="input-form-name"></td>
+                            <td>
+                                <span ng-click="addForm()" class="glyphicon glyphicon-plus-sign gi-form-table"></span>
+                                <span ng-click="updateForm()" class="glyphicon glyphicon-ok-sign gi-form-table"></span>
+                            </td>
+                        </tr> -->
+                        <tr ng-repeat="user in model.users">
+                            <td>{{user.username}}</td>
+                            <td>{{user.firstName}}</td>
+                            <td>{{user.email}}</td>
+                            <td>{{user.region}}</td>
+                            <td>{{user.flair1}}</td>
+                            <td>{{user.flair2}}</td>
+                            <td>{{user.flair3}}</td>
+                            <td>{{user.media}}</td>
+                            <td>
+                                <span ng-click="deleteForm(form._id)" class="glyphicon glyphicon-remove gi-form-table"></span>
+                                <span ng-click="selectForm(form._id)"  class="glyphicon glyphicon-pencil gi-form-table"></span>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
