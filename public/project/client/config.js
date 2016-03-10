@@ -9,8 +9,8 @@
                     templateUrl: 'views/home/home.view.html'
                 })
                 .when('/poc/users', {
-                    templateUrl: 'views/poc/poc.users.view.html',
-                    controller: 'PocController',
+                    templateUrl: 'views/admin/admin.view.html',
+                    controller: 'AdminController',
                     controllerAs: 'model',
                 })
                 .when('/poc/profile', {
