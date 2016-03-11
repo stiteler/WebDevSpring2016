@@ -8,7 +8,7 @@
                 .when('/home', {
                     templateUrl: 'views/home/home.view.html'
                 })
-                .when('/poc/users', {
+                .when('/poc/admin', {
                     templateUrl: 'views/admin/admin.view.html',
                     controller: 'AdminController',
                     controllerAs: 'model',

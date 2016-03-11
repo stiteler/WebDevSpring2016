@@ -1,15 +1,11 @@
 <div class="container-fluid">
   <div class="row">
 
-
-
     <div class="col-md-4">
       <div class="bs-component">
         <div class="panel panel-primary">
           <div class="panel-body">
-            <span class="label label-primary">Job opportunities</span>
-            <span class="label label-primary">Recommendations</span>
-            <span class="label label-primary">Connections</span>
+              <span class="label label-primary">beacon: looking for {{model.profile.beacon}}</span>
           </div>
         </div>
       </div>
@@ -19,7 +15,7 @@
       <div class="bs-component">
         <div class="panel panel-primary">
           <div class="panel-body">
-            <h1>@cstiteler</h1>
+              <h1>@{{model.profile.username}}</h1>
           </div>
         </div>
       </div>
@@ -39,13 +35,15 @@
 
 
   <div class="row">
-    <div class="col-md-4 pull-left">
+    <div class="col-md-4 col-sm-12 col-xs-12 pull-left">
       <div class="bs-component">
         <div class="panel panel-default">
           <div class="panel-body">
-          <img class="image-responsive center-block "src="https://pbs.twimg.com/profile_images/650838229126660096/r91wuuwN_400x400.jpg">
-          <p>
-            "On the other hand, we denounce with righteous indignation and dislike men who are so beguiled and demoralized by the charms of pleasure of the moment, so blinded by desire, that they cannot foresee the pain and trouble that are bound to ensue; and equal blame belongs to those who fail in their duty through weakness of will, which is the same as saying through shrinking from toil and pain. These cases are perfectly simple and easy to distinguish. In a free hour, when our power of choice is untrammelled and when nothing prevents our being able to do what we like best, every pleasure is to be welcomed and every pain avoided. But in certain circumstances and owing to the claims of duty or the obligations of business it will frequently occur that pleasures have to be repudiated and annoyances accepted. The wise man therefore always holds in these matters to this principle of selection: he rejects pleasures to secure other greater pleasures, or else he endures pains to avoid worse pains."
+            <img class="image-responsive center-block "src="https://pbs.twimg.com/profile_images/650838229126660096/r91wuuwN_400x400.jpg">
+            <h3>{{model.profile.firstName}} {{model.profile.lastName}} </h3>
+            <p ngIf"model.profile.industry">Industry: {{model.profile.industry}} </p>
+            <p ngIf="model.profile.organization">Organization: {{model.profile.organization}}</p>
+            <p ngIf="model.profile.region">Region: {{model.profile.region}}</p>
             </p>
           </div>
         </div>
@@ -60,7 +58,7 @@
           <h3 class="panel-title">Primary Flair</h3>
         </div>
         <div class="panel-body">
-          <h2>Flair Panel</h2>
+          <h2>{{model.profile.flair1}}</h2>
         </div>
       </div>
     </div>
@@ -74,7 +72,7 @@
           <h3 class="panel-title">Secondary Flair</h3>
         </div>
         <div class="panel-body">
-          <h2>Flair Panel</h2>
+          <h2>{{model.profile.flair2}}</h2>
         </div>
       </div>
     </div>
@@ -89,7 +87,7 @@
           <h3 class="panel-title">Tertiary Flair</h3>
         </div>
         <div class="panel-body">
-          <h2>Flair Panel</h2>
+          <h2>{{model.profile.flair3}}</h2>
         </div>
       </div>
     </div>
@@ -100,11 +98,10 @@
     <div class="bs-component">
       <div class="well well-lg panel-default">
         <div class="panel-body responsive">
-          <iframe class="embedly-embed center-block" src="//cdn.embedly.com/widgets/media.html?src=https%3A%2F%2Fplayer.vimeo.com%2Fvideo%2F18150336&url=https%3A%2F%2Fvimeo.com%2F18150336&image=http%3A%2F%2Fi.vimeocdn.com%2Fvideo%2F117311910_1280.jpg&key=b16d33bed47a4b61a4ce19e8e2b7f039&type=text%2Fhtml&schema=vimeo" width="500" height="281" scrolling="no" frameborder="0" allowfullscreen></iframe>
+          <div ng-bind-html="model.profile.mediaIFrame"></div>
         </div>
       </div>
     </div>
   </div>
-
 
 </div>

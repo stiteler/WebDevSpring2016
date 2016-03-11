@@ -99,6 +99,14 @@
                 password: user.password,
                 email: user.email,
                 roles: user.roles,
+                flair1: user.flair1,
+                flair2: user.flair2,
+                flair3: user.flair3,
+                media: user.media,
+                beacon: user.beacon,
+                industry: user.industry,
+                organization: user.organization,
+                region: user.region,
             };
             return copy;
         }
@@ -108,7 +116,7 @@
                 {
                     _id: 123,
                     firstName: 'Alice',
-                    lastName: 'Wonderland',
+                    lastName: 'Wunderland',
                     username: 'alice',
                     password: 'alice',
                     roles: ['user'],
@@ -118,7 +126,9 @@
                     flair2: 'riddles',
                     flair3: 'walking',
                     media: 'https://www.youtube.com/watch?v=WovwuOFBUuY',
-                    beacon: 'networking'
+                    beacon: 'networking',
+                    industry: 'Entertainment',
+                    organization: 'Yellow Brick Road, Inc.'
                 },
                 {
                     _id: 124,
@@ -133,7 +143,9 @@
                     flair2: 'smoking',
                     flair3: 'drinking',
                     media: 'https://vimeo.com/124251378',
-                    beacon: 'looking'
+                    beacon: 'looking',
+                    industry: 'Advertising',
+                    organization: 'ACME Corp.'
                 },
                 {
                     _id: 125,
@@ -148,7 +160,9 @@
                     flair2: 'music',
                     flair3: 'inspiration',
                     media: 'https://soundcloud.com/kungsmusic/bob-marley-jammin-kungs-remix',
-                    beacon: 'off'
+                    beacon: 'off',
+                    industry: 'Agriculture',
+                    organization: 'Rasta.ly'
                 },
             ];
         }

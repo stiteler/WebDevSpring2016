@@ -3,6 +3,7 @@
 
     angular
         .module('FlairdropApp', [
-            'ngRoute'
+            'ngRoute',
+            'ngSanitize'
         ]);
 })();
