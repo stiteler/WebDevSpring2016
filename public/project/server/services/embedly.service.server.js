@@ -1,9 +1,11 @@
 // example code
-module.exports = function(app, request) {
+module.exports = function(app) {
+// module.exports = function(app, request) {
     console.log('loading embedly service');
     app.get("/api/project/embed/:media", generateEmbed);
     var api_key = process.env.EMBEDLY_API_KEY;
 
+    // Work in Progress
     function generateEmbed(req, res) {
         // media should be escaped already client side
         var media = req.params.media;
@@ -50,14 +52,14 @@ module.exports = function(app, request) {
             //         console.log(error);
             //     });
 
-            request(api_call, function(error, response, body) {
-                if (!error && response.statusCode == 200) {
-                    res.send(body);
-                } else {
-                    console.log(error)
-                    res.status(400).send('Unable to generate embed.');
-                }
-            });
+            // request(api_call, function(error, response, body) {
+            //     if (!error && response.statusCode == 200) {
+            //         res.send(body);
+            //     } else {
+            //         console.log(error)
+            //         res.status(400).send('Unable to generate embed.');
+            //     }
+            // });
 
             // request.get(api_call)
             //     .on('response', function(response) {

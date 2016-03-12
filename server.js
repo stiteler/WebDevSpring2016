@@ -1,7 +1,7 @@
 #!/bin/env node
 var express = require('express');
 var app = express();
-var request = require('request');
+// var request = require('request');
 
 var ipaddress = process.env.OPENSHIFT_NODEJS_IP;
 var port = process.env.OPENSHIFT_NODEJS_PORT || 3000;
@@ -18,6 +18,8 @@ if (typeof process.env.OPENSHIFT_HOMEDIR != 'undefined') {
 app.use(express.static('public'));
 
 // Requirements:
-require("./public/project/server/app.js")(app, request);
+// require("./public/project/server/app.js")(app, request);
+require("./public/project/server/app.js")(app);
+
 
 app.listen(port, ipaddress);
