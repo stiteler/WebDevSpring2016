@@ -10,9 +10,37 @@ module.exports = function(app, request) {
         console.log('embed request, media: ' + media);
 
         if(media) {
-            var base = 'https://api.embed.ly/1/oembed';
+            var host = 'https://api.embed.ly'
+            var path = '/1/oembed';
             var params = '?key=' + api_key + '&url=' + media;
-            var api_call = base + params;
+            var api_call = host + path + params;
+
+            // var options = {
+            //     host: 'https://api.embed.ly',
+            //     path: path + params,
+            //     method: 'GET'
+            // }
+            // console.log(api_call);
+
+            // https.request(options, function(res) {
+            //     console.log(res);
+            // })
+            // .on('error', function(err) {
+            //     console.log(err);
+            // });
+
+            // var body = [];
+            // https.get(api_call)
+            //     .on('data', function(chunk) {
+            //         body.push(chunk);
+            //     })
+            //     .on('end', function() {
+            //         body = Buffer.concat(body).toString();
+            //         res.send(body);
+            //     })
+            //     .on('error', function(error) {
+            //         console.log(error);
+            //     });
 
             request(api_call, function(error, response, body) {
                 if (!error && response.statusCode == 200) {
