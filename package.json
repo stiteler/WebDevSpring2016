@@ -24,7 +24,8 @@
   },
   "dependencies": {
     "arrive": "^2.3.1",
-    "express": "~3.4.4"
+    "express": "~3.4.4",
+    "requests": "^0.1.7"
   },
   "devDependencies": {},
   "bundleDependencies": [],
