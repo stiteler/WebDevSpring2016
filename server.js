@@ -19,6 +19,6 @@ app.use(express.static('public'));
 
 
 // Requirements:
-require("./public/project/server/app.js")(app);
+require("./public/project/server/app.js")(app, request);
 
 app.listen(port, ipaddress);
