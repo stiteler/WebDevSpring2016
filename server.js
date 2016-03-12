@@ -1,7 +1,7 @@
 #!/bin/env node
 var express = require('express');
 var app = express();
-var ipaddress = process.env.OPENSHIFT_NODEJS_IP;
+var ipaddress = process.env.OPENSHIFT_NODEJS_IP || 'localhost';
 var port = process.env.OPENSHIFT_NODEJS_PORT || 3000;
 
 if (typeof process.env.OPENSHIFT_HOMEDIR != 'undefined') {

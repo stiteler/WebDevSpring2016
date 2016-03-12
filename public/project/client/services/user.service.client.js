@@ -107,6 +107,7 @@
                 industry: user.industry,
                 organization: user.organization,
                 region: user.region,
+                imageUrl: user.imageUrl
             };
             return copy;
         }
@@ -128,7 +129,8 @@
                     media: 'https://www.youtube.com/watch?v=WovwuOFBUuY',
                     beacon: 'networking',
                     industry: 'Entertainment',
-                    organization: 'Yellow Brick Road, Inc.'
+                    organization: 'Yellow Brick Road, Inc.',
+                    imageUrl: 'https://pbs.twimg.com/profile_images/650838229126660096/r91wuuwN_400x400.jpg'
                 },
                 {
                     _id: 124,
@@ -145,7 +147,9 @@
                     media: 'https://vimeo.com/124251378',
                     beacon: 'looking',
                     industry: 'Advertising',
-                    organization: 'ACME Corp.'
+                    organization: 'ACME Corp.',
+                    imageUrl: 'https://pbs.twimg.com/profile_images/650838229126660096/r91wuuwN_400x400.jpg'
+
                 },
                 {
                     _id: 125,
@@ -162,7 +166,8 @@
                     media: 'https://soundcloud.com/kungsmusic/bob-marley-jammin-kungs-remix',
                     beacon: 'off',
                     industry: 'Agriculture',
-                    organization: 'Rasta.ly'
+                    organization: 'Rasta.ly',
+                    imageUrl: 'https://pbs.twimg.com/profile_images/650838229126660096/r91wuuwN_400x400.jpg'
                 },
             ];
         }
