@@ -17,9 +17,17 @@ module.exports = function(app, request) {
 
             // var options = {
             //     host: 'https://api.embed.ly',
+            //     port: 80,
             //     path: path + params,
             //     method: 'GET'
             // }
+
+            // var req = https.request(options, function(response) {
+            //     console.log(response);
+            // }).on('error', function(err) {
+            //     console.log(err);
+            // })
+            // req.end();
             // console.log(api_call);
 
             // https.request(options, function(res) {
