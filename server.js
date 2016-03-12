@@ -15,4 +15,8 @@ if (typeof process.env.OPENSHIFT_HOMEDIR != 'undefined') {
 // serve static assignment directory
 app.use(express.static('public'));
 
+
+// Requirements:
+require("./public/project/server/app.js")(app);
+
 app.listen(port, ipaddress);
