@@ -7,21 +7,54 @@
 
     function AdminController($scope, $rootScope, UserService) {
         var vm = this;
+        var us = UserService;
+
+        vm.deleteUser = deleteUser;
+        vm.selectUser = selectUser;
+        vm.addUser = addUser;
+        vm.updateUser = updateUser;
 
         function init() {
-            vm.$rootScope = $rootScope;
-            vm.$scope = $scope;
-            vm.UserService = UserService;
-
             // models:
-            UserService.findAllUsers(function(result) {
-                console.log(result);
+            us.findAllUsers(function(result) {
                 vm.users = result;
             });
 
-            // api key: b16d33bed47a4b61a4ce19e8e2b7f039
+        }
+        init();
 
-      }
-      init();
+        function updateUser() {
+            var user = vm.active;
+            if(user) {
+                us.updateUser(user._id, user, function(resp) {
+                    if (resp) {
+                        us.findAllUsers(function(result) {
+                            vm.users = result;
+                        });
+                    }
+                    vm.active = null;
+                });
+            }
+        }
+
+        function addUser() {
+            var user = vm.active;
+            us.createUser(user, function(resp) {
+                us.findAllUsers(function(result) {
+                    vm.users = result;
+                });
+                vm.active = null;
+            });
+        }
+
+        function selectUser(user) {
+            vm.active = user;
+        }
+
+        function deleteUser(userId) {
+            us.deleteUserById(userId, function(resp) {
+                vm.users = resp;
+            });
+        }
     }
 }());

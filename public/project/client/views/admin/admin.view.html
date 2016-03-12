@@ -19,6 +19,37 @@
                         </tr>
                     </thead>
                     <tbody>
+                    <tr>
+                        <td><input ng-model="model.active.username" 
+                            type="text" class="input-sm form-control"
+                            placeholder="username"></td>
+                        <td><input ng-model="model.active.firstName" 
+                            type="text" class="input-sm form-control"
+                            placeholder="firstName"></td>
+                        <td><input ng-model="model.active.email" 
+                            type="text" class="input-sm form-control"
+                            placeholder="email"></td>
+                        <td><input ng-model="model.active.region" 
+                            type="text" class="input-sm form-control"
+                            placeholder="region"></td>
+                        <td><input ng-model="model.active.flair1" 
+                            type="text" class="input-sm form-control"
+                            placeholder="primary"></td>
+                        <td><input ng-model="model.active.flair2" 
+                            type="text" class="input-sm form-control"
+                            placeholder="secondary"></td>
+                        <td><input ng-model="model.active.flair3" 
+                            type="text" class="input-sm form-control"
+                            placeholder="tertiary"></td>
+                        <td><input ng-model="model.active.media" 
+                            type="text" class="input-sm form-control"
+                            placeholder="media"></td>
+
+                        <td>
+                            <span ng-click="model.addUser()" class="glyphicon glyphicon-plus-sign gi-form-table"></span>
+                            <span ng-click="model.updateUser(active)" class="glyphicon glyphicon-ok-sign gi-form-table"></span>
+                        </td>
+                    </tr>
         <!--                 <tr>
                             <td><input ng-model="model.active.title" 
                                 type="text" class="input-sm form-control"
@@ -38,8 +69,8 @@
                             <td>{{user.flair3}}</td>
                             <td>{{user.media}}</td>
                             <td>
-                                <span ng-click="deleteForm(form._id)" class="glyphicon glyphicon-remove gi-form-table"></span>
-                                <span ng-click="selectForm(form._id)"  class="glyphicon glyphicon-pencil gi-form-table"></span>
+                                <span ng-click="model.deleteUser(user._id)" class="glyphicon glyphicon-remove gi-form-table"></span>
+                                <span ng-click="model.selectUser(user)"  class="glyphicon glyphicon-pencil gi-form-table"></span>
                             </td>
                         </tr>
                     </tbody>
