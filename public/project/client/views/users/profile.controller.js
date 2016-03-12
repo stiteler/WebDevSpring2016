@@ -9,9 +9,6 @@
         var vm = this;
 
         function init() {
-            vm.$rootScope = $rootScope;
-            vm.$scope = $scope;
-
             // vm.sessionUser = $rootScope.user;
             // just for PoC I'm setting this to be Alice.
             UserService.getUserByUserId(123, function(user) {
@@ -34,6 +31,23 @@
         }
         init();
 
+        // this is just for the PoC for now.
+        vm.changeUserByUsername = changeUserByUsername;
 
+        function changeUserByUsername(username) {
+            // this is hardcoded because it's just for the API proof of concept
+            var user_map = {
+                'alice': 123,
+                'bob': 125,
+                'don': 124,
+            };
+
+            var new_id = user_map[username];
+            if (new_id) {
+                UserService.getUserByUserId(new_id, function(result) {
+                    vm.profile = result;
+                });
+            }
+        }
     }
 }());
