@@ -31,7 +31,10 @@
   "devDependencies": {},
   "bundleDependencies": [],
   "private": true,
-  "main": "server.js",
+  "main": "supervisor server.js",
+  "scripts": {
+    "start": "npm install"
+  },
   "jshintConfig": {
     "bitwise": true,
     "camelcase": true,

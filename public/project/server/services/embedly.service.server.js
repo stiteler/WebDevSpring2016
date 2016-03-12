@@ -54,9 +54,20 @@ module.exports = function(app, request) {
                 if (!error && response.statusCode == 200) {
                     res.send(body);
                 } else {
+                    console.log(error)
                     res.status(400).send('Unable to generate embed.');
                 }
             });
+
+            // request.get(api_call)
+            //     .on('response', function(response) {
+            //         console.log(response.body);
+            //     })
+            //     .on('error', function(err) {
+            //         console.log('REQUESTS ERROR');
+            //         console.log(err);
+            //     })
+
         }
     }
 }
