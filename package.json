@@ -31,7 +31,7 @@
   "devDependencies": {},
   "bundleDependencies": [],
   "private": true,
-  "main": "node server.js",
+  "main": "server.js",
   "jshintConfig": {
     "bitwise": true,
     "camelcase": true,
