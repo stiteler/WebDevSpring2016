@@ -15,6 +15,12 @@
                 vm.profile = user;
             });
 
+            _updateMedia();
+            
+        }
+        init();
+
+        function _updateMedia() {
             // get the media embed for this user
             if (vm.profile.media) {
                 EmbedlyService.getEmbedByMediaUrl(vm.profile.media)
@@ -29,7 +35,6 @@
                 });
             }
         }
-        init();
 
         // this is just for the PoC for now.
         vm.changeUserByUsername = changeUserByUsername;
@@ -43,9 +48,12 @@
             };
 
             var new_id = user_map[username];
+            console.log('new id: ' + new_id)
             if (new_id) {
                 UserService.getUserByUserId(new_id, function(result) {
+                    console.log(result);
                     vm.profile = result;
+                    _updateMedia();
                 });
             }
         }
