@@ -25,7 +25,8 @@
       <div class="bs-component">
         <div class="panel">
           <div class="panel-body">
-            <a href="javascript:void(0)" class="btn btn-raised btn-info btn-block">Connect</a>
+            <a ng-show="!model.connected" ng-click="model.connect()" class="btn btn-raised btn-info btn-block">Connect</a>
+            <a ng-show="model.connected" ng-click="model.connect()" class="btn btn-raised btn-primary btn-block">Recommend</a>
 <!--             <a href="javascript:void(0)" class="btn btn-raised btn-success btn-block">Recommend</a> -->
           </div>
         </div>
@@ -63,28 +64,31 @@
   </div>
 
   <!-- flair 1 -->
-  <div class="col-md-8 col-sm-12 col-xs-12 pull-right">
+  <div class="col-lg-8 col-md-8 col-sm-12 col-xs-12 pull-right">
     <div class="bs-component">
       <div class="panel panel-warning">
         <div class="panel-heading">
           <h3 class="panel-title">Primary Flair</h3>
         </div>
         <div class="panel-body">
-          <h2>{{model.profile.flair1}}</h2>
+          <h2>{{model.profile.flair1}} - Recommenders: <span class="label label-warning" ng-repeat="reco in model.getRecosForFlair(model.profile.flair1)">{{reco.recommender}}</span>
+          </h2>
         </div>
       </div>
     </div>
   </div>
 
   <!-- flair 2 -->
-  <div class="col-md-8 col-sm-12 col-xs-12 pull-right">
+  <div class="col-lg-8 col-md-8 col-sm-12 col-xs-12 pull-right">
     <div class="bs-component">
       <div class="panel panel-warning">
         <div class="panel-heading">
           <h3 class="panel-title">Secondary Flair</h3>
         </div>
         <div class="panel-body">
-          <h2>{{model.profile.flair2}}</h2>
+          <h2>{{model.profile.flair2}} - Recommenders: <span class="label label-warning" ng-repeat="reco in model.getRecosForFlair(model.profile.flair2)">{{reco.recommender}}
+            </span>
+          </h2>
         </div>
       </div>
     </div>
@@ -92,14 +96,16 @@
 
 
   <!-- flair 3 -->
-  <div class="col-md-8 col-sm-12 col-xs-12 pull-right">
+  <div class="col-lg-8 col-md-8 col-sm-12 col-xs-12 pull-right">
     <div class="bs-component">
       <div class="panel panel-warning">
         <div class="panel-heading">
           <h3 class="panel-title">Tertiary Flair</h3>
         </div>
         <div class="panel-body">
-          <h2>{{model.profile.flair3}}</h2>
+          <h2>{{model.profile.flair3}} - Recommenders: <span class="label label-warning" ng-repeat="reco in model.getRecosForFlair(model.profile.flair3)">{{reco.recommender}}
+            </span>
+          </h2>
         </div>
       </div>
     </div>
