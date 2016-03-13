@@ -18,8 +18,12 @@ if (typeof process.env.OPENSHIFT_HOMEDIR != 'undefined') {
 app.use(express.static('public'));
 
 // Requirements:
-// require("./public/project/server/app.js")(app, request);
+
+// project
 require("./public/project/server/app.js")(app);
 
+
+// assignment
+require("./public/assignment/server/app.js")(app);
 
 app.listen(port, ipaddress);
