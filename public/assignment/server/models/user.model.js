@@ -28,8 +28,17 @@ module.exports = function(app) {
         return _findUserByKey('username', username);
     }
 
-    function findUserByCredentials(password) {
-        return _findUserByKey('password', password);
+    function findUserByCredentials(username, password) {
+        var users = findAllUsers();
+        for(var i in users) {
+            if (users[i]) {
+                var u = users[i];
+                if (u.password == password && u.username == username) {
+                    return u
+                }
+            }
+        }
+        return null;
     }
 
     function createUser(user) {
@@ -66,7 +75,7 @@ module.exports = function(app) {
         for(var i in users) {
             if (users[i]) {
                 var u = users[i];
-                if (u.key == value) {
+                if (u[key] == value) {
                     return u
                 }
             }

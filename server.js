@@ -1,5 +1,7 @@
 #!/bin/env node
 var express = require('express');
+var bodyParser = require('body-parser');
+var uuid = require('node-uuid');
 var app = express();
 // var request = require('request');
 
@@ -14,6 +16,9 @@ if (typeof process.env.OPENSHIFT_HOMEDIR != 'undefined') {
   dir = __dirname;
 }
 
+// MIDDLEWARE:
+app.use(bodyParser());
+
 // serve static assignment directory
 app.use(express.static('public'));
 
@@ -22,8 +27,7 @@ app.use(express.static('public'));
 // project
 require("./public/project/server/app.js")(app);
 
-
 // assignment
-require("./public/assignment/server/app.js")(app);
+require("./public/assignment/server/app.js")(app, uuid);
 
 app.listen(port, ipaddress);

@@ -1,4 +1,4 @@
-module.exports = function(app, FormModel, uuid) {
+module.exports = function(app, FormModel) {
     app.get('/api/assignment/user/:userId/form', getFormsForUser);
     app.get('/api/assignment/form/:formId', getFormById);
     app.put('/api/assignment/form/:formId', putForm);
@@ -32,8 +32,6 @@ module.exports = function(app, FormModel, uuid) {
     function createForm() {
         var newForm = req.body;
         var uid = req.params.userId;
-        var fid = uuid.v4();
-        newForm._id = fid;
         newForm.userId = uid;
         res.json(fm.createForm(newForm));
     }

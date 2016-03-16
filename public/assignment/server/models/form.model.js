@@ -5,8 +5,8 @@ module.exports = function(app) {
         findFormById: findFormById,
         updateForm: updateForm,
         deleteFormById: deleteFormById,
-        findFormByFormname: findFormByFormname,
-        findFormByCredentials: findFormByCredentials,
+        findFormByTitle: findFormByTitle,
+        findFormByUserId: findFormByUserId,
     }
     return api;
 
@@ -20,16 +20,16 @@ module.exports = function(app) {
         return JSON.parse(fs.readFileSync('./public/assignment/server/models/form.mock.json', 'utf8'));
     }
 
+    function findFormByUserId(userId) {
+        return _findFormByKey('userId', userId);
+    }
+
     function findFormById(formId) {
         return _findFormByKey('_id', formId);
     }
 
-    function findFormByFormname(formname) {
-        return _findFormByKey('formname', formname);
-    }
-
-    function findFormByCredentials(password) {
-        return _findFormByKey('password', password);
+    function findFormByTitle(title) {
+        return _findFormByKey('title', title);
     }
 
     function createForm(form) {
@@ -66,8 +66,8 @@ module.exports = function(app) {
         for(var i in forms) {
             if (forms[i]) {
                 var u = forms[i];
-                if (u.key == value) {
-                    return u
+                if (u[key] == value) {
+                    return u;
                 }
             }
         }
