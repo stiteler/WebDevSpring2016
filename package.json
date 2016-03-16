@@ -26,6 +26,7 @@
     "arrive": "^2.3.1",
     "body-parser": "^1.15.0",
     "express": "^3.4.8",
+    "mongoose": "^4.4.7",
     "node-uuid": "^1.4.7",
     "npm": "^3.8.1",
     "request": "^2.69.0"
