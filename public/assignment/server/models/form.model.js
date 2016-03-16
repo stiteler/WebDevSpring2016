@@ -7,10 +7,65 @@ module.exports = function(app) {
         deleteFormById: deleteFormById,
         findFormByTitle: findFormByTitle,
         findFormByUserId: findFormByUserId,
+        getFieldsByFormId: getFieldsByFormId,
+        getField: getField,
+        addField: addField,
+        updateField: updateField,
     }
     return api;
 
     var forms = findAllForms();
+
+    function addField(formId, field) {
+        var form = findFormById(formId);
+        form.fields.push(field);
+    }
+
+    function getFieldsByFormId(formId) {
+        var form = findFormbyId(formId);
+        if(form) {
+            return form.fields;
+        }
+    }
+
+    function deleteField(formId, fieldId) {
+        var fields = getFieldsByFormId(formId);
+        var toDelete = getField(formId, fieldId);
+        if(fields) {
+            var index = fields.indexOf(toDelete);
+            forms.splice(index, 1);
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    function updateField(formId, fieldId, updates) {
+        var existing = getField(formId, fieldId);
+        if (existing) {
+            for (var key in updates) {
+                if (updates[key]) {
+                    var u = updates[i];
+                    existing[attr] = u;
+                }
+            }
+            return existing;
+        }
+        return null;
+    }
+
+    function getField(formId, fieldId) {
+        var fields = getFieldsByFormId(formId);
+        for (var i in fields) {
+            if(fields[i]) {
+                var field = fields[i];
+                if(field._id == fieldId) {
+                    return field;
+                }
+            }
+        }
+        return null;
+    }
 
     function findAllForms() {
         if (forms) {

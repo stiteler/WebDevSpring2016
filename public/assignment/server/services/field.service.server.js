@@ -1,38 +1,54 @@
-module.exports = function(app, FormModel) {
-    app.get('/api/assignment/user/:userId/form', getFormsForUser);
-    app.get('/api/assignment/form/:formId', getFormById);
-    app.put('/api/assignment/form/:formId', putForm);
-    app.delete('/api/assignment/form/:formId', deleteForm);
-    app.post('/api/assignment/user/:userId/form', createForm);
+module.exports = function(app, FormModel, uuid) {
+    app.get('/api/assignment/form/:formId/field', getFieldsByFormId);
+    app.get('/api/assignment/form/:formId/field/:fieldId', getField);
+    app.delete('/api/assignment/form/:formId/field/:fieldId', deleteField);
+    app.post('/api/assignment/form/:formId/field', createField);
+    app.put('/api/assignment/form/:formId/field/:fieldId', updateField);
 
     var fm = FormModel;
 
-    function getFormsForUser(req, res) {
-        var uid = req.params.userId;
-        res.json(fm.findFormByUserId(uid));
+    function getFieldsByFormId(req, res) {
+        var fid = req.params.formId;
+        var form = fm.findFormById(fid);
+        if(form) {
+            res.json(form.fields);
+        } else {
+            res.json([]);
+        }
     }
 
-    function getFormById(res, res) {
-        var fid = req.params.formId;
-        res.json(fm.findFormById(fid));
+    function getField(req, res) {
+        var formId = req.params.formId;
+        var fieldId = req.params.fieldId;
+
+        res.json(fm.getField(formId, fieldId));
     }
 
-    function putForm(req, res) {
-        var fid = req.params.formId;
+    function createField(req, res) {
+        var field = req.body;
+        field._id = uuid.v4();
+        var formId = req.params.formId;
+        fm.addField(formId, field);
+        res.send(200);
+    }
+
+    function deleteField(req, res) {
+        var formId = req.params.formId;
+        var fieldId = req.params.fieldId;
+        if(fm.deleteField(formId, fieldId)) {
+            res.send(200);
+        } else {
+            res.send(400);
+        }
+    }
+
+    function updateField(req, res) {
+        var formId = req.params.formId;
+        var fieldId = req.params.fieldId;
         var updates = req.body;
-        updates._id = fid;
-        res.json(fm.updateForm(updates));
+
+        var updated = fm.updateField(formId, fieldId, updates);
+        res.json(updated);
     }
 
-    function deleteForm(req, res) {
-        var fid = req.params.formId;
-        res.json(fm.deleteFormById(fid));
-    }
-
-    function createForm() {
-        var newForm = req.body;
-        var uid = req.params.userId;
-        newForm.userId = uid;
-        res.json(fm.createForm(newForm));
-    }
 }
