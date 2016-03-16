@@ -18,6 +18,19 @@ if (typeof process.env.OPENSHIFT_HOMEDIR != 'undefined') {
 
 // MIDDLEWARE:
 app.use(bodyParser());
+app.use(function(req, res, next) {
+    console.log(req.originalUrl);
+    next();
+});
+
+// forward to client side, for now
+app.get('/assignment/', function(req, res) {
+    res.redirect('/assignment/client');
+});
+
+app.get('/project/', function(req, res) {
+    res.redirect('/project/client');
+});
 
 // serve static assignment directory
 app.use(express.static('public'));
@@ -29,5 +42,7 @@ require("./public/project/server/app.js")(app);
 
 // assignment
 require("./public/assignment/server/app.js")(app, uuid);
+
+//
 
 app.listen(port, ipaddress);
