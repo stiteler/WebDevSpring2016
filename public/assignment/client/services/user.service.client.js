@@ -5,147 +5,74 @@
         .module('FormBuilderApp')
         .factory('UserService', UserService);
 
-    function UserService() {
-        var users = _getUsers();
-
+    function UserService($http, $rootScope) {
         var api = {
-            findUserByUsernameAndPassword: findUserByUsernameAndPassword,
+            findUserByUsername: findUserByUsername,
+            findUserByCredentials: findUserByCredentials,
             findAllUsers: findAllUsers,
             createUser: createUser,
             deleteUserById: deleteUserById,
             updateUser: updateUser,
             getUserByUserId: getUserByUserId,
+            setCurrentUser: setCurrentUser,
+            getCurrentUser: getCurrentUser,
         };
         return api;
 
-        function findUserByUsernameAndPassword(username, password, callback) {
-            var retr = null;
-            for (var i in users) {
-                if (users[i]) {
-                    var user = users[i];
-                    if (username === user.username && password === user.password) {
-                        retr = user;
-                    }
+        function setCurrentUser(user) {
+            $rootScope.user = user;
+        }
+
+        function getCurrentUser() {
+            return $rootScope.user;
+        }
+
+        function findUserByUsername(username) {
+            return $http({
+                method: 'GET',
+                url: '/api/assignment/user',
+                params: {
+                    'username': username
                 }
-            }
-            callback(retr);
+            });
         }
 
-        function findAllUsers(callback) {
-            callback(users);
+        function findUserByCredentials(username, password) {
+            return $http.get(
+                        '/api/assignment/user',
+                        {
+                            params: {
+                                'username': username, 'password': password
+                            }
+                        });
         }
 
-        function getUserByUserId(userId, callback) {
-            var user = _getUserById(userId);
-            if (user) {
-                callback(_copyUser(user));
-            } else {
-                callback(null);
-            }
+        function findAllUsers() {
+            return $http.get('/api/assignment/user');
         }
 
-        function createUser(user, callback) {
-            var uid = (new Date()).getTime();
-            user._id = uid;
-
-            // we want to make a copy here to avoid
-            // $scope.user pointer issues.
-            users.push(_copyUser(user));
-            callback(user);
+        function getUserByUserId(userId) {
+            return $http.get('/api/assignment/user/' + userId);
         }
 
-        function deleteUserById(userId, callback) {
-            var user = _getUserById(userId);
-            if (user) {
-                var index = users.indexOf(user);
-                users.splice(index, 1);
-                callback(users);
-            }
+        function createUser(user) {
+            return $http({
+                method: 'POST',
+                url: '/api/assignment/user',
+                data: user
+            });
         }
 
-        function updateUser(userId, user, callback) {
-            var existing = _getUserById(userId);
-            if (existing) {
-                for (var attr in user) {
-                    if (user[attr]) {
-                        existing[attr] = user[attr];
-                    }
-                }
-                // copy user here again to avoid scoping issues
-                callback(_copyUser(existing));
-            } else {
-                callback(null);
-            }
+        function deleteUserById(userId) {
+            return $http.delete('/api/assignment/user/' + userId);
         }
 
-        function _getUserById(userId) {
-            for (var i in users) {
-                if (users[i]) {
-                    var user = users[i];
-                    if (user._id === userId) {
-                        return user;
-                    }
-                }
-            }
-            return null;
-        }
-
-        function _copyUser(user) {
-            var copy = {
-                _id: user._id,
-                firstName: user.firstName,
-                lastName: user.lastName,
-                username: user.username,
-                password: user.password,
-                email: user.email,
-                roles: user.roles,
-            };
-            return copy;
-        }
-
-        function _getUsers() {
-            return [
-                {
-                    _id: 123,
-                    firstName: 'Alice',
-                    lastName: 'Wonderland',
-                    username: 'alice',
-                    password: 'alice',
-                    roles: ['student']
-                },
-                {
-                    _id: 234,
-                    firstName: 'Bob',
-                    lastName: 'Hope',
-                    username: 'bob',
-                    password: 'bob',
-                    roles: ['admin']
-                },
-                {
-                    _id: 345,
-                    firstName: 'Charlie',
-                    lastName: 'Brown',
-                    username: 'charlie',
-                    password: 'charlie',
-                    roles: ['faculty']
-                },
-                {
-                    _id: 456,
-                    firstName: 'Dan',
-                    lastName: 'Craig',
-                    username: 'dan',
-                    password: 'dan',
-                    roles: ['faculty', 'admin']
-                },
-                {
-                    _id: 567,
-                    firstName: 'Edward',
-                    lastName: 'Norton',
-                    username: 'ed',
-                    password: 'ed',
-                    roles: ['student']
-                }
-            ];
+        function updateUser(userId, user) {
+            return $http({
+                method: 'PUT',
+                url: '/api/assignment/user/' + userId,
+                data: user
+            });
         }
     }
 }());

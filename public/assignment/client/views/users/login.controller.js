@@ -13,17 +13,15 @@
             var un = $scope.username;
             var pw = $scope.password;
 
-            UserService.findUserByUsernameAndPassword(un, pw, function (res) {
-                if (typeof(res) !== 'undefined') {
-                    $rootScope.user = res;
-                    UtilsService.navigate('/profile');
-                } else {
-                    console.log('no such user');
-                    // for the love of god
-                    // don't 'alert' anyone. just handle it.
-                    console.alert('Please try again');
-                }
-            });
+            UserService
+                .findUserByCredentials(un, pw)
+                .then(function(resp) {
+                    if (resp.data) {
+                        console.log(resp.data);
+                        UserService.setCurrentUser(resp.data);
+                        UtilsService.navigate('/profile');
+                    }
+                });
         }
     }
 }());

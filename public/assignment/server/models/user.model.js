@@ -10,14 +10,15 @@ module.exports = function(app) {
     }
     return api;
 
-    var users = findAllUsers();
-
+    // we only need this without mongo for now.
     function findAllUsers() {
-        if (users) {
-            return users;
+        if (global.users) {
+            return global.users;
         }
         var fs = require('fs');
-        return JSON.parse(fs.readFileSync('./public/assignment/server/models/user.mock.json', 'utf8'));
+        // only till we implement mongo
+        global.users = JSON.parse(fs.readFileSync('./public/assignment/server/models/user.mock.json', 'utf8'));
+        return global.users;
     }
 
     function findUserById(userId) {
@@ -42,18 +43,19 @@ module.exports = function(app) {
     }
 
     function createUser(user) {
-        user._id = (new Date()),getTime();
+        // eventually mongo's job.. just for now
+        var users = findAllUsers();
+        user._id = (new Date()).getTime();
         users.push(user);
-        return users;
+        return user;
     }
 
     function updateUser(updates) {
         var existing = findUserById(updates._id);
         if (existing) {
             for (var key in updates) {
-                if (updates[key]) {
-                    var u = updates[i];
-                    existing[attr] = u;
+                if (updates.hasOwnProperty(key)) {
+                    existing[key] = updates[key];
                 }
             }
             return existing;

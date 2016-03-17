@@ -18,7 +18,7 @@ if(process.env.OPENSHIFT_MONGODB_DB_PASSWORD) {
         process.env.OPENSHIFT_APP_NAME;
 }
 
-var db = mongoose.connect(connectionString);
+//var db = mongoose.connect(connectionString);
 
 if (typeof process.env.OPENSHIFT_HOMEDIR != 'undefined') {
   console.log("openshift environment detected");
