@@ -5,7 +5,7 @@
         .module('FormBuilderApp')
         .controller('FormController', FormController);
 
-    function FormController($scope, $rootScope, FormService, UtilsService) {
+    function FormController($scope, $rootScope, FormService, UtilsService, UserService) {
         $scope.deleteForm = deleteForm;
         $scope.addForm = addForm;
         $scope.selectForm = selectForm;
@@ -13,11 +13,16 @@
 
         function init() {
             if (UtilsService.isLoggedIn()) {
-                $scope.user = $rootScope.user;
+                $scope.user = UserService.getCurrentUser();
+
                 var userId = $scope.user._id;
-                FormService.findAllFormsForUser(userId, function (res) {
-                    $scope.forms = res;
-                });
+                FormService
+                    .findAllFormsForUser(userId)
+                    .then(function (res) {
+                        if(res.data) {
+                            $scope.forms = res.data;
+                        }
+                    });
             } else {
                 UtilsService.navigate('#/home');
             }
@@ -26,40 +31,54 @@
         init();
 
         function refreshActive() {
-            $scope.active = {
-                title: '',
-            };
+            $scope.active = null;
         }
 
         function deleteForm(formId) {
             var userId = $scope.user._id;
-            FormService.deleteFormById(formId, function(resp) {
-                // vuln. in resp from delete by Id
-                // user gets ALL forms, to fix would
-                // require changing the API.
-                FormService.findAllFormsForUser(userId, function (forms) {
-                    $scope.forms = forms;
+
+            FormService
+                .deleteFormById(formId)
+                .then(function(resp) {
+                    console.log("IN DELETE BY ID");
+                    console.log(resp.data);
                 });
-            });
+
+            FormService
+                .findAllFormsForUser(userId)
+                .then(function (forms) {
+                    $scope.forms = forms.data;
+                });
         }
 
         function addForm() {
             var newForm = {
+                //TODO: add fields here?
                 title: $scope.active.title,
-                _id: (new Date()).getTime(),
+                // _id: (new Date()).getTime(),
             };
+
             var userId = $scope.user._id;
-            FormService.createFormForUser(userId, newForm, function(res) {
-                // update the forms in scope.
-                FormService.findAllFormsForUser(userId, function (res) {
+
+            FormService
+                .createFormForUser(userId, newForm)
+                .then(function(res) {
+            });
+
+            // now update the forms in scope.
+            FormService.
+                .findAllFormsForUser(userId)
+                .then(function (res) {
                     $scope.forms = res;
                     refreshActive();
                 });
-            });
         }
 
         function selectForm(formId) {
+            // I don't need to do this.. just pass in the object right?
+            // TODO Refactor
             var selected = $scope.active;
+
             for (var i in $scope.forms) {
                 if ($scope.forms[i]) {
                     var form = $scope.forms[i];
@@ -72,6 +91,8 @@
         }
 
         function updateForm() {
+            // TODO I AM HERE
+
             // take the 'active' form and save it,
             // then refresh all forms
             var active = $scope.active;
