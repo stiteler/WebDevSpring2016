@@ -10,6 +10,7 @@
 
         model.selectType = selectType;
         model.addField = addField;
+        model.removeField = removeField;
 
         function init() {
             if (UtilsService.isLoggedIn()) {
@@ -25,13 +26,28 @@
         }
         init();
 
+        function removeField(field) {
+            console.log('removing Field: ' + field);
+        }
+
         function addField() {
             var type = model.selectedFieldType;
-            console.log('adding field: ' + type);
+            var rawType = _lookupRawType(type);
+            var templates = _templateMappings();
+            if(templates[rawType]) {
+                model.form.fields.push(templates[rawType]);
+            }
         }
 
         function selectType(type) {
             model.selectedFieldType = type;
+        }
+
+        function _lookupRawType(type) {
+            var mappings = _fieldMappings();
+            if (mappings[type]) {
+                return mappings[type];
+            }
         }
 
         function _getFieldTypes() {
@@ -54,6 +70,30 @@
                 'Checkboxes Field': 'CHECKBOXES',
                 'Radio Buttons Field': 'RADIOS'
             };
+        }
+
+        function _templateMappings() {
+            var mappings = {
+                'TEXT': {"_id": null, "label": "New Text Field", "type": "TEXT", "placeholder": "New Field"},
+                'TEXTAREA': {"_id": null, "label": "New Text Field", "type": "TEXTAREA", "placeholder": "New Field"},
+                'DATE': {"_id": null, "label": "New Date Field", "type": "DATE"},
+                'OPTIONS': {"_id": null, "label": "New Dropdown", "type": "OPTIONS", "options": [
+                                {"label": "Option 1", "value": "OPTION_1"},
+                                {"label": "Option 2", "value": "OPTION_2"},
+                                {"label": "Option 3", "value": "OPTION_3"}
+                            ]},
+                'CHECKBOXES': {"_id": null, "label": "New Checkboxes", "type": "CHECKBOXES", "options": [
+                                {"label": "Option A", "value": "OPTION_A"},
+                                {"label": "Option B", "value": "OPTION_B"},
+                                {"label": "Option C", "value": "OPTION_C"}
+                            ]},
+                'RADIOS': {"_id": null, "label": "New Radio Buttons", "type": "RADIOS", "options": [
+                                {"label": "Option X", "value": "OPTION_X"},
+                                {"label": "Option Y", "value": "OPTION_Y"},
+                                {"label": "Option Z", "value": "OPTION_Z"}
+                            ]}
+            }
+            return mappings;
         }
 
         function _getTestForm() {
