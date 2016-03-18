@@ -4,6 +4,9 @@
     angular
         .module('FormBuilderApp')
         .directive('jgaSortable', function() {
+            // directive ported from github.com/jannunzi/WebDev
+            //      /public/experiments/directives/sortable
+            //      /directive/Sortable.js
             console.log('in directive');
 
             var start = null;
