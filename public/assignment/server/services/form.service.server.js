@@ -9,7 +9,7 @@ module.exports = function(app, FormModel, uuid) {
 
     function getFormsForUser(req, res) {
         var uid = req.params.userId;
-        res.json(fm.findFormByUserId(uid));
+        res.json(fm.findFormsByUserId(uid));
     }
 
     function getFormById(res, res) {
@@ -29,7 +29,7 @@ module.exports = function(app, FormModel, uuid) {
         res.json(fm.deleteFormById(fid));
     }
 
-    function createForm() {
+    function createForm(req, res) {
         var newForm = req.body;
         var uid = req.params.userId;
         var fid = uuid.v4();

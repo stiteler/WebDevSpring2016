@@ -2,11 +2,11 @@ module.exports = function(app) {
     var api = {
         createForm: createForm,
         findAllForms: findAllForms,
+        findFormsByUserId: findFormsByUserId,
         findFormById: findFormById,
         updateForm: updateForm,
         deleteFormById: deleteFormById,
         findFormByTitle: findFormByTitle,
-        findFormByUserId: findFormByUserId,
         getFieldsByFormId: getFieldsByFormId,
         getField: getField,
         addField: addField,
@@ -15,6 +15,20 @@ module.exports = function(app) {
     return api;
 
     var forms = findAllForms();
+
+    function findFormsByUserId(userId) {
+        var forms = findAllForms();
+        var rtn = [];
+        for (var i in forms) {
+            if(forms[i]) {
+                var f = forms[i];
+                if (f.userId == userId) {
+                    rtn.push(f);
+                }
+            }
+        }
+        return rtn;
+    }
 
     function addField(formId, field) {
         var form = findFormById(formId);
@@ -68,15 +82,13 @@ module.exports = function(app) {
     }
 
     function findAllForms() {
-        if (forms) {
-            return forms;
+        // again, global only until mongo implemented.
+        if (global.forms) {
+            return global.forms;
         }
         var fs = require('fs');
-        return JSON.parse(fs.readFileSync('./public/assignment/server/models/form.mock.json', 'utf8'));
-    }
-
-    function findFormByUserId(userId) {
-        return _findFormByKey('userId', userId);
+        global.forms = JSON.parse(fs.readFileSync('./public/assignment/server/models/form.mock.json', 'utf8'));
+        return global.forms;
     }
 
     function findFormById(formId) {
@@ -88,7 +100,8 @@ module.exports = function(app) {
     }
 
     function createForm(form) {
-        form._id = (new Date()),getTime();
+        var forms = findAllForms();
+        form._id = (new Date()).getTime();
         forms.push(form);
         return forms;
     }
@@ -97,9 +110,8 @@ module.exports = function(app) {
         var existing = findFormById(updates._id);
         if (existing) {
             for (var key in updates) {
-                if (updates[key]) {
-                    var u = updates[i];
-                    existing[attr] = u;
+                if (updates.hasOwnProperty(key)) {
+                    existing[key] = updates[key];
                 }
             }
             return existing;
@@ -109,7 +121,7 @@ module.exports = function(app) {
 
     function deleteFormById(formId) {
         var forms = findAllForms();
-        var form = findFormById();
+        var form = findFormById(formId);
         if (form) {
             var index = forms.indexOf(form);
             forms.splice(index, 1);

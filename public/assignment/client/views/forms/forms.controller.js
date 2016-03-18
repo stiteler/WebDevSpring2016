@@ -5,24 +5,20 @@
         .module('FormBuilderApp')
         .controller('FormController', FormController);
 
-    function FormController($scope, $rootScope, FormService, UtilsService, UserService) {
+    function FormController($scope, FormService, UtilsService, UserService) {
         $scope.deleteForm = deleteForm;
         $scope.addForm = addForm;
         $scope.selectForm = selectForm;
         $scope.updateForm = updateForm;
 
+        var initialActive = {
+            title: ''
+        }
+
         function init() {
             if (UtilsService.isLoggedIn()) {
                 $scope.user = UserService.getCurrentUser();
-
-                var userId = $scope.user._id;
-                FormService
-                    .findAllFormsForUser(userId)
-                    .then(function (res) {
-                        if(res.data) {
-                            $scope.forms = res.data;
-                        }
-                    });
+                refreshForms();
             } else {
                 UtilsService.navigate('#/home');
             }
@@ -31,24 +27,17 @@
         init();
 
         function refreshActive() {
-            $scope.active = null;
+            $scope.active = angular.copy(initialActive);
         }
 
         function deleteForm(formId) {
             var userId = $scope.user._id;
 
+            // catch an error here someday.
             FormService
                 .deleteFormById(formId)
-                .then(function(resp) {
-                    console.log("IN DELETE BY ID");
-                    console.log(resp.data);
-                });
 
-            FormService
-                .findAllFormsForUser(userId)
-                .then(function (forms) {
-                    $scope.forms = forms.data;
-                });
+            refreshForms();
         }
 
         function addForm() {
@@ -65,13 +54,32 @@
                 .then(function(res) {
             });
 
-            // now update the forms in scope.
-            FormService.
+            refreshForms();
+            refreshActive();
+        }
+
+        function updateForm() {
+            var active = $scope.active;
+            var formId = active._id;
+            var userId = $scope.user._id;
+
+            // error handle this someday
+            FormService
+                .updateFormById(formId, active);
+
+            refreshForms();
+            refreshActive();
+        }
+
+        function refreshForms() {
+            var userId = $scope.user._id;
+            FormService
                 .findAllFormsForUser(userId)
-                .then(function (res) {
-                    $scope.forms = res;
-                    refreshActive();
+                .then(function (forms) {
+                    console.log(forms.data);
+                    $scope.forms = forms.data;
                 });
+
         }
 
         function selectForm(formId) {
@@ -90,23 +98,5 @@
             $scope.active = selected;
         }
 
-        function updateForm() {
-            // TODO I AM HERE
-
-            // take the 'active' form and save it,
-            // then refresh all forms
-            var active = $scope.active;
-            var formId = active._id;
-            var userId = $scope.user._id;
-
-            FormService.updateFormById(formId, active, function (update) {
-                console.log('update');
-                console.log(update);
-                FormService.findAllFormsForUser(userId, function (forms) {
-                    $scope.forms = forms;
-                    refreshActive();
-                });
-            });
-        }
     }
 }());

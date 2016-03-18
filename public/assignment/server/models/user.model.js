@@ -78,7 +78,7 @@ module.exports = function(app) {
             if (users[i]) {
                 var u = users[i];
                 if (u[key] == value) {
-                    return u
+                    return u;
                 }
             }
         }
