@@ -36,12 +36,13 @@
         })
         .controller('FieldController', FieldController);
 
-    function FieldController(UserService, UtilsService) {
+    function FieldController(UserService, UtilsService, $uibModal) {
         var model = this;
 
         model.selectType = selectType;
         model.addField = addField;
         model.removeField = removeField;
+        model.editField = editField;
 
         function init() {
             if (UtilsService.isLoggedIn()) {
@@ -56,6 +57,21 @@
             }
         }
         init();
+
+        function editField(field) {
+            $uibModal.open({
+                animation: false,
+                templateUrl: 'views/forms/fieldedit.view.html',
+                controller: 'FieldEditController',
+                controllerAs: 'model',
+                size: 'md',
+                resolve: {
+                    items: function () {
+                        return ['something'];
+                    }
+                }
+            }); 
+        }
 
         function removeField(field) {
             console.log('removing Field: ' + field);
@@ -199,4 +215,6 @@
            };
         }
     }
+
 }());
+

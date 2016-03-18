@@ -3,6 +3,7 @@
 
     angular
         .module('FormBuilderApp', [
-            'ngRoute'
+            'ngRoute',
+            'ui.bootstrap',
         ]);
 })();
