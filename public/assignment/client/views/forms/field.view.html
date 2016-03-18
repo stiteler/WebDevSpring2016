@@ -13,7 +13,7 @@
       <!-- RENDER FIELDS -->
       <div class=""><!-- table doesn't need responsive because fields are, no rendered rows" -->
       <table class="table table-borderless">
-        <tbody jgaSortable jga-axis="y">
+        <tbody jga-sortable jga-axis="y">
 
           <tr ng-repeat="field in model.form.fields">
             <td>
@@ -78,7 +78,8 @@
               <!--</div> intead of div it's tr--> 
             </td>
             </tr>
-            
+          </tbody> <!-- end draggable table body -->
+          <tbody> <!-- non draggable table body -->
             <tr>
               <td>
               <!-- NEW FIELD -->

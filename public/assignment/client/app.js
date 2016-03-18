@@ -3,7 +3,6 @@
 
     angular
         .module('FormBuilderApp', [
-            'ngRoute',
-            'jgaSortable'
+            'ngRoute'
         ]);
 })();
