@@ -25,3 +25,7 @@ i.gi-form-table {
 .table-borderless tbody tr td{
     border: none;
 }
+a#unclickable {
+    color: #A0A0A0;
+    text-decoration: none;
+}

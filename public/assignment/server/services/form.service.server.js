@@ -12,7 +12,7 @@ module.exports = function(app, FormModel, uuid) {
         res.json(fm.findFormsByUserId(uid));
     }
 
-    function getFormById(res, res) {
+    function getFormById(req, res) {
         var fid = req.params.formId;
         res.json(fm.findFormById(fid));
     }
@@ -37,4 +37,4 @@ module.exports = function(app, FormModel, uuid) {
         newForm.userId = uid;
         res.json(fm.createForm(newForm));
     }
-}
+};

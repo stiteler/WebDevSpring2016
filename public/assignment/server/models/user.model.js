@@ -7,7 +7,7 @@ module.exports = function(app) {
         deleteUserById: deleteUserById,
         findUserByUsername: findUserByUsername,
         findUserByCredentials: findUserByCredentials,
-    }
+    };
     return api;
 
     // we only need this without mongo for now.
@@ -17,7 +17,9 @@ module.exports = function(app) {
         }
         var fs = require('fs');
         // only till we implement mongo
-        global.users = JSON.parse(fs.readFileSync('./public/assignment/server/models/user.mock.json', 'utf8'));
+        global.users = JSON.parse(
+                fs.readFileSync(
+                    './public/assignment/server/models/user.mock.json', 'utf8'));
         return global.users;
     }
 
@@ -31,11 +33,11 @@ module.exports = function(app) {
 
     function findUserByCredentials(username, password) {
         var users = findAllUsers();
-        for(var i in users) {
+        for (var i in users) {
             if (users[i]) {
                 var u = users[i];
-                if (u.password == password && u.username == username) {
-                    return u
+                if (u.password === password && u.username === username) {
+                    return u;
                 }
             }
         }
@@ -74,14 +76,14 @@ module.exports = function(app) {
 
     function _findUserByKey(key, value) {
         var users = findAllUsers();
-        for(var i in users) {
+        for (var i in users) {
             if (users[i]) {
                 var u = users[i];
-                if (u[key] == value) {
+                if (u[key] === value) {
                     return u;
                 }
             }
         }
         return null;
     }
-}
+};

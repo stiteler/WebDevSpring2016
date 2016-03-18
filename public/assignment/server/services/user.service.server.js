@@ -55,4 +55,4 @@ module.exports = function(app, UserModel) {
         var uid = req.params.id;
         res.json(um.deleteUserById(uid));
     }
-}
+};

@@ -12,17 +12,16 @@ module.exports = function(app) {
         addField: addField,
         deleteField: deleteField,
         updateField: updateField,
-    }
+    };
     return api;
-
 
     function findFormsByUserId(userId) {
         var forms = findAllForms();
         var rtn = [];
         for (var i in forms) {
-            if(forms[i]) {
+            if (forms[i]) {
                 var f = forms[i];
-                if (f.userId == userId) {
+                if (f.userId === userId) {
                     rtn.push(f);
                 }
             }
@@ -37,7 +36,7 @@ module.exports = function(app) {
 
     function getFieldsByFormId(formId) {
         var form = findFormById(formId);
-        if(form) {
+        if (form) {
             return form.fields;
         }
     }
@@ -45,7 +44,7 @@ module.exports = function(app) {
     function deleteField(formId, fieldId) {
         var fields = getFieldsByFormId(formId);
         var toDelete = getField(formId, fieldId);
-        if(fields) {
+        if (fields) {
             var index = fields.indexOf(toDelete);
             fields.splice(index, 1);
             return true;
@@ -70,9 +69,9 @@ module.exports = function(app) {
     function getField(formId, fieldId) {
         var fields = getFieldsByFormId(formId);
         for (var i in fields) {
-            if(fields[i]) {
+            if (fields[i]) {
                 var field = fields[i];
-                if(field._id == fieldId) {
+                if (field._id === fieldId) {
                     return field;
                 }
             }
@@ -86,7 +85,9 @@ module.exports = function(app) {
             return global.forms;
         }
         var fs = require('fs');
-        global.forms = JSON.parse(fs.readFileSync('./public/assignment/server/models/form.mock.json', 'utf8'));
+        global.forms = JSON.parse(
+                fs.readFileSync(
+                    './public/assignment/server/models/form.mock.json', 'utf8'));
         return global.forms;
     }
 
@@ -102,7 +103,7 @@ module.exports = function(app) {
         var forms = findAllForms();
         form._id = (new Date()).getTime();
         forms.push(form);
-        console.log("global after new form:");
+        console.log('global after new form:');
         console.log(global.forms);
         return forms;
     }
@@ -131,14 +132,14 @@ module.exports = function(app) {
 
     function _findFormByKey(key, value) {
         var forms = findAllForms();
-        for(var i in forms) {
+        for (var i in forms) {
             if (forms[i]) {
                 var u = forms[i];
-                if (u[key] == value) {
+                if (u[key] === value) {
                     return u;
                 }
             }
         }
         return null;
     }
-}
+};

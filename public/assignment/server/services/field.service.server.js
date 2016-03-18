@@ -12,7 +12,7 @@ module.exports = function(app, FormModel, uuid) {
         var form = fm.findFormById(fid);
         console.log('in get fields by form id');
         console.log(form);
-        if(form) {
+        if (form) {
             res.json(form.fields);
         } else {
             res.json([]);
@@ -37,7 +37,7 @@ module.exports = function(app, FormModel, uuid) {
     function deleteField(req, res) {
         var formId = req.params.formId;
         var fieldId = req.params.fieldId;
-        if(fm.deleteField(formId, fieldId)) {
+        if (fm.deleteField(formId, fieldId)) {
             res.send(200);
         } else {
             res.send(400);
@@ -53,4 +53,4 @@ module.exports = function(app, FormModel, uuid) {
         res.json(updated);
     }
 
-}
+};
