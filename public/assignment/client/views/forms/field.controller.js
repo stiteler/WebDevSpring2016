@@ -42,6 +42,7 @@
         model.addField = addField;
         model.removeField = removeField;
         model.editField = editField;
+        model.copyField = copyField;
 
         function init() {
             if (UtilsService.isLoggedIn()) {
@@ -131,6 +132,18 @@
                         console.log('ADD FIELD OK');
                     });
             }
+            _refreshFields()
+        }
+
+        function copyField(field) {
+            var copy = angular.copy(field);
+            copy._id = null;
+
+            FieldService
+                .createFieldForForm(model.formId, copy)
+                .then(function(resp) {
+                    console.log('COPY FIELD OK');
+                });
             _refreshFields()
         }
 
