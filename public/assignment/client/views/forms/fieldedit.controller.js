@@ -9,8 +9,6 @@
         var model = this;
 
         function init() {
-            console.log('items are');
-            console.log(items);
             model.field = items[0];
             model.prettyType = items[1];
 
@@ -23,6 +21,8 @@
 
         model.ok = function () {
             if(model.hasOptions) {
+                console.log('new rendered');
+                console.log(model.rendered);
                 model.field.options = string_to_options(model.rendered);
                 console.log('new options');
                 console.log(model.field.options);
@@ -50,14 +50,14 @@
         }
 
         function string_to_options(rendered) {
-            var splits = rendered.split('\n');
+            var splits = model.rendered.split('\n');
             var newOptions = [];
             for (var i in splits) {
                 if (splits[i]) {
                     var split = splits[i];
-                    var pair = split.split(':');
+                    var pair = split.split(':', 2);
                     var label = pair[0];
-                    var value = pair[0];
+                    var value = pair[1];
                     newOptions.push({'label': label, 'value': value});
                 }
             }

@@ -43,8 +43,8 @@
 
         function addForm() {
             var newForm = {
-                //TODO: add fields here?
                 title: $scope.active.title,
+                fields: [],
                 // _id: (new Date()).getTime(),
             };
 
@@ -77,7 +77,6 @@
             FormService
                 .findAllFormsForUser(userId)
                 .then(function (forms) {
-                    console.log(forms.data);
                     $scope.forms = forms.data;
                 });
 

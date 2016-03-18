@@ -12,6 +12,14 @@
       <input ng-model="model.field.placeholder" type="text" class="form-control" 
         placeholder="Placeholder" value="{{model.field.placeholder}}">
     </div>
+    <div ng-switch-when="EMAIL">
+      <label class="control-label">Label</label>
+      <input ng-model="model.field.label" type="text" class="form-control"
+         placeholder="Label" value="{{model.field.label}}">
+      <label class="control-label">Placeholder</label>
+      <input ng-model="model.field.placeholder" type="text" class="form-control" 
+        placeholder="Placeholder" value="{{model.field.placeholder}}">
+    </div>
     <div ng-switch-when="TEXTAREA">
       <label class="control-label">Label</label>
       <input ng-model="model.field.label" type="text" class="form-control"

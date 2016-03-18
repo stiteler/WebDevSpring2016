@@ -28,6 +28,9 @@
                       <div ng-switch-when="TEXT">
                         <input type="text" class="form-control" placeholder="{{field.placeholder}}"/>
                       </div>
+                      <div ng-switch-when="EMAIL">
+                        <input type="email" class="form-control" placeholder="{{field.placeholder}}"/>
+                      </div>
                       <div ng-switch-when="TEXTAREA">
                         <textarea type="text" class="form-control">{{field.placeholder}}</textarea>
                       </div>

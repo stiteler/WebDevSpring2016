@@ -93,16 +93,18 @@
                 }
             });
 
-            var edited = null;
             modalInstance
                 .result
                 .then(function (result) {
-                    console.log('result is');
-                    console.log(result);
-                    edited = result;
+                    FieldService
+                        .updateField(model.formId, model.selectedField._id, result)
+                        .then(function(resp) {
+                            console.log('UPDATE FIELD OK');
+                        });
+                    _refreshFields();
                 }, function () {
-                    console.log("dismissed");
-            }); 
+                    console.log("MODAL DISMISSED");
+            });
         }
 
         function removeField(field) {
@@ -121,19 +123,15 @@
             var rawType = _lookupRawType(type);
             var templates = _templateMappings();
             if(templates[rawType]) {
-                var newForm = templates[rawType]
-                //model.form.fields.push(newForm);
+                var newForm = templates[rawType];
 
                 FieldService
                     .createFieldForForm(model.formId, newForm)
                     .then(function(resp) {
-                        if(resp.data) {
-                            console.log('response from create field');
-                            console.log(resp.data);
-                            // need to re render list here.
-                        }
+                        console.log('ADD FIELD OK');
                     });
             }
+            _refreshFields()
         }
 
         function selectType(type) {
@@ -150,6 +148,7 @@
         function _getFieldTypes() {
             return [
                 'Single Line Text Field',
+                'Email Text Field',
                 'Multi Line Text Field',
                 'Date Field',
                 'Dropdown Field',
@@ -161,6 +160,7 @@
         function _fieldMappings() {
             return {
                 'Single Line Text Field': 'TEXT',
+                'Email Text Field': 'EMAIL',
                 'Multi Line Text Field': 'TEXTAREA',
                 'Date Field': 'DATE',
                 'Dropdown Field': 'OPTIONS',
@@ -172,6 +172,7 @@
         function _templateMappings() {
             var mappings = {
                 'TEXT': {"_id": null, "label": "New Text Field", "type": "TEXT", "placeholder": "New Field"},
+                'EMAIL': {"_id": null, "label": "New Email Field", "type": "EMAIL", "placeholder": "Email"},
                 'TEXTAREA': {"_id": null, "label": "New Text Field", "type": "TEXTAREA", "placeholder": "New Field"},
                 'DATE': {"_id": null, "label": "New Date Field", "type": "DATE"},
                 'OPTIONS': {"_id": null, "label": "New Dropdown", "type": "OPTIONS", "options": [

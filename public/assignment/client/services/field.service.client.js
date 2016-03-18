@@ -18,7 +18,7 @@
         function createFieldForForm(formId, field) {
             return $http({
                 method: 'POST',
-                url: '/api/assignment/form/' + formId + 'field',
+                url: '/api/assignment/form/' + formId + '/field',
                 data: field
             });
         }

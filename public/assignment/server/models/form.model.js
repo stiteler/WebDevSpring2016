@@ -58,9 +58,8 @@ module.exports = function(app) {
         var existing = getField(formId, fieldId);
         if (existing) {
             for (var key in updates) {
-                if (updates[key]) {
-                    var u = updates[i];
-                    existing[attr] = u;
+                if (updates.hasOwnProperty(key)) {
+                    existing[key] = updates[key];
                 }
             }
             return existing;
@@ -103,6 +102,8 @@ module.exports = function(app) {
         var forms = findAllForms();
         form._id = (new Date()).getTime();
         forms.push(form);
+        console.log("global after new form:");
+        console.log(global.forms);
         return forms;
     }
 
