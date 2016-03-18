@@ -20,7 +20,7 @@
 
             UserService.createUser(newUser)
                 .then(function (created) {
-                    console.log("CREATE USER:");
+                    console.log('CREATE USER:');
                     console.log(created.data);
                     if (created.data) {
                         UserService.setCurrentUser(created.data);

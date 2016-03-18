@@ -56,7 +56,7 @@
                 model.fieldTypes = _getFieldTypes();
                 model.selectedFieldType = model.fieldTypes[0];
 
-                _refreshFields()
+                _refreshFields();
 
             } else {
                 UtilsService.navigate('#/home');
@@ -68,7 +68,7 @@
             FieldService
                 .getFieldsForForm(model.formId)
                 .then(function(resp) {
-                    if(resp.data) {
+                    if (resp.data) {
                         model.fields = resp.data;
                     }
                 });
@@ -104,26 +104,26 @@
                         });
                     _refreshFields();
                 }, function () {
-                    console.log("MODAL DISMISSED");
-            });
+                    console.log('MODAL DISMISSED');
+                });
         }
 
         function removeField(field) {
             FieldService
                 .deleteFieldFromForm(model.formId, field._id)
                 .then(function(resp) {
-                    if(resp.data) {
-                        console.log("DELETE OK");
+                    if (resp.data) {
+                        console.log('DELETE OK');
                     }
                 });
-            _refreshFields()
+            _refreshFields();
         }
 
         function addField() {
             var type = model.selectedFieldType;
             var rawType = _lookupRawType(type);
             var templates = _templateMappings();
-            if(templates[rawType]) {
+            if (templates[rawType]) {
                 var newForm = templates[rawType];
 
                 FieldService
@@ -132,7 +132,7 @@
                         console.log('ADD FIELD OK');
                     });
             }
-            _refreshFields()
+            _refreshFields();
         }
 
         function copyField(field) {
@@ -144,7 +144,7 @@
                 .then(function(resp) {
                     console.log('COPY FIELD OK');
                 });
-            _refreshFields()
+            _refreshFields();
         }
 
         function selectType(type) {
@@ -184,113 +184,113 @@
 
         function _templateMappings() {
             var mappings = {
-                'TEXT': {"_id": null, "label": "New Text Field", "type": "TEXT", "placeholder": "New Field"},
-                'EMAIL': {"_id": null, "label": "New Email Field", "type": "EMAIL", "placeholder": "Email"},
-                'TEXTAREA': {"_id": null, "label": "New Text Field", "type": "TEXTAREA", "placeholder": "New Field"},
-                'DATE': {"_id": null, "label": "New Date Field", "type": "DATE"},
-                'OPTIONS': {"_id": null, "label": "New Dropdown", "type": "OPTIONS", "options": [
-                                {"label": "Option 1", "value": "OPTION_1"},
-                                {"label": "Option 2", "value": "OPTION_2"},
-                                {"label": "Option 3", "value": "OPTION_3"}
+                'TEXT': {'_id': null, 'label': 'New Text Field', 'type': 'TEXT', 'placeholder': 'New Field'},
+                'EMAIL': {'_id': null, 'label': 'New Email Field', 'type': 'EMAIL', 'placeholder': 'Email'},
+                'TEXTAREA': {'_id': null, 'label': 'New Text Field', 'type': 'TEXTAREA', 'placeholder': 'New Field'},
+                'DATE': {'_id': null, 'label': 'New Date Field', 'type': 'DATE'},
+                'OPTIONS': {'_id': null, 'label': 'New Dropdown', 'type': 'OPTIONS', 'options': [
+                                {'label': 'Option 1', 'value': 'OPTION_1'},
+                                {'label': 'Option 2', 'value': 'OPTION_2'},
+                                {'label': 'Option 3', 'value': 'OPTION_3'}
                             ]},
-                'CHECKBOXES': {"_id": null, "label": "New Checkboxes", "type": "CHECKBOXES", "options": [
-                                {"label": "Option A", "value": "OPTION_A"},
-                                {"label": "Option B", "value": "OPTION_B"},
-                                {"label": "Option C", "value": "OPTION_C"}
+                'CHECKBOXES': {'_id': null, 'label': 'New Checkboxes', 'type': 'CHECKBOXES', 'options': [
+                                {'label': 'Option A', 'value': 'OPTION_A'},
+                                {'label': 'Option B', 'value': 'OPTION_B'},
+                                {'label': 'Option C', 'value': 'OPTION_C'}
                             ]},
-                'RADIOS': {"_id": null, "label": "New Radio Buttons", "type": "RADIOS", "options": [
-                                {"label": "Option X", "value": "OPTION_X"},
-                                {"label": "Option Y", "value": "OPTION_Y"},
-                                {"label": "Option Z", "value": "OPTION_Z"}
+                'RADIOS': {'_id': null, 'label': 'New Radio Buttons', 'type': 'RADIOS', 'options': [
+                                {'label': 'Option X', 'value': 'OPTION_X'},
+                                {'label': 'Option Y', 'value': 'OPTION_Y'},
+                                {'label': 'Option Z', 'value': 'OPTION_Z'}
                             ]}
-            }
+            };
             return mappings;
         }
 
         function _getTestForm() {
-           return {
-              "_id": "010",
-              "title": "ToDo",
-              "userId": 234,
-              "fields":[
+            return {
+                '_id': '010',
+                'title': 'ToDo',
+                'userId': 234,
+                'fields':[
                  {
-                    "_id":"777",
-                    "label":"Title",
-                    "type":"TEXT",
-                    "placeholder":"Title"
+                     '_id':'777',
+                     'label':'Title',
+                     'type':'TEXT',
+                     'placeholder':'Title'
                  },
                  {
-                    "_id":"888",
-                    "label":"Description",
-                    "type":"TEXTAREA",
-                    "placeholder":"Title"
+                     '_id':'888',
+                     'label':'Description',
+                     'type':'TEXTAREA',
+                     'placeholder':'Title'
                  },
                  {
-                    "_id":"999",
-                    "label":"Due Date",
-                    "type":"DATE"
+                     '_id':'999',
+                     'label':'Due Date',
+                     'type':'DATE'
                  },
                  {
-                    "_id":"145",
-                    "label":"State",
-                    "type":"OPTIONS",
-                    "options":[
+                     '_id':'145',
+                     'label':'State',
+                     'type':'OPTIONS',
+                     'options':[
                        {
-                          "label":"Massachussetts",
-                          "value":"MA"
+                           'label':'Massachussetts',
+                           'value':'MA'
                        },
                        {
-                          "label":"New Hampshire",
-                          "value":"NH"
+                           'label':'New Hampshire',
+                           'value':'NH'
                        }
                     ]
                  },
                  {
-                    "_id":"444",
-                    "label":"Sex/Gender",
-                    "type":"RADIOS",
-                    "options":[
+                     '_id':'444',
+                     'label':'Sex/Gender',
+                     'type':'RADIOS',
+                     'options':[
                        {
-                          "label":"Male",
-                          "value":"Male"
+                           'label':'Male',
+                           'value':'Male'
                        },
                        {
-                          "label":"Female",
-                          "value":"Female"
+                           'label':'Female',
+                           'value':'Female'
                        }
                     ]
                  },
                  {
-                    "_id":"345",
-                    "label":"Moods",
-                    "type":"CHECKBOXES",
-                    "options":[
+                     '_id':'345',
+                     'label':'Moods',
+                     'type':'CHECKBOXES',
+                     'options':[
                        {
-                          "label":"Happy",
-                          "value":"happy"
+                           'label':'Happy',
+                           'value':'happy'
                        },
                        {
-                          "label":"Accomplished",
-                          "value":"accomplished"
+                           'label':'Accomplished',
+                           'value':'accomplished'
                        }
                     ]
                  }
               ]
-           };
+            };
         }
     }
 
     function invert(obj) {
-        var new_obj = {};
+        var newObj = {};
 
         for (var prop in obj) {
-            if(obj.hasOwnProperty(prop)) {
-                new_obj[obj[prop]] = prop;
+            if (obj.hasOwnProperty(prop)) {
+                newObj[obj[prop]] = prop;
             }
         }
 
-        return new_obj;
-    };
+        return newObj;
+    }
 
 }());
 

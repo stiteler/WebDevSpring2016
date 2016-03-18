@@ -13,7 +13,7 @@
 
         var initialActive = {
             title: ''
-        }
+        };
 
         function init() {
             if (UtilsService.isLoggedIn()) {
@@ -36,7 +36,7 @@
 
             // catch an error here someday.
             FormService
-                .deleteFormById(formId)
+                .deleteFormById(formId);
 
             refreshForms();
         }

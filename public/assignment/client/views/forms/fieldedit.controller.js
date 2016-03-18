@@ -12,18 +12,18 @@
             model.field = items[0];
             model.prettyType = items[1];
 
-            if(['OPTIONS', 'CHECKBOXES', 'RADIOS'].indexOf(model.field.type) >= 0) {
+            if (['OPTIONS', 'CHECKBOXES', 'RADIOS'].indexOf(model.field.type) >= 0) {
                 model.hasOptions = true;
-                model.rendered = options_to_string(model.field.options);
+                model.rendered = optionsToString(model.field.options);
             }
         }
         init();
 
         model.ok = function () {
-            if(model.hasOptions) {
+            if (model.hasOptions) {
                 console.log('new rendered');
                 console.log(model.rendered);
-                model.field.options = string_to_options(model.rendered);
+                model.field.options = stringToOptions(model.rendered);
                 console.log('new options');
                 console.log(model.field.options);
             }
@@ -34,22 +34,22 @@
             $uibModalInstance.dismiss('cancel');
         };
 
-        function options_to_string(options) {
+        function optionsToString(options) {
             var rendered = [];
             for (var i in options) {
-                if(options[i]) {
+                if (options[i]) {
                     var option = options[i];
-                    rendered.push(option_to_string(option));
+                    rendered.push(optionToString(option));
                 }
             }
             return rendered.join('\n');
         }
 
-        function option_to_string(option) {
-            return option.label + ":" + option.value;
+        function optionToString(option) {
+            return option.label + ':' + option.value;
         }
 
-        function string_to_options(rendered) {
+        function stringToOptions(rendered) {
             var splits = model.rendered.split('\n');
             var newOptions = [];
             for (var i in splits) {
