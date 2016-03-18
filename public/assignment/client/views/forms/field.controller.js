@@ -130,9 +130,9 @@
                     .createFieldForForm(model.formId, newForm)
                     .then(function(resp) {
                         console.log('ADD FIELD OK');
+                        _refreshFields();
                     });
             }
-            _refreshFields();
         }
 
         function copyField(field) {
