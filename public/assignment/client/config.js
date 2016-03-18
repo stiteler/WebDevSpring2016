@@ -19,6 +19,11 @@
             templateUrl: 'views/forms/forms.view.html',
             controller: 'FormController'
         })
+        .when('/form/:formId/fields', {
+            templateUrl: 'views/forms/field.view.html',
+            controller: 'FieldController',
+            controllerAs: 'model',
+        })
         .when('/fields', {
             templateUrl: 'views/forms/field.view.html',
             controller: 'FieldController',

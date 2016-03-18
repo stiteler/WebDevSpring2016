@@ -4,7 +4,8 @@
 <ul class="nav nav-tabs">
     <li role="presentation" class="active"><a data-toggle="tab" href="#forms-pane">Forms</a></li>
     <!-- <li role="presentation"><a data-toggle="tab" href="#fields-pane">Fields</a></li> -->
-    <li role="presentation"><a href="#/fields">Fields</a></li>
+    <!-- li role="presentation"><a href="#/fields">Fields</a></li -->
+    <li ng-show="isSelected" role="presentation"><a ng-href="#/form/{{active._id}}/fields">Fields</a></li>
 </ul>
 
 <!-- Begin Tab Content -->

@@ -10,6 +10,8 @@ module.exports = function(app, FormModel, uuid) {
     function getFieldsByFormId(req, res) {
         var fid = req.params.formId;
         var form = fm.findFormById(fid);
+        console.log('in get fields by form id');
+        console.log(form);
         if(form) {
             res.json(form.fields);
         } else {

@@ -27,6 +27,7 @@
         init();
 
         function refreshActive() {
+            $scope.isSelected = false;
             $scope.active = angular.copy(initialActive);
         }
 
@@ -95,6 +96,7 @@
                     }
                 }
             }
+            $scope.isSelected = true;
             $scope.active = selected;
         }
 

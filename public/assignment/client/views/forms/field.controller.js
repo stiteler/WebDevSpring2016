@@ -7,7 +7,6 @@
             // directive ported from github.com/jannunzi/WebDev
             //      /public/experiments/directives/sortable
             //      /directive/Sortable.js
-            console.log('in directive');
 
             var start = null;
             var end = null;
@@ -21,7 +20,7 @@
                     },
                     stop: function(event, ui) {
                         end = ui.item.index();
-                        var fields = scope.model.form.fields;
+                        var fields = scope.model.fields;
                         var temp = fields[start];
                         fields[start] = fields[end];
                         fields[end] = temp;
@@ -36,7 +35,7 @@
         })
         .controller('FieldController', FieldController);
 
-    function FieldController(UserService, UtilsService, $uibModal) {
+    function FieldController(UserService, UtilsService, $uibModal, $routeParams, FieldService) {
         var model = this;
 
         model.selectType = selectType;
@@ -47,16 +46,32 @@
         function init() {
             if (UtilsService.isLoggedIn()) {
                 model.user = UserService.getCurrentUser();
-                model.form = _getTestForm();
-                model.fields = model.form.fields;
+                model.formId = $routeParams.formId;
+                //model.userId = $routeParams.userId;
+
+                // model.form = _getTestForm();
+                // model.fields = model.form.fields;
 
                 model.fieldTypes = _getFieldTypes();
                 model.selectedFieldType = model.fieldTypes[0];
+
+                _refreshFields()
+
             } else {
                 UtilsService.navigate('#/home');
             }
         }
         init();
+
+        function _refreshFields() {
+            FieldService
+                .getFieldsForForm(model.formId)
+                .then(function(resp) {
+                    if(resp.data) {
+                        model.fields = resp.data;
+                    }
+                });
+        }
 
         function editField(field) {
             model.selectedField = field;
@@ -91,7 +106,14 @@
         }
 
         function removeField(field) {
-            console.log('removing Field: ' + field);
+            FieldService
+                .deleteFieldFromForm(model.formId, field._id)
+                .then(function(resp) {
+                    if(resp.data) {
+                        console.log("DELETE OK");
+                    }
+                });
+            _refreshFields()
         }
 
         function addField() {
@@ -99,7 +121,18 @@
             var rawType = _lookupRawType(type);
             var templates = _templateMappings();
             if(templates[rawType]) {
-                model.form.fields.push(templates[rawType]);
+                var newForm = templates[rawType]
+                //model.form.fields.push(newForm);
+
+                FieldService
+                    .createFieldForForm(model.formId, newForm)
+                    .then(function(resp) {
+                        if(resp.data) {
+                            console.log('response from create field');
+                            console.log(resp.data);
+                            // need to re render list here.
+                        }
+                    });
             }
         }
 

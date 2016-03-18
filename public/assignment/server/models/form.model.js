@@ -10,11 +10,11 @@ module.exports = function(app) {
         getFieldsByFormId: getFieldsByFormId,
         getField: getField,
         addField: addField,
+        deleteField: deleteField,
         updateField: updateField,
     }
     return api;
 
-    var forms = findAllForms();
 
     function findFormsByUserId(userId) {
         var forms = findAllForms();
@@ -36,7 +36,7 @@ module.exports = function(app) {
     }
 
     function getFieldsByFormId(formId) {
-        var form = findFormbyId(formId);
+        var form = findFormById(formId);
         if(form) {
             return form.fields;
         }
@@ -47,7 +47,7 @@ module.exports = function(app) {
         var toDelete = getField(formId, fieldId);
         if(fields) {
             var index = fields.indexOf(toDelete);
-            forms.splice(index, 1);
+            fields.splice(index, 1);
             return true;
         } else {
             return false;
