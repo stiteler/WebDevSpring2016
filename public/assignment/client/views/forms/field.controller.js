@@ -59,7 +59,13 @@
         init();
 
         function editField(field) {
-            $uibModal.open({
+            model.selectedField = field;
+
+            var mappings = _fieldMappings();
+            var inverseMappings = invert(mappings);
+            var prettyType = inverseMappings[model.selectedField.type];
+
+            var modalInstance = $uibModal.open({
                 animation: false,
                 templateUrl: 'views/forms/fieldedit.view.html',
                 controller: 'FieldEditController',
@@ -67,9 +73,20 @@
                 size: 'md',
                 resolve: {
                     items: function () {
-                        return ['something'];
+                        return [model.selectedField, prettyType];
                     }
                 }
+            });
+
+            var edited = null;
+            modalInstance
+                .result
+                .then(function (result) {
+                    console.log('result is');
+                    console.log(result);
+                    edited = result;
+                }, function () {
+                    console.log("dismissed");
             }); 
         }
 
@@ -215,6 +232,18 @@
            };
         }
     }
+
+    function invert(obj) {
+        var new_obj = {};
+
+        for (var prop in obj) {
+            if(obj.hasOwnProperty(prop)) {
+                new_obj[obj[prop]] = prop;
+            }
+        }
+
+        return new_obj;
+    };
 
 }());
 

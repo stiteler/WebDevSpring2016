@@ -1,15 +1,58 @@
 <div class="modal-header">
-  <h3 class="modal-title">Edit Field</h3>
+  <h3 class="modal-title">{{model.prettyType}}</h3>
 </div>
+
 <div class="modal-body">
-  <ul>
-    <li ng-repeat="item in items">
-      <a href="#" ng-click="$event.preventDefault(); selected.item = item">{{ item }}</a>
-    </li>
-  </ul>
-    Selected: <b>{{ selected.item }}</b>
-    <label class="control-label">Some Label</label>
-    <input type="text" class="form-control" placeholder="some placeholder">
+  <div ng-switch="model.field.type">
+    <div ng-switch-when="TEXT">
+      <label class="control-label">Label</label>
+      <input ng-model="model.field.label" type="text" class="form-control"
+         placeholder="Label" value="{{model.field.label}}">
+      <label class="control-label">Placeholder</label>
+      <input ng-model="model.field.placeholder" type="text" class="form-control" 
+        placeholder="Placeholder" value="{{model.field.placeholder}}">
+    </div>
+    <div ng-switch-when="TEXTAREA">
+      <label class="control-label">Label</label>
+      <input ng-model="model.field.label" type="text" class="form-control"
+         placeholder="Label" value="{{model.field.label}}">
+      <label class="control-label">Placeholder</label>
+      <input ng-model="model.field.placeholder" type="text" class="form-control" 
+        placeholder="Placeholder" value="{{model.field.placeholder}}">
+    </div>
+    <div ng-switch-when="DATE">
+      <label class="control-label">Label</label>
+      <input ng-model="model.field.label" type="text" class="form-control"
+         placeholder="Label" value="{{model.field.label}}">
+    </div>
+    <div ng-switch-when="OPTIONS">
+      <label class="control-label">Label</label>
+      <input ng-model="model.field.label" type="text" class="form-control"
+         placeholder="Label" value="{{model.field.label}}">
+      <label class="control-label">Options</label>
+      <textarea ng-model="model.rendered" type="text" class="form-control">
+        {{model.rendered}}
+      </textarea>
+    </div>
+    <div ng-switch-when="CHECKBOXES">
+      <label class="control-label">Label</label>
+      <input ng-model="model.field.label" type="text" class="form-control"
+         placeholder="Label" value="{{model.field.label}}">
+      <label class="control-label">Options</label>
+      <textarea ng-model="model.rendered" type="text" class="form-control">
+        {{model.rendered}}
+      </textarea>
+    </div>
+    <div ng-switch-when="RADIOS">
+      <label class="control-label">Label</label>
+      <input ng-model="model.field.label" type="text" class="form-control"
+         placeholder="Label" value="{{model.field.label}}">
+      <label class="control-label">Options</label>
+      <textarea ng-model="model.rendered" type="text" class="form-control">
+        {{model.rendered}}
+      </textarea>
+    </div>
+  </div>
 </div>
 <div class="modal-footer">
   <button class="btn btn-primary" type="button" ng-click="model.ok()">OK</button>
