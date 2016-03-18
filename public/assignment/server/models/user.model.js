@@ -36,7 +36,7 @@ module.exports = function(app) {
         for (var i in users) {
             if (users[i]) {
                 var u = users[i];
-                if (u.password === password && u.username === username) {
+                if (u.password == password && u.username == username) {
                     return u;
                 }
             }
@@ -79,7 +79,7 @@ module.exports = function(app) {
         for (var i in users) {
             if (users[i]) {
                 var u = users[i];
-                if (u[key] === value) {
+                if (u[key] == value) {
                     return u;
                 }
             }

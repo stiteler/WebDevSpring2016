@@ -21,7 +21,7 @@ module.exports = function(app) {
         for (var i in forms) {
             if (forms[i]) {
                 var f = forms[i];
-                if (f.userId === userId) {
+                if (f.userId == userId) {
                     rtn.push(f);
                 }
             }
@@ -71,7 +71,7 @@ module.exports = function(app) {
         for (var i in fields) {
             if (fields[i]) {
                 var field = fields[i];
-                if (field._id === fieldId) {
+                if (field._id == fieldId) {
                     return field;
                 }
             }
@@ -135,7 +135,7 @@ module.exports = function(app) {
         for (var i in forms) {
             if (forms[i]) {
                 var u = forms[i];
-                if (u[key] === value) {
+                if (u[key] == value) {
                     return u;
                 }
             }
