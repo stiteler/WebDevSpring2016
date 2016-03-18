@@ -5,8 +5,6 @@
         .module('FormBuilderApp')
         .controller('MainController', MainController);
 
-    function MainController($location) {
-
-    }
+    function MainController() {}
 
 })();

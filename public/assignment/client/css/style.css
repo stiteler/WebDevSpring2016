@@ -21,3 +21,7 @@ thead {
 i.gi-form-table {
     pointer-events: all;
 }
+
+.table-borderless tbody tr td{
+    border: none;
+}

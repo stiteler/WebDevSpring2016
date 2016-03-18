@@ -1,4 +1,4 @@
-<h1 class="page-header">Forms</h1>
+<h1 class="page-header">Forms: {{model.form.title}}</h1>
 
 <ul class="nav nav-tabs">
     <li role="presentation"><a href="#/forms">Forms</a></li>
@@ -9,105 +9,125 @@
   <div class="tab-pane fade in active" id="fields-pane">
     <div class="container fields-container">
 
-    <h2>Form: {{model.form.title}}</h2><hr>
 
       <!-- RENDER FIELDS -->
-      <div ng-repeat="field in model.form.fields">
-        <div class="container field-obj-container">
-          <div class="col-sm-7">
-            <label class="control-label">{{field.label}}</label>
-          </div>
-          <form class="form-vertical">
-            <div class='form-group'>
-              <div class="col-sm-7">
-                <div ng-switch="field.type">
-                  <div ng-switch-when="TEXT">
-                    <input type="text" class="form-control" placeholder="{{field.placeholder}}"/>
-                  </div>
-                  <div ng-switch-when="TEXTAREA">
-                    <textarea type="text" class="form-control">{{field.placeholder}}</textarea>
-                  </div>
-                  <div ng-switch-when="DATE">
-                      <input type="date" class="form-control">
-                  </div>
-                  <div ng-switch-when="OPTIONS">
+      <div class=""><!-- table doesn't need responsive because fields are, no rendered rows" -->
+      <table class="table table-borderless">
+        <tbody jgaSortable jga-axis="y">
 
-                    <div class="dropdown">
-                      <button class="btn btn-default btn-block dropdown-toggle" 
-                              type="button" data-toggle="dropdown">
-                        {{field.label}}
-                        <span class="caret"></span>
-                      </button>
-
-                      <ul class="dropdown-menu col-sm-12">
-                        <li ng-repeat="option in field.options">
-                          <a>{{option.label}}</a>
-                        </li>
-                      </ul>
-                    </div>
-
-                  </div>
-                  <div ng-switch-when="CHECKBOXES">
-                    <div ng-repeat="option in field.options">
-                      <input type="checkbox" name="{{field._id}}" ng-value="option.value">
-                      {{option.label}}
-                    </div>
-                  </div>
-                  <div ng-switch-when="RADIOS">
-                    <div ng-repeat="option in field.options">
-                      <input type="radio" name="{{field._id}}" ng-value="option.value">
-                      {{option.label}}
-                    </div>
-                  </div>
-                </div>
+          <tr ng-repeat="field in model.form.fields">
+            <td>
+            <div class="container field-obj-container">
+              <div class="col-sm-8">
+                <label class="control-label">{{field.label}}</label>
               </div>
-                <div class="col-sm-5">
-                    <span class="glyphicon glyphicon-pencil gi-field-table"></span>
-                    <span class="glyphicon glyphicon-plus-sign gi-field-table"></span>
-                    <span ng-click="model.removeField(field)"
-                          class="glyphicon glyphicon-remove gi-field-table"></span>
-                    <span class="glyphicon glyphicon-align-justify gi-field-table"></span>
-                </div>
+              <form class="form-vertical">
+                <div class='form-group'>
+                  <div class="col-sm-8">
+                    <div ng-switch="field.type">
+                      <div ng-switch-when="TEXT">
+                        <input type="text" class="form-control" placeholder="{{field.placeholder}}"/>
+                      </div>
+                      <div ng-switch-when="TEXTAREA">
+                        <textarea type="text" class="form-control">{{field.placeholder}}</textarea>
+                      </div>
+                      <div ng-switch-when="DATE">
+                          <input type="date" class="form-control">
+                      </div>
+                      <div ng-switch-when="OPTIONS">
+
+                        <div class="dropdown">
+                          <button class="btn btn-default btn-block dropdown-toggle" 
+                                  type="button" data-toggle="dropdown">
+                            {{field.label}}
+                            <span class="caret"></span>
+                          </button>
+
+                          <ul class="dropdown-menu col-sm-12">
+                            <li ng-repeat="option in field.options">
+                              <a>{{option.label}}</a>
+                            </li>
+                          </ul>
+                        </div>
+
+                      </div>
+                      <div ng-switch-when="CHECKBOXES">
+                        <div ng-repeat="option in field.options">
+                          <input type="checkbox" name="{{field._id}}" ng-value="option.value">
+                          {{option.label}}
+                        </div>
+                      </div>
+                      <div ng-switch-when="RADIOS">
+                        <div ng-repeat="option in field.options">
+                          <input type="radio" name="{{field._id}}" ng-value="option.value">
+                          {{option.label}}
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                    <div class="col-sm-4 pull-right">
+                        <span class="glyphicon glyphicon-pencil gi-field-table"></span>
+                        <span class="glyphicon glyphicon-plus-sign gi-field-table"></span>
+                        <span ng-click="model.removeField(field)"
+                              class="glyphicon glyphicon-remove gi-field-table"></span>
+                        <span class="glyphicon glyphicon-align-justify gi-field-table"></span>
+                    </div>
+                  </div>
+                </form>
               </div>
-            </form>
-          </div>
-        </div>
+              <!--</div> intead of div it's tr--> 
+            </td>
+            </tr>
+            
+            <tr>
+              <td>
+              <!-- NEW FIELD -->
+              <div class="container field-obj-container">
+                  <div class="col-sm-9">
+                      <hr>
+                  </div>
+              </div>
+              </td>
+            </tr>
+
+            <tr>
+              <td>
+                <div class="container field-obj-container">
+                  <div class="col-sm-8">
+                    <label class="control-label">Add New Field:</label>
+                  </div>
+                  <form class="form-vertical" action="forms">
+                    <div class='form-group'>
+                      <div class="col-sm-8">
+                        <div class="dropdown" ng-model="model.fieldType">
+                          <button class="btn btn-default btn-block dropdown-toggle" 
+                                  type="button" data-toggle="dropdown">
+                            {{model.selectedFieldType}}
+                            <span class="caret"></span>
+                          </button>
+                          <ul class="dropdown-menu col-sm-12">
+                            <li ng-repeat="type in model.fieldTypes">
+                              <a ng-click="model.selectType(type)">{{type}}</a></li>
+                          </ul>
+                        </div>
+                      </div>
+                      <div class="col-sm-4 pull-right">
+                        <div ng-click="model.addField()">
+                          <span class="glyphicon glyphicon-plus-sign gi-field-table"></span>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </form>
+              </div>
+              </td>
+            </tr>
+
+          </tbody>
+        </table>
+      </div> <!-- table responsive -->
       <!-- END RENDER -->
 
-      <!-- NEW FIELD -->
-      <div class="container field-obj-container">
-          <div class="col-sm-9">
-              <hr>
-          </div>
-      </div>
 
-      <div class="container field-obj-container">
-        <div class="col-sm-7">
-          <label class="control-label">Add New Field:</label>
-        </div>
-        <form class="form-vertical" action="forms">
-          <div class='form-group'>
-            <div class="col-sm-7">
-              <div class="dropdown" ng-model="model.fieldType">
-                <button class="btn btn-default btn-block dropdown-toggle" 
-                        type="button" data-toggle="dropdown">
-                  {{model.selectedFieldType}}
-                  <span class="caret"></span>
-                </button>
-                <ul class="dropdown-menu col-sm-12">
-                  <li ng-repeat="type in model.fieldTypes">
-                    <a ng-click="model.selectType(type)">{{type}}</a></li>
-                </ul>
-              </div>
-            </div>
-            <div class="col-sm-5">
-              <div ng-click="model.addField()">
-                <span class="glyphicon glyphicon-plus-sign gi-field-table"></span>
-              </div>
-            </div>
-          </div>
-        </div>
-      </form>
-    </div>
   </div>
 </div>
