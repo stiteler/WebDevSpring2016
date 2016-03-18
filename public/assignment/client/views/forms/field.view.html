@@ -173,23 +173,22 @@
         <form class="form-vertical" action="forms">
           <div class='form-group'>
             <div class="col-sm-7">
-              <div class="dropdown">
+              <div class="dropdown" ng-model="model.fieldType">
                 <button class="btn btn-default btn-block dropdown-toggle" 
-                        type="button" id="dropdownMenu1" data-toggle="dropdown" 
-                        aria-haspopup="true" aria-expanded="true">
-                  Single Line Text
+                        type="button" data-toggle="dropdown">
+                  {{model.selectedFieldType}}
                   <span class="caret"></span>
                 </button>
                 <ul class="dropdown-menu col-sm-12">
-                  <li><a href="#">Single Line Text</a></li>
-                  <li><a href="#">Date</a></li>
-                  <li><a href="#">Checkboxes</a></li>
-                  <li><a href="#">Radio Buttons</a></li>
+                  <li ng-repeat="type in model.fieldTypes">
+                    <a ng-click="model.selectType(type)">{{type}}</a></li>
                 </ul>
               </div>
             </div>
           <div class="col-sm-5">
-            <span class="glyphicon glyphicon-plus-sign gi-field-table"></span>
+            <div ng-click="model.addField()">
+              <span class="glyphicon glyphicon-plus-sign gi-field-table"></span>
+            </div>
           </div>
         </div>
       </form>
