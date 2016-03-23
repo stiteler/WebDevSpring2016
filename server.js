@@ -29,6 +29,10 @@ if (typeof process.env.OPENSHIFT_HOMEDIR != 'undefined') {
 }
 
 // MIDDLEWARE:
+// TODO: add bodyparser.json
+// app.use(bodyParser.json())
+// app.user(bodyParser.urlencoded({extended:true})
+// require multer.
 app.use(bodyParser());
 app.use(function(req, res, next) {
     console.log(req.originalUrl);
