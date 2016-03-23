@@ -5,20 +5,36 @@
         .module('FlairdropApp')
         .factory('UserService', UserService);
 
-    function UserService() {
+    function UserService($rootScope) {
         var users = _getUsers();
 
         var api = {
-            findUserByUsernameAndPassword: findUserByUsernameAndPassword,
+            findUserByCredentials: findUserByCredentials,
             findAllUsers: findAllUsers,
             createUser: createUser,
             deleteUserById: deleteUserById,
             updateUser: updateUser,
             getUserByUserId: getUserByUserId,
+            isLoggedIn: isLoggedIn,
+            login: login,
         };
         return api;
 
-        function findUserByUsernameAndPassword(username, password, callback) {
+        function login(userId) {
+            // for now
+            console.log('logging in');
+            getUserByUserId(userId, function(user) {
+                if (user) {
+                    $rootScope.user = angular.copy(user);
+                }
+            });
+        }
+
+        function isLoggedIn() {
+            return $rootScope.user ? true : false;
+        }
+
+        function findUserByCredentials(username, password, callback) {
             var retr = null;
             for (var i in users) {
                 if (users[i]) {
