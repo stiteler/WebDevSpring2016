@@ -1,3 +1,19 @@
+.navbar {
+  background-color: #167AC6;
+}
+
+#primary-flair-panel-heading {
+  background-color: #03A9F4;
+}
+
+#secondary-flair-panel-heading {
+  background-color: #337AB7;
+}
+
+#tertiary-flair-panel-heading {
+  background-color: #3F65B5;
+}
+
 .col-centered{
     float: none;
     margin: 0 auto;
@@ -22,9 +38,9 @@
   font-size: 2.0em;
 }
 
-fieldset {
+/*fieldset {
   min-width: 0;
   padding: 0;
   margin: 0;
   border: 0;
-}
+}*/

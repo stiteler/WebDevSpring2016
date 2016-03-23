@@ -1,54 +1,21 @@
 <div class="container-fluid">
-  <div class="row">
 
-    <div class="col-md-4">
-      <div class="bs-component">
-        <div class="panel panel-primary">
-          <div class="panel-body">
-              <span class="label label-primary">beacon: looking for {{model.profile.beacon}}</span>
-          </div>
+  <div class="col-md-4">
+    <div class="bs-component">
+
+      <div class="panel panel-default">
+        <div class="panel-body">
+          <h4><span class="label label-info">looking for {{model.profile.beacon}}</span></h4>
+          <img class="image-responsive center-block "src="https://pbs.twimg.com/profile_images/650838229126660096/r91wuuwN_400x400.jpg" alt="Profile Picture">
+          <h1>@{{model.profile.username}}</h1>
+          <h3>{{model.profile.firstName}} {{model.profile.lastName}} </h3>
+          <p ngIf="model.profile.industry">Industry: {{model.profile.industry}} </p>
+          <p ngIf="model.profile.organization">Organization: {{model.profile.organization}}</p>
+          <p ngIf="model.profile.region">Region: {{model.profile.region}}</p>
+          <a ng-show="!model.connected" ng-click="model.connect()" class="btn btn-raised btn-info btn-block">Connect</a>
+          <a ng-show="model.connected" ng-click="model.connect()" class="btn btn-raised btn-primary btn-block">Recommend</a>
         </div>
       </div>
-    </div>
-
-    <div class="col-md-4">
-      <div class="bs-component">
-        <div class="panel panel-primary">
-          <div class="panel-body">
-              <h1>@{{model.profile.username}}</h1>
-          </div>
-        </div>
-      </div>
-    </div>
-
-
-    <div class="col-md-4 col-sm-12 col-xs-12 pull-right">
-      <div class="bs-component">
-        <div class="panel">
-          <div class="panel-body">
-            <a ng-show="!model.connected" ng-click="model.connect()" class="btn btn-raised btn-info btn-block">Connect</a>
-            <a ng-show="model.connected" ng-click="model.connect()" class="btn btn-raised btn-primary btn-block">Recommend</a>
-<!--             <a href="javascript:void(0)" class="btn btn-raised btn-success btn-block">Recommend</a> -->
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-
-
-  <div class="row">
-    <div class="col-md-4 col-sm-12 col-xs-12 pull-left">
-      <div class="bs-component">
-        <div class="panel panel-default">
-          <div class="panel-body">
-            <img class="image-responsive center-block "src="https://pbs.twimg.com/profile_images/650838229126660096/r91wuuwN_400x400.jpg">
-            <h3>{{model.profile.firstName}} {{model.profile.lastName}} </h3>
-            <p ngIf"model.profile.industry">Industry: {{model.profile.industry}} </p>
-            <p ngIf="model.profile.organization">Organization: {{model.profile.organization}}</p>
-            <p ngIf="model.profile.region">Region: {{model.profile.region}}</p>
-            </p>
-          </div>
-        </div>
 
       <div class="bs-component">
         <div class="panel">
@@ -56,19 +23,18 @@
             <a ng-click="model.changeUserByUsername('bob')" class="btn btn-raised btn-info btn-block">Bob</a>
             <a ng-click="model.changeUserByUsername('alice')" class="btn btn-raised btn-info btn-block">Alice</a>
             <a ng-click="model.changeUserByUsername('don')" class="btn btn-raised btn-info btn-block">Don</a>
-
           </div>
         </div>
       </div>
-
     </div>
   </div>
+
 
   <!-- flair 1 -->
   <div class="col-lg-8 col-md-8 col-sm-12 col-xs-12 pull-right">
     <div class="bs-component">
       <div class="panel panel-warning">
-        <div class="panel-heading">
+        <div class="panel-heading" id="primary-flair-panel-heading">
           <h3 class="panel-title">Primary Flair</h3>
         </div>
         <div class="panel-body">
@@ -83,7 +49,7 @@
   <div class="col-lg-8 col-md-8 col-sm-12 col-xs-12 pull-right">
     <div class="bs-component">
       <div class="panel panel-warning">
-        <div class="panel-heading">
+        <div class="panel-heading" id="secondary-flair-panel-heading">
           <h3 class="panel-title">Secondary Flair</h3>
         </div>
         <div class="panel-body">
@@ -100,7 +66,7 @@
   <div class="col-lg-8 col-md-8 col-sm-12 col-xs-12 pull-right">
     <div class="bs-component">
       <div class="panel panel-warning">
-        <div class="panel-heading">
+        <div class="panel-heading" id="tertiary-flair-panel-heading">
           <h3 class="panel-title">Tertiary Flair</h3>
         </div>
         <div class="panel-body">
@@ -122,5 +88,4 @@
       </div>
     </div>
   </div>
-
 </div>

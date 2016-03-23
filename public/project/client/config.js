@@ -28,6 +28,11 @@
                   controller: 'RegisterController',
                   controllerAs: 'model',
                 })
+                .when('/search', {
+                  templateUrl: 'views/search/search.view.html',
+                  controller: 'SearchController',
+                  controllerAs: 'model',
+                })
                 // example of resolve:
                 // see jose's code in proj/client/omdb/config.js
                 //  .when("/profile", {
