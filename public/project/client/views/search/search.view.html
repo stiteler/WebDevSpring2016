@@ -1,0 +1,94 @@
+<div class="container-fluid">
+  <div class="col-md-2">
+    <div class="bs-component">
+      <div class="well">
+        <form class="form-vertical">
+          <fieldset>
+            <legend>Search</legend>
+
+            <p>Filters</p>
+            <div class="form-group has-info" style="margin-top: 0;"> <!-- inline style is just to demo custom css to put checkbox below input above -->
+              <div class="checkbox checkbox-info">
+                <label>
+                  <input type="checkbox"> Software
+                </label>
+              </div>
+              <div class="checkbox checkbox-info">
+                <label>
+                  <input type="checkbox"> Something
+                </label>
+              </div>
+              <div class="checkbox checkbox-info">
+                <label>
+                  <input type="checkbox"> Something Else
+                </label>
+              </div>
+            </div>
+
+            <div class="row col-md-12">
+              <div class="form-group label-floating">
+                <label class="control-label" for="filter">Flair</label>
+                <input ng-model="model.filter" id="filter" type="text" class="form-control input">
+              </div>
+            </div>
+
+            <!-- <div class="form-group"> -->
+              <div class="row btn-group">
+                <a data-target="#" class="btn btn-block dropdown-toggle btn-primary" 
+                   data-toggle="dropdown">
+                  Beacon
+                  <span class="caret"></span>
+                </a>
+                <ul class="dropdown-menu col-md-12">
+                  <li><a href="javascript:void(0)">No Beacon</a></li>
+                  <li><a href="javascript:void(0)">Connections</a></li>
+                  <li><a href="javascript:void(0)">Work</a></li>
+                </ul>
+              </div>
+            <!-- </div> -->
+
+            <div class="row col-md-12">
+              <div class="form-group label-floating">
+                <label class="control-label" for="filter">Region</label>
+                <input ng-model="model.filter" id="filter" type="text" class="form-control input">
+              </div>
+            </div>
+
+          </fieldset>
+        </form>
+      </div>
+    </div>
+  </div>
+
+
+  <!-- Search Results -->
+  <div class="col-lg-10 col-md-10 col-sm-12 col-xs-12 pull-right">
+
+    <div class="bs-component">
+      <div class="well well-sm">
+        <h2>Search Result</h2>
+        <h3><span class="label label-padded" id="primary-flair-label"
+                  ng-repeat="">Search Result</span></h3>
+        </h2>
+      </div>
+    </div>
+
+    <div class="bs-component">
+      <div class="well well-sm">
+        <h2>Search Result</h2>
+        <h3><span class="label label-padded" id="primary-flair-label"
+                  ng-repeat="">Search Result</span></h3>
+        </h2>
+      </div>
+    </div>
+
+    <div class="bs-component">
+      <div class="well well-sm">
+        <h2>Search Result</h2>
+        <h3><span class="label label-padded" id="primary-flair-label"
+                  ng-repeat="">Search Result</span></h3>
+        </h2>
+      </div>
+    </div>
+  </div>
+</div>

@@ -54,9 +54,6 @@
   margin: 2px;
 }
 
-/*fieldset {
-  min-width: 0;
-  padding: 0;
-  margin: 0;
-  border: 0;
-}*/
+.form-group.form-group-lg.label-floating label.control-label, .form-group.form-group-lg.label-placeholder label.control-label {
+  top: -20px;
+}
