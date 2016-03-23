@@ -76,6 +76,7 @@
                 'alice': 123,
                 'bob': 125,
                 'don': 124,
+                'c': 120,
             };
 
             var new_id = user_map[username];

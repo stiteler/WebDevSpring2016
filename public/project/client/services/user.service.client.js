@@ -133,6 +133,24 @@
                     imageUrl: 'https://pbs.twimg.com/profile_images/650838229126660096/r91wuuwN_400x400.jpg'
                 },
                 {
+                    _id: 120,
+                    firstName: 'Chris',
+                    lastName: 'Stiteler',
+                    username: 'c',
+                    password: 'c',
+                    roles: ['user'],
+                    email: 'c@c.com',
+                    region: 'Boston',
+                    flair1: 'Python',
+                    flair2: 'Java',
+                    flair3: 'Javascript',
+                    media: 'https://soundcloud.com/steaz-1/sets/long-but-good',
+                    beacon: 'work',
+                    industry: 'Software Engineering',
+                    organization: 'Embedly Inc',
+                    imageUrl: 'https://pbs.twimg.com/profile_images/650838229126660096/r91wuuwN_400x400.jpg'
+                },
+                {
                     _id: 124,
                     firstName: 'Don',
                     lastName: 'Draper',
