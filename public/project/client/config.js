@@ -8,14 +8,24 @@
                 .when('/home', {
                     templateUrl: 'views/home/home.view.html'
                 })
-                .when('/poc/admin', {
+                .when('/admin', {
                     templateUrl: 'views/admin/admin.view.html',
                     controller: 'AdminController',
                     controllerAs: 'model',
                 })
-                .when('/poc/profile', {
+                .when('/profile', {
                   templateUrl: 'views/users/profile.view.html',
                   controller: 'ProfileController',
+                  controllerAs: 'model',
+                })
+                .when('/login', {
+                  templateUrl: 'views/users/login.view.html',
+                  controller: 'LoginController',
+                  controllerAs: 'model',
+                })
+                .when('/register', {
+                  templateUrl: 'views/users/register.view.html',
+                  controller: 'RegisterController',
                   controllerAs: 'model',
                 })
                 // example of resolve:
