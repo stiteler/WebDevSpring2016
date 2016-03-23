@@ -2,15 +2,27 @@
   background-color: #167AC6;
 }
 
+/* Primary Flair*/
 #primary-flair-panel-heading {
   background-color: #03A9F4;
 }
+#primary-flair-label {
+  background-color: #03A9F4;
+}
 
+/* Secondary Flair */
 #secondary-flair-panel-heading {
   background-color: #337AB7;
 }
+#secondary-flair-label {
+  background-color: #337AB7;
+}
 
+/* Tertiary Flair */
 #tertiary-flair-panel-heading {
+  background-color: #3F65B5;
+}
+#tertiary-flair-label {
   background-color: #3F65B5;
 }
 
@@ -36,6 +48,10 @@
 }
 .gi-form-table {
   font-size: 2.0em;
+}
+
+.label-padded {
+  margin: 2px;
 }
 
 /*fieldset {
