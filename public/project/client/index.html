@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" 
+<html lang="en"
 
   ng-app="FlairdropApp">
 
@@ -30,6 +30,7 @@
     <script src="views/users/profile.controller.js"></script>
     <script src="views/users/login.controller.js"></script>
     <script src="views/users/register.controller.js"></script>
+    <script src="views/search/search.controller.js"></script>
 
     <!-- Services -->
     <script src="services/user.service.client.js"></script>
@@ -38,12 +39,12 @@
 
     <!-- Style Dependencies-->
     <!-- Bootstrap CSS -->
-    <link 
-      href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" 
+    <link
+      href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css"
       rel="stylesheet">
     <!-- FontAwesome for table drop downs -->
-    <link 
-      href="//maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" 
+    <link
+      href="//maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css"
       rel="stylesheet">
 
     <!-- material bootstrap styles and fonts -->
@@ -63,7 +64,7 @@
     <script src="//fezvrasta.github.io/snackbarjs/dist/snackbar.min.js"></script>
     <script src="config.js"></script>
   </head>
-  <body ng-controller="MainController"> 
+  <body ng-controller="MainController">
     <div ng-include="'views/header/navigation.view.html'"></div>
         <div class="container-fluid">
           <div ng-view></div>
