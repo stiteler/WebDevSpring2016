@@ -18,6 +18,11 @@
                   controller: 'ProfileController',
                   controllerAs: 'model',
                 })
+                .when('/profile/:username', {
+                  templateUrl: 'views/users/profile.view.html',
+                  controller: 'ProfileController',
+                  controllerAs: 'model',
+                })
                 .when('/login', {
                   templateUrl: 'views/users/login.view.html',
                   controller: 'LoginController',

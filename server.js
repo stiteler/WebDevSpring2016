@@ -28,12 +28,9 @@ if (typeof process.env.OPENSHIFT_HOMEDIR != 'undefined') {
   dir = __dirname;
 }
 
-// MIDDLEWARE:
-// TODO: add bodyparser.json
-// app.use(bodyParser.json())
-// app.user(bodyParser.urlencoded({extended:true})
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({extended:true}));
 // require multer.
-app.use(bodyParser());
 app.use(function(req, res, next) {
     console.log(req.originalUrl);
     next();
@@ -51,14 +48,10 @@ app.get('/project/', function(req, res) {
 // serve static assignment directory
 app.use(express.static('public'));
 
-// Requirements:
-
 // project
 require("./public/project/server/app.js")(app);
-
 // assignment
 require("./public/assignment/server/app.js")(app, uuid);
 
-//
 
 app.listen(port, ipaddress);

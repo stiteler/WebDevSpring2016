@@ -1,4 +1,4 @@
-<div class="col-lg-10 col-sm-10 col-xs-12 col-centered">
+<div class="col-lg-6 col-sm-6 col-xs-12 col-centered">
   <div class="well well-lg">
     <form class="form-horizontal">
       <fieldset>
@@ -7,12 +7,17 @@
 
       <div class="form-group label-floating has-info">
         <label class="control-label" for="username">username</label>
-        <input ng-model="username" id="username" type="text" class="form-control input-lg">
+        <input ng-model="model.username" id="username" type="text" class="form-control input-lg">
       </div>
 
       <div class="form-group label-floating has-info">
         <label class="control-label" for="password">password</label>
-        <input ng-model="password" type="password" class="form-control input-lg">
+        <input ng-model="model.password" type="password" class="form-control input-lg">
+      </div>
+
+      <div ng-if="model.errorMessage" class="alert alert-dismissible alert-danger">
+        <button type="button" ng-click="model.clearError()" class="close" data-dismiss="alert">×</button>
+        <strong>{{model.errorMessage}}</strong>
       </div>
 
       <div class="form-group">

@@ -5,8 +5,8 @@
         .module('FlairdropApp')
         .factory('UserService', UserService);
 
-    function UserService($rootScope) {
-        var users = _getUsers();
+    function UserService($rootScope, $http) {
+        var users = findAllUsers();
 
         var api = {
             findUserByCredentials: findUserByCredentials,
@@ -15,195 +15,76 @@
             deleteUserById: deleteUserById,
             updateUser: updateUser,
             getUserByUserId: getUserByUserId,
+            setCurrentUser: setCurrentUser,
+            getCurrentUser: getCurrentUser,
             isLoggedIn: isLoggedIn,
-            login: login,
+            findUserByUsername: findUserByUsername,
         };
         return api;
 
-        function login(userId) {
-            // for now
-            console.log('logging in');
-            getUserByUserId(userId, function(user) {
-                if (user) {
-                    $rootScope.user = angular.copy(user);
-                }
-            });
+        function isLoggedInAdmin() {
+            if (isLoggedIn()) {
+                return true;
+                // return ($rootScope.user.roles.indexOf('admin') > -1) ? true : false;
+            }
         }
 
         function isLoggedIn() {
             return $rootScope.user ? true : false;
         }
 
-        function findUserByCredentials(username, password, callback) {
-            var retr = null;
-            for (var i in users) {
-                if (users[i]) {
-                    var user = users[i];
-                    if (username === user.username && password === user.password) {
-                        retr = user;
-                    }
+        function setCurrentUser(user) {
+            $rootScope.user = user;
+        }
+
+        function getCurrentUser() {
+            return $rootScope.user;
+        }
+
+        function findUserByUsername(username) {
+            return $http({
+                method: 'GET',
+                url: '/api/project/user',
+                params: {
+                    'username': username
                 }
-            }
-            callback(retr);
+            });
         }
 
-        function findAllUsers(callback) {
-            callback(users);
+        function findUserByCredentials(username, password) {
+            return $http({
+                url: '/api/project/user',
+                method: "GET",
+                params: {'username': username, 'password': password}
+             });
         }
 
-        function getUserByUserId(userId, callback) {
-            var user = _getUserById(userId);
-            if (user) {
-                callback(_copyUser(user));
-            } else {
-                callback(null);
-            }
+        function findAllUsers() {
+            return $http.get('/api/project/user');
         }
 
-        function createUser(user, callback) {
-            var uid = (new Date()).getTime();
-            user._id = uid;
-
-            // we want to make a copy here to avoid
-            // $scope.user pointer issues.
-            users.push(_copyUser(user));
-            callback(user);
+        function getUserByUserId(userId) {
+            return $http.get('/api/project/user/' + userId);
         }
 
-        function deleteUserById(userId, callback) {
-            var user = _getUserById(userId);
-            if (user) {
-                var index = users.indexOf(user);
-                users.splice(index, 1);
-                callback(users);
-            }
+        function createUser(user) {
+            return $http({
+                method: 'POST',
+                url: '/api/project/user',
+                data: user
+            });
         }
 
-        function updateUser(userId, user, callback) {
-            var existing = _getUserById(userId);
-            if (existing) {
-                for (var attr in user) {
-                    if (user[attr]) {
-                        existing[attr] = user[attr];
-                    }
-                }
-                // copy user here again to avoid scoping issues
-                callback(_copyUser(existing));
-            } else {
-                callback(null);
-            }
+        function deleteUserById(userId) {
+            return $http.delete('/api/project/user/' + userId);
         }
 
-        function _getUserById(userId) {
-            for (var i in users) {
-                if (users[i]) {
-                    var user = users[i];
-                    if (user._id === userId) {
-                        return user;
-                    }
-                }
-            }
-            return null;
-        }
-
-        function _copyUser(user) {
-            var copy = {
-                _id: user._id,
-                firstName: user.firstName,
-                lastName: user.lastName,
-                username: user.username,
-                password: user.password,
-                email: user.email,
-                roles: user.roles,
-                flair1: user.flair1,
-                flair2: user.flair2,
-                flair3: user.flair3,
-                media: user.media,
-                beacon: user.beacon,
-                industry: user.industry,
-                organization: user.organization,
-                region: user.region,
-                imageUrl: user.imageUrl
-            };
-            return copy;
-        }
-
-        function _getUsers() {
-            return [
-                {
-                    _id: 123,
-                    firstName: 'Alice',
-                    lastName: 'Wunderland',
-                    username: 'alice',
-                    password: 'alice',
-                    roles: ['user'],
-                    email: 'alice@wonderland.com',
-                    region: 'wonderland',
-                    flair1: 'magic',
-                    flair2: 'riddles',
-                    flair3: 'walking',
-                    media: 'https://www.youtube.com/watch?v=WovwuOFBUuY',
-                    beacon: 'networking',
-                    industry: 'Entertainment',
-                    organization: 'Yellow Brick Road, Inc.',
-                    imageUrl: 'https://pbs.twimg.com/profile_images/650838229126660096/r91wuuwN_400x400.jpg'
-                },
-                {
-                    _id: 120,
-                    firstName: 'Chris',
-                    lastName: 'Stiteler',
-                    username: 'c',
-                    password: 'c',
-                    roles: ['user'],
-                    email: 'c@c.com',
-                    region: 'Boston',
-                    flair1: 'Python',
-                    flair2: 'Java',
-                    flair3: 'Javascript',
-                    media: 'https://soundcloud.com/steaz-1/sets/long-but-good',
-                    beacon: 'work',
-                    industry: 'Software Engineering',
-                    organization: 'Embedly Inc',
-                    imageUrl: 'https://pbs.twimg.com/profile_images/650838229126660096/r91wuuwN_400x400.jpg'
-                },
-                {
-                    _id: 124,
-                    firstName: 'Don',
-                    lastName: 'Draper',
-                    username: 'don',
-                    password: 'don',
-                    roles: ['user', 'recruiter'],
-                    email: 'don@netflix.com',
-                    region: 'new york',
-                    flair1: 'advertising',
-                    flair2: 'smoking',
-                    flair3: 'drinking',
-                    media: 'https://vimeo.com/124251378',
-                    beacon: 'looking',
-                    industry: 'Advertising',
-                    organization: 'ACME Corp.',
-                    imageUrl: 'https://pbs.twimg.com/profile_images/650838229126660096/r91wuuwN_400x400.jpg'
-
-                },
-                {
-                    _id: 125,
-                    firstName: 'Bob',
-                    lastName: 'Marley',
-                    username: 'bob',
-                    password: 'bob',
-                    roles: ['user'],
-                    email: 'bob@rasta.com',
-                    region: 'Jamaica',
-                    flair1: 'botany',
-                    flair2: 'music',
-                    flair3: 'inspiration',
-                    media: 'https://soundcloud.com/kungsmusic/bob-marley-jammin-kungs-remix',
-                    beacon: 'off',
-                    industry: 'Agriculture',
-                    organization: 'Rasta.ly',
-                    imageUrl: 'https://pbs.twimg.com/profile_images/650838229126660096/r91wuuwN_400x400.jpg'
-                },
-            ];
+        function updateUser(userId, user) {
+            return $http({
+                method: 'PUT',
+                url: '/api/project/user/' + userId,
+                data: user
+            });
         }
     }
 }());

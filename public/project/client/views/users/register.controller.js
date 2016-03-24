@@ -3,9 +3,9 @@
 
     angular
         .module('FlairdropApp')
-        .controller('LoginController', LoginController);
+        .controller('RegisterController', RegisterController);
 
-    function LoginController(UserService) {
+    function RegisterController(UserService) {
         var model = this;
         
     }

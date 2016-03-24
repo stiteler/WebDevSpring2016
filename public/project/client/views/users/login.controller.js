@@ -8,37 +8,28 @@
     function LoginController(UserService, $location) {
         var model = this;
         model.login = login;
-        model.forgot = forgot;
+        model.clearError = clearError();
 
-        function init() {
-            console.log("Login Init");
-        }
-        init();
-
-        function forgot() {
-            console.log('forgot password!');
+        function clearError() {
+            model.errorMessage = false;
         }
 
         function login() {
-            console.log('clicked login');
-            UserService.findUserByCredentials(model.username, model.password, function(user) {
-                if(user) {
-                    UserService.login(user._id, function() {
-                        console.log("logged in");
-                    });
-                    $location.path('/profile');
-                }
-            });
+            UserService
+                .findUserByCredentials(model.username, model.password)
+                .then(function(resp) {
+                    if (resp.data) {
+                        UserService.setCurrentUser(resp.data);
+                        $location.path('/profile');
+                    }
+                },
+                function(err) {
+                    model.errorMessage = err.data.error;
 
-            // UserService
-            //     .findUserByCredentials(un, pw)
-            //     .then(function(resp) {
-            //         if (resp.data) {
-            //             console.log(resp.data);
-            //             UserService.login(resp.data);
-            //             UtilsService.navigate('/profile');
-            //         }
-            //     });
+                    setTimeout(function () {
+                        clearError();
+                    }, 3000);
+                });
         }
     }
 }());

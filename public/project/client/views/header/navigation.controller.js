@@ -5,13 +5,37 @@
         .module('FlairdropApp')
         .controller('NavigationController', NavigationController);
 
-    function NavigationController($scope, $rootScope) {
-      var vm = this;
+    function NavigationController(UserService, $location) {
+        var model = this;
 
-      function init() {
-        vm.$rootScope = $rootScope;
-        vm.$scope = $scope;
-      }
-      init();
+        model.logout = logout;
+        model.isAdmin = UserService.isAdmin;
+        model.isLoggedIn = UserService.isLoggedIn;
+        model.isActive = isActive;
+        model.user = UserService.getCurrentUser;
+
+        function init() {
+            console.log("IN INIT")
+            if (UserService.isLoggedIn()) {
+                model.user = UserService.getCurrentUser();
+                console.log("model.user after init");
+                console.log(model.user);
+            }
+        }
+        init();
+
+        function logout() {
+            UserService.setCurrentUser(null);
+            $location.path('/home')
+        }
+
+        function isAdmin() {
+            return UserService.isAdmin();
+        }
+
+        function isActive(loc) {
+            return $location.path() === loc;
+        }
     }
 }());
+
