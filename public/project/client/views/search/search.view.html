@@ -8,19 +8,9 @@
 
             <p>Filters</p>
             <div class="form-group has-info" style="margin-top: 0;"> <!-- inline style is just to demo custom css to put checkbox below input above -->
-              <div class="checkbox checkbox-info">
+              <div ng-repeat="filter in model.flairFilters" class="checkbox checkbox-info">
                 <label>
-                  <input type="checkbox"> Software
-                </label>
-              </div>
-              <div class="checkbox checkbox-info">
-                <label>
-                  <input type="checkbox"> Something
-                </label>
-              </div>
-              <div class="checkbox checkbox-info">
-                <label>
-                  <input type="checkbox"> Something Else
+                  <input ng-change="model.query()" ng-model="filter.selected" type="checkbox">{{filter.value}}
                 </label>
               </div>
             </div>
@@ -28,7 +18,9 @@
             <div class="row col-md-12">
               <div class="form-group label-floating">
                 <label class="control-label" for="filter">Flair</label>
-                <input ng-model="model.filter" id="filter" type="text" class="form-control input">
+                <input ng-keypress="model.addFilter($event)" 
+                       ng-model="model.newFilter" id="filter" 
+                       type="text" class="form-control input">
               </div>
             </div>
 
@@ -50,7 +42,7 @@
             <div class="row col-md-12">
               <div class="form-group label-floating">
                 <label class="control-label" for="filter">Region</label>
-                <input ng-model="model.filter" id="filter" type="text" class="form-control input">
+                <input disabled="" ng-model="model.filter" id="filter" type="text" class="form-control input">
               </div>
             </div>
 
@@ -63,32 +55,30 @@
 
   <!-- Search Results -->
   <div class="col-lg-10 col-md-10 col-sm-12 col-xs-12 pull-right">
-
-    <div class="bs-component">
-      <div class="well well-sm">
-        <h2>Search Result</h2>
-        <h3><span class="label label-padded" id="primary-flair-label"
-                  >Search Result</span></h3>
-        </h2>
+    <div ng-repeat="result in model.results" class="container-fluid well well-sm">
+      <div class="col-xs-12 col-sm-12 col-md-3 col-lg-2 pull-left">
+        <h2><a href="#/profile/{{result.username}}">{{result.username}}</a></h2>
+        <p>Region: {{result.region}}</p>
+        <span class="label label-info">Looking for {{result.beacon}}</span>
       </div>
-    </div>
-
-    <div class="bs-component">
-      <div class="well well-sm">
-        <h2>Search Result</h2>
-        <h3><span class="label label-padded" id="primary-flair-label"
-                  >Search Result</span></h3>
-        </h2>
-      </div>
-    </div>
-
-    <div class="bs-component">
-      <div class="well well-sm">
-        <h2>Search Result</h2>
-        <h3><span class="label label-padded" id="primary-flair-label"
-                  >Search Result</span></h3>
-        </h2>
-      </div>
+      <div class="col-xs-12 col-sm-12 col-md-6 col-lg-8 container-fluid">
+            <!-- <div class="col-md-8 pull-right container-fluid"> -->
+        <!-- <div class="col-md-10 pull-left"> -->
+          <h3>
+            <span class="label label-info">#{{result.flair1}}</span>
+            <span class="label label-info">#{{result.flair2}}</span>
+            <span class="label label-info">#{{result.flair3}}</span>
+          </h3>
+        </div>
+        <!-- </div> -->
+        <div class="col-xs-12 col-sm-12 col-md-3 col-lg-2 pull right">
+          <a href="#/profile/{{result.username}}"
+             class="btn btn-raised btn-info btn-block">
+             View Profile
+          </a>
+        </div>
+      <!-- </div> -->
     </div>
   </div>
 </div>
+
