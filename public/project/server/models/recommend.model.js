@@ -15,6 +15,8 @@ module.exports = function(app, UserModel) {
 
     function createRecommend(recommendeeId, recommend) {
         var recommendee = UserModel.findUserById(recommendeeId);
+        var recommender = UserModel.findUserById(recommend.recommenderId);
+        recommend.recommenderUsername = recommender.username;
         recommend._id = (new Date()).getTime();
         recommendee.recommends.push(recommend);
         return recommend;

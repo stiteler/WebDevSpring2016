@@ -34,10 +34,20 @@
           <h3 class="panel-title">Primary Flair</h3>
         </div>
         <div class="panel-body">
-          <h2>{{model.profile.flair1}} - Recommenders:</h2>
-          <h3><span class="label label-padded" id="primary-flair-label"
-                    ng-repeat="reco in model.getRecosForFlair(model.profile.flair1)">{{reco.recommender}}</span></h3>
-          </h2>
+
+          <h2><a href="#">{{model.profile.flair1}}</a></h2>
+
+          <div class="container-fluid">
+
+            <div class="col-md-3" 
+                  ng-repeat="reco in model.getRecosForFlair(model.profile.flair1)">
+              <a ng-click="model.visitRecommender(reco)" class="btn btn-raised btn-info">
+              "{{reco.blurb}}" - {{reco.recommenderUsername}}</a>
+            </div>
+
+          </div>
+
+
         </div>
       </div>
     </div>
@@ -50,11 +60,20 @@
         <div class="panel-heading" id="secondary-flair-panel-heading">
           <h3 class="panel-title">Secondary Flair</h3>
         </div>
-        <div class="panel-body">
-          <h2>{{model.profile.flair2}} - Recommenders: </h2>
-          <h3><span class="label label-padded" id="secondary-flair-label"
-                    ng-repeat="reco in model.getRecosForFlair(model.profile.flair2)">{{reco.recommender}}</span></h3>
-          </h2>
+        <div class="panel-body container-fluid">
+          
+          <h2><a href="#">{{model.profile.flair2}}</a></h2>
+
+          <div class="container-fluid">
+
+            <div class="col-md-3" 
+                  ng-repeat="reco in model.getRecosForFlair(model.profile.flair2)">
+              <a ng-click="model.visitRecommender(reco)" class="btn btn-raised btn-info">
+              "{{reco.blurb}}" - {{reco.recommenderUsername}}</a>
+            </div>
+
+          </div>
+
         </div>
       </div>
     </div>
@@ -69,11 +88,19 @@
           <h3 class="panel-title">Tertiary Flair</h3>
         </div>
         <div class="panel-body">
-          <h2>{{model.profile.flair3}} - Recommenders:</h2>
-          <h3><span class="label label-info label-padded" id="tertiary-flair-label"
-                    ng-repeat="reco in model.getRecosForFlair(model.profile.flair3)">{{reco.recommender}}
-            </span>
-          </h2>
+
+          <h2><a href="#">{{model.profile.flair3}}</a></h2>
+
+          <div class="container-fluid">
+
+            <div class="col-md-3" 
+                  ng-repeat="reco in model.getRecosForFlair(model.profile.flair3)">
+              <a ng-click="model.visitRecommender(reco)" class="btn btn-raised btn-info">
+              "{{reco.blurb}}" - {{reco.recommenderUsername}}</a>
+            </div>
+
+          </div>
+
         </div>
       </div>
     </div>

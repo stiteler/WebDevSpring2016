@@ -5,13 +5,14 @@
         .module('FlairdropApp')
         .controller('ProfileController', ProfileController);
 
-    function ProfileController($sce, $routeParams, $location, RecommendService, UserService, EmbedlyService) {
+    function ProfileController($sce, $rootScope, $routeParams, $location, RecommendService, UserService, EmbedlyService) {
         var model = this;
         var rs = RecommendService;
 
         model.getRecosForFlair = getRecosForFlair;
         model.connect = connect;
         model.isSelf = isSelf;
+        model.visitRecommender = visitRecommender;
 
         function init() {
             // model.sessionUser = $rootScope.user;
@@ -41,8 +42,9 @@
         init();
         
         function isSelf() {
-            // true if this is the users profile.
-            if(model.profile._id === UserService.getCurrentUser()._id) {
+            // if user is looking at own profile.
+            var current = UserService.getCurrentUser();
+            if (current && model.profile._id == current._id) {
                 return true;
             } else {
                 return false;
@@ -51,8 +53,13 @@
 
         // just as a PoC this needs to use the ConnectionService
         function connect() {
-            // $rootScope.connected = true;
+            // TODO: Impl through connect service.
+            $rootScope.connected = true;
             _updateModels();
+        }
+
+        function visitRecommender(reco) {
+            $location.path("/profile/"+reco.recommenderUsername);
         }
 
         function getRecosForFlair(flair) {
@@ -60,7 +67,7 @@
             for (var i in model.recos) {
                 if(model.recos[i]) {
                     var obj = model.recos[i];
-                    if(model.recos[i].flair == flair) {
+                    if(model.recos[i].recommendation == flair) {
                         these.push(obj);
                     }
                 }
@@ -69,12 +76,16 @@
         }
 
         function _updateModels() {
-            // RecommendService
-            //     .getRecommendsForUser(model.profile.username, function(recos) {
-            //         console.log(recos);
-            //         model.recos = recos;
-            //     });
-            // model.connected = $rootScope.connected ? true : false;
+            RecommendService
+                .getRecommendsForUserId(model.profile._id)
+                .then(function(resp) {
+                    console.log("RECOMMENDS FOR USER:")
+                    console.log(resp.data);
+                    model.recos = resp.data;
+                });
+
+            // TODO
+            model.connected = $rootScope.connected ? true : false;
 
             _updateMedia();
         }

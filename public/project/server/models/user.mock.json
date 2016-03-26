@@ -18,15 +18,29 @@
       "industry":"Entertainment",
       "organization":"Yellow Brick Road, Inc.",
       "imageUrl":"https://pbs.twimg.com/profile_images/650838229126660096/r91wuuwN_400x400.jpg",
-      "recommends":[
+      "recommends": [
          {
             "recommenderId":120,
             "recommendation": "magic",
             "recommenderUsername": "c",
             "blurb": "She's great at magic!",
             "_id": 123
+         },
+         {
+            "recommenderId":124,
+            "recommendation": "walking",
+            "recommenderUsername": "don",
+            "blurb": "follows yellow roads",
+            "_id": 126
+         },
+         {
+            "recommenderId":125,
+            "recommendation": "magic",
+            "recommenderUsername": "bob",
+            "blurb": "brilliant patronus",
+            "_id": 129
          }
-      ],
+      ]
    },
    {  
       "_id":120,
@@ -47,7 +61,22 @@
       "industry":"Software Engineering",
       "organization":"Embedly Inc",
       "imageUrl":"https://pbs.twimg.com/profile_images/650838229126660096/r91wuuwN_400x400.jpg",
-      "recommends":[],
+      "recommends":[
+         {
+            "recommenderId":123,
+            "recommendation": "Python",
+            "recommenderUsername": "alice",
+            "blurb": "Pythonista",
+            "_id": 1242
+         },
+         {
+            "recommenderId":124,
+            "recommendation": "Java",
+            "recommenderUsername": "don",
+            "blurb": "Good OOD",
+            "_id": 1235
+         }
+      ]
    },
    {  
       "_id":124,
@@ -65,11 +94,11 @@
       "flair2":"smoking",
       "flair3":"drinking",
       "media":"https://vimeo.com/124251378",
-      "beacon":"looking",
+      "beacon":"work",
       "industry":"Advertising",
       "organization":"ACME Corp.",
       "imageUrl":"https://pbs.twimg.com/profile_images/650838229126660096/r91wuuwN_400x400.jpg",
-      "recommends":[],
+      "recommends":[]
    },
    {  
       "_id":125,
@@ -86,10 +115,10 @@
       "flair2":"music",
       "flair3":"inspiration",
       "media":"https://soundcloud.com/kungsmusic/bob-marley-jammin-kungs-remix",
-      "beacon":"off",
+      "beacon":"recommendations",
       "industry":"Agriculture",
       "organization":"Rasta.ly",
       "imageUrl":"https://pbs.twimg.com/profile_images/650838229126660096/r91wuuwN_400x400.jpg",
-      "recommends":[],
+      "recommends":[]
    }
 ]

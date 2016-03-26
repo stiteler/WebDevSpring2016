@@ -7,5 +7,6 @@ module.exports = function(app) {
     var UserModel = require('./models/user.model.js')(app);
     var RecommendModel = require('./models/recommend.model.js')(app, UserModel);
     var UserService = require('./services/user.service.server.js')(app, UserModel);
+    var RecommendService = require('./services/recommend.service.server.js')(app, UserModel, RecommendModel);
     var embedly = require('./services/embedly.service.server.js')(app);
 }
