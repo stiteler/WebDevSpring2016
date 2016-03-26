@@ -5,7 +5,7 @@
         .module('FlairdropApp')
         .factory('UserService', UserService);
 
-    function UserService($rootScope, $http) {
+    function UserService($rootScope, $http, $location) {
         var users = findAllUsers();
 
         var api = {

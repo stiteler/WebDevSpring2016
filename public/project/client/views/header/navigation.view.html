@@ -10,19 +10,21 @@
             <span class="icon-bar"></span>
           </button>
 
-          <a class="navbar-brand" href="#/home">Flairdrop</a>
+          <a class="navbar-brand" href="#/home">flairdrop</a>
         </div>
         <div class="navbar-collapse collapse navbar-responsive-collapse">
 
-          <form class="navbar-form navbar-left" rol="search">
+        <!-- TODO: Impl. a route to search with query params -->
+<!--           <form ng-show="model.isLoggedIn()" class="navbar-form navbar-left" rol="search">
             <div class="form-group">
               <input type="text" class="form-control" placeholder="Find People">
             </div>
-          </form>
+          </form> -->
 
           <ul class="nav navbar-nav navbar-right">
 
-            <li ng-class="{ active : model.isActive('/search') }">
+            <li ng-show="model.isLoggedIn()"
+                ng-class="{ active : model.isActive('/search') }">
                     <a href="#/search">Search</a></li>
 
             <li ng-show="model.isAdmin()">

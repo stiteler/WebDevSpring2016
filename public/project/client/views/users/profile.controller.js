@@ -11,6 +11,7 @@
 
         model.getRecosForFlair = getRecosForFlair;
         model.connect = connect;
+        model.isSelf = isSelf;
 
         function init() {
             // model.sessionUser = $rootScope.user;
@@ -23,6 +24,7 @@
                 .findUserByUsername(username)
                 .then(function(resp) {
                     model.profile = resp.data;
+                    _updateModels();
 
                 }, function(err) {
                     $location.path('/home');
@@ -30,12 +32,22 @@
             }
             else if (UserService.isLoggedIn()) {
                     model.profile = UserService.getCurrentUser();
+                    _updateModels();
                 } else {
                     $location.path('/home');
                 }
-            _updateModels();
+
         }
         init();
+        
+        function isSelf() {
+            // true if this is the users profile.
+            if(model.profile._id === UserService.getCurrentUser()._id) {
+                return true;
+            } else {
+                return false;
+            }
+        }
 
         // just as a PoC this needs to use the ConnectionService
         function connect() {
@@ -82,5 +94,6 @@
                     });
             }
         }
+
     }
 }());

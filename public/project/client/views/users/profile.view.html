@@ -5,7 +5,13 @@
 
       <div class="panel panel-default">
         <div class="panel-body">
-          <h4><span class="label label-info">looking for {{model.profile.beacon}}</span></h4>
+          <h4>
+            <span class="label label-info">looking for {{model.profile.beacon}}</span>
+            <a ng-if="model.isSelf()" href="#/profile/edit" 
+               class="btn btn-raised btn-info pull-right">Edit</a>
+          </h4>
+          
+
           <img class="image-responsive center-block "src="https://pbs.twimg.com/profile_images/650838229126660096/r91wuuwN_400x400.jpg" alt="Profile Picture">
           <h1>@{{model.profile.username}}</h1>
           <h3>{{model.profile.firstName}} {{model.profile.lastName}} </h3>

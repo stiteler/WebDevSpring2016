@@ -1,0 +1,145 @@
+<div class="container-fluid">
+
+  <div class="col-md-4">
+    <div class="bs-component">
+
+      <div class="panel panel-default">
+        <div class="panel-body">
+          <h4><span class="label label-info">looking for {{model.profile.beacon}}</span></h4>
+          <img class="image-responsive center-block "src="https://pbs.twimg.com/profile_images/650838229126660096/r91wuuwN_400x400.jpg" alt="Profile Picture">
+          <h1>@{{model.profile.username}}</h1>
+
+            <!-- Edit firstName -->
+            <div class="form-group">
+              <label for="firstName" class="col-md-2 control-label">First</label>
+
+              <div class="col-md-10">
+                <input ng-model="model.profile.firstName" id="firstName" type="text" class="form-control" placeholder="{{model.profile.firstName}}">
+              </div>
+            </div>
+
+
+            <!-- Edit lastName -->
+            <div class="form-group">
+              <label for="lastName" class="col-md-2 control-label">Last</label>
+              <div class="col-md-10">
+              <input ng-model="model.profile.lastName" type="text" id="lastName" class="form-control" placeholder="{{model.profile.lastName}}">
+              </div>
+            </div>
+
+
+            <div class="form-group">
+              <label for="industry" class="col-md-2 control-label">Industry</label>
+              <div class="col-md-10">
+              <input ng-model="model.profile.industry" id="industry" type="text" class="form-control" placeholder="{{model.profile.industry}}">
+              </div>
+            </div>
+
+
+            <div class="form-group">
+              <label for="organization" class="col-md-2 control-label">Organization</label>
+              <div class="col-md-10">
+              <input ng-model="model.profile.organization" id="organization" type="text" class="form-control" placeholder="{{model.profile.organization}}">
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label for="region" class="col-md-2 control-label">Region</label>
+              <div class="col-md-10">
+              <input ng-model="model.profile.region" id="region" type="text" class="form-control" placeholder="{{model.profile.region}}">
+              </div>
+            </div>
+
+            <div class="form-group col-md-12">
+              <a ng-click="model.save()" class="btn btn-raised btn-primary btn-block">Save</a>
+            </div>
+
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+  <!-- flair 1 -->
+  <div class="col-lg-8 col-md-8 col-sm-12 col-xs-12 pull-right">
+    <div class="bs-component">
+      <div class="panel panel-warning">
+        <div class="panel-heading" id="primary-flair-panel-heading">
+          <h3 class="panel-title">Primary Flair</h3>
+        </div>
+        <div class="panel-body">
+
+            <div class="form-group">
+              <div class="col-md-12">
+              <input ng-model="model.profile.flair1" id="flair1" type="text" class="form-control input-lg" placeholder="{{model.profile.flair1}}">
+              </div>
+            </div>
+
+<!--           <h2>{{model.profile.flair1}} - Recommenders:</h2>
+          <h3><span class="label label-padded" id="primary-flair-label"
+                    ng-repeat="reco in model.getRecosForFlair(model.profile.flair1)">{{reco.recommender}}</span></h3> -->
+          </h2>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- flair 2 -->
+  <div class="col-lg-8 col-md-8 col-sm-12 col-xs-12 pull-right">
+    <div class="bs-component">
+      <div class="panel panel-warning">
+        <div class="panel-heading" id="secondary-flair-panel-heading">
+          <h3 class="panel-title">Secondary Flair</h3>
+        </div>
+        <div class="panel-body">
+            <div class="form-group">
+              <div class="col-md-12">
+              <input ng-model="model.profile.flair2" id="flair2" type="text" class="form-control input-lg" placeholder="{{model.profile.flair2}}">
+              </div>
+            </div>
+          </h2>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+  <!-- flair 3 -->
+  <div class="col-lg-8 col-md-8 col-sm-12 col-xs-12 pull-right">
+    <div class="bs-component">
+      <div class="panel panel-warning">
+        <div class="panel-heading" id="tertiary-flair-panel-heading">
+          <h3 class="panel-title">Tertiary Flair</h3>
+        </div>
+        <div class="panel-body">
+            <div class="form-group">
+              <div class="col-md-12">
+              <input ng-model="model.profile.flair3" id="flair3" type="text" class="form-control input-lg" placeholder="{{model.profile.flair3}}">
+              </div>
+            </div>
+            </span>
+          </h2>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Media -->
+  <div class="col-md-8 col-sm-12 col-xs-12 pull-right">
+    <div class="bs-component">
+      <div class="panel panel-success">
+        <div class="panel-heading">
+          <h3 class="panel-title">Your Media</h3>
+        </div>
+        <div class="panel-body">
+            <div class="form-group">
+              <label for="media" class="col-md-2 control-label">Media Url</label>
+              <div class="col-md-12">
+                <input ng-model="model.profile.media" id="media" type="text" class="input-lg form-control" placeholder="{{model.profile.media}}">
+              </div>
+            </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

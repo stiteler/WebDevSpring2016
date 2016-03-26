@@ -17,7 +17,16 @@
       "beacon":"networking",
       "industry":"Entertainment",
       "organization":"Yellow Brick Road, Inc.",
-      "imageUrl":"https://pbs.twimg.com/profile_images/650838229126660096/r91wuuwN_400x400.jpg"
+      "imageUrl":"https://pbs.twimg.com/profile_images/650838229126660096/r91wuuwN_400x400.jpg",
+      "recommends":[
+         {
+            "recommenderId":120,
+            "recommendation": "magic",
+            "recommenderUsername": "c",
+            "blurb": "She's great at magic!",
+            "_id": 123
+         }
+      ],
    },
    {  
       "_id":120,
@@ -37,7 +46,8 @@
       "beacon":"work",
       "industry":"Software Engineering",
       "organization":"Embedly Inc",
-      "imageUrl":"https://pbs.twimg.com/profile_images/650838229126660096/r91wuuwN_400x400.jpg"
+      "imageUrl":"https://pbs.twimg.com/profile_images/650838229126660096/r91wuuwN_400x400.jpg",
+      "recommends":[],
    },
    {  
       "_id":124,
@@ -58,7 +68,8 @@
       "beacon":"looking",
       "industry":"Advertising",
       "organization":"ACME Corp.",
-      "imageUrl":"https://pbs.twimg.com/profile_images/650838229126660096/r91wuuwN_400x400.jpg"
+      "imageUrl":"https://pbs.twimg.com/profile_images/650838229126660096/r91wuuwN_400x400.jpg",
+      "recommends":[],
    },
    {  
       "_id":125,
@@ -78,6 +89,7 @@
       "beacon":"off",
       "industry":"Agriculture",
       "organization":"Rasta.ly",
-      "imageUrl":"https://pbs.twimg.com/profile_images/650838229126660096/r91wuuwN_400x400.jpg"
+      "imageUrl":"https://pbs.twimg.com/profile_images/650838229126660096/r91wuuwN_400x400.jpg",
+      "recommends":[],
    }
 ]
