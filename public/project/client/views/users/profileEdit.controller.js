@@ -30,6 +30,7 @@
                 flair1: model.profile.flair1,
                 flair2: model.profile.flair2,
                 flair3: model.profile.flair3,
+                imageUrl: model.profile.imageUrl,
                 media: model.profile.media,
             };
 

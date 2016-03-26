@@ -17,7 +17,7 @@
       "beacon":"networking",
       "industry":"Entertainment",
       "organization":"Yellow Brick Road, Inc.",
-      "imageUrl":"https://pbs.twimg.com/profile_images/650838229126660096/r91wuuwN_400x400.jpg",
+      "imageUrl":"http://www.thewrap.com/wp-content/uploads/2013/11/JOHNNY-DEPP-ALICE-IN-WONDERLAND-6181.jpg",
       "recommends": [
          {
             "recommenderId":120,
@@ -97,7 +97,7 @@
       "beacon":"work",
       "industry":"Advertising",
       "organization":"ACME Corp.",
-      "imageUrl":"https://pbs.twimg.com/profile_images/650838229126660096/r91wuuwN_400x400.jpg",
+      "imageUrl":"https://sonyahamlin.files.wordpress.com/2012/02/don.jpeg",
       "recommends":[]
    },
    {  
@@ -118,7 +118,7 @@
       "beacon":"recommendations",
       "industry":"Agriculture",
       "organization":"Rasta.ly",
-      "imageUrl":"https://pbs.twimg.com/profile_images/650838229126660096/r91wuuwN_400x400.jpg",
+      "imageUrl":"https://lh5.googleusercontent.com/-jaNM0BX_1oY/AAAAAAAAAAI/AAAAAAAAWKw/vw1YRbueEJQ/s0-c-k-no-ns/photo.jpg",
       "recommends":[]
    }
 ]

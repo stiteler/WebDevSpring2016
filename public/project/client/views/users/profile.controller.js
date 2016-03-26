@@ -13,6 +13,7 @@
         model.connect = connect;
         model.isSelf = isSelf;
         model.visitRecommender = visitRecommender;
+        model.renderProfileImage = renderProfileImage;
 
         function init() {
             // model.sessionUser = $rootScope.user;
@@ -49,6 +50,10 @@
             } else {
                 return false;
             }
+        }
+
+        function renderProfileImage() {
+            return model.imageUrl;
         }
 
         // just as a PoC this needs to use the ConnectionService

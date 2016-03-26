@@ -5,8 +5,25 @@
 
       <div class="panel panel-default">
         <div class="panel-body">
+
           <h4><span class="label label-info">looking for {{model.profile.beacon}}</span></h4>
-          <img class="image-responsive center-block "src="https://pbs.twimg.com/profile_images/650838229126660096/r91wuuwN_400x400.jpg" alt="Profile Picture">
+
+
+          <!-- Excuse Width attr for now, going to use an image API later for sizing. -->
+          <img class="image-responsive center-block" 
+               ng-src="{{model.profile.imageUrl}}"
+               width="300"
+               alt="Profile Picture">
+
+          <div class="form-group">
+            <label for="imageUrl" class="col-md-2 control-label">Profile Image</label>
+
+            <div class="col-md-10">
+              <input ng-model="model.profile.imageUrl" id="imageUrl" type="text" class="form-control" placeholder="{{model.profile.imageUrl}}">
+            </div>
+          </div>
+
+
           <h1>@{{model.profile.username}}</h1>
 
             <!-- Edit firstName -->
