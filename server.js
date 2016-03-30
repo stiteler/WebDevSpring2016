@@ -1,7 +1,6 @@
 #!/bin/env node
 var express = require('express');
 var bodyParser = require('body-parser');
-var uuid = require('node-uuid');
 var mongoose = require('mongoose');
 var app = express();
 // var request = require('request');
@@ -49,9 +48,9 @@ app.get('/project/', function(req, res) {
 app.use(express.static('public'));
 
 // project
-require("./public/project/server/app.js")(app);
+require("./public/project/server/app.js")(app, db, mongoose);
 // assignment
-require("./public/assignment/server/app.js")(app, uuid);
+require("./public/assignment/server/app.js")(app, db, mongoose);
 
 
 app.listen(port, ipaddress);
