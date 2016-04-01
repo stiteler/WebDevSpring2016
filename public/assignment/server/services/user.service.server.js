@@ -11,8 +11,6 @@ module.exports = function(app, UserModel) {
         updates._id = uid;
         UserModel.updateUser(updates)
             .then(function(success) {
-                console.log("update user success");
-                console.log(success.lastName);
                 res.json(success);
             }, function(err) {
                 console.log("updateUser service error");
@@ -62,17 +60,31 @@ module.exports = function(app, UserModel) {
 
     function getUserByUsername(req, res) {
         var username = req.query.username;
+        UserModel
+            .findUserByUsername(username)
+            .then(function(user) {
+                res.json(user);
+            }, function(err) {
+                console.log("error fetching user by username");
+                console.log(err);
+                res.statuts(400).json({error: "Unable to find user with that username"});
+            });
         res.json(UserModel.findUserByUsername(username));
     }
 
     function getAllUsers(req, res) {
-        res.json(UserModel.findAllUsers());
+        UserModel
+            .findAllUsers()
+            .then(function(users) {
+                res.json(users);
+            }, function(err) {
+                res.status(400).json({error: "Unable to find users"});
+            })
     }
 
     function getUserById(req, res) {
         var uid = req.params.id;
         res.json(UserModel.findUserById(uid));
-
     }
 
     function deleteUser(req, res) {
