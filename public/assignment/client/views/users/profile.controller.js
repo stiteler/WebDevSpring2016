@@ -11,7 +11,6 @@
         if (UtilsService.isLoggedIn()) {
             var userId = UserService.getCurrentUser()._id;
         } else {
-            // is there a better way to control being on #/profile and refreshing the page?
             UtilsService.navigate('#/home');
         }
 
@@ -26,10 +25,7 @@
             UserService
                 .updateUser($scope.active._id, $scope.active)
                 .then(function (result) {
-                    console.log('Update Result:');
-                    console.log(result.data);
-                    $scope.active = angular.copy(result.data);
-                    UserService.setCurrentUser(result.data);
+                    UserService.setCurrentUser(angular.copy($scope.active));
                 });
         }
     }

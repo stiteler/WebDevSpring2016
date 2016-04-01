@@ -19,9 +19,11 @@
         }
 
         function isAdmin() {
-            if (isLoggedIn()) {
-                return ($rootScope.user.roles.indexOf('admin') > -1) ? true : false;
-            }
+            // not supported in assignment4, will show up later.
+            return false;
+            // if (isLoggedIn()) {
+            //     return ($rootScope.user.roles.indexOf('admin') > -1) ? true : false;
+            // }
         }
 
         function isActive(location) {

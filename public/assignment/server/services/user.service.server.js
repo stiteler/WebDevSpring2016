@@ -5,18 +5,34 @@ module.exports = function(app, UserModel) {
     app.put('/api/assignment/user/:id', updateUser);
     app.delete('/api/assignment/user/:id', deleteUser);
 
-    var um = UserModel;
-
     function updateUser(req, res) {
         var uid = req.params.id;
         var updates = req.body;
         updates._id = uid;
-        res.json(um.updateUser(updates));
+        UserModel.updateUser(updates)
+            .then(function(success) {
+                console.log("update user success");
+                console.log(success.lastName);
+                res.json(success);
+            }, function(err) {
+                console.log("updateUser service error");
+                console.log(err);
+                res.status(400).json({"error": "Unable to update user at this time"});
+            });
     }
 
     function createUser(req, res) {
         var newUser = req.body;
-        res.json(um.createUser(newUser));
+        UserModel
+            .createUser(newUser)
+            .then(function(user) {
+                res.json(user);
+            }, function(err) {
+                console.log("createUser service error");
+                console.log(err);
+                res.status(400).json({"error": "Unable to create user at this time"});
+            });
+
     }
 
     function getUser(req, res) {
@@ -33,26 +49,34 @@ module.exports = function(app, UserModel) {
     function login(req, res) {
         var username = req.query.username;
         var password = req.query.password;
-        res.json(um.findUserByCredentials(username, password));
+
+        UserModel
+            .findUserByCredentials(username, password)
+            .then(function(user) {
+                console.log(user);
+                res.status(200).json(user);
+            }, function(err) {
+                res.status(403).json(err);
+            });
     }
 
     function getUserByUsername(req, res) {
         var username = req.query.username;
-        res.json(um.findUserByUsername(username));
+        res.json(UserModel.findUserByUsername(username));
     }
 
     function getAllUsers(req, res) {
-        res.json(um.findAllUsers());
+        res.json(UserModel.findAllUsers());
     }
 
     function getUserById(req, res) {
         var uid = req.params.id;
-        res.json(um.findUserById(uid));
+        res.json(UserModel.findUserById(uid));
 
     }
 
     function deleteUser(req, res) {
         var uid = req.params.id;
-        res.json(um.deleteUserById(uid));
+        res.json(UserModel.deleteUserById(uid));
     }
 };

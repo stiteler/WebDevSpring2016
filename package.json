@@ -29,6 +29,7 @@
     "mongoose": "^4.4.7",
     "node-uuid": "^1.4.7",
     "npm": "^3.8.1",
+    "q": "^1.4.1",
     "request": "^2.69.0"
   },
   "devDependencies": {},
