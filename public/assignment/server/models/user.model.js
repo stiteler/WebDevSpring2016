@@ -1,5 +1,3 @@
-// var q = require("q");
-
 module.exports = function(db, mongoose) {
     var UserSchema = require("./user.schema.server.js")(mongoose);
     var User = mongoose.model("User", UserSchema);
@@ -47,7 +45,6 @@ module.exports = function(db, mongoose) {
     }
 
     function deleteUserById(userId) {
-        User
-            .findByIdAndRemove(userId);
+        return User.findByIdAndRemove(userId);
     }
 };

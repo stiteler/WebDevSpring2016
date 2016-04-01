@@ -20,7 +20,7 @@
 
         function isAdmin() {
             // not supported in assignment4, will show up later.
-            return false;
+            return true;
             // if (isLoggedIn()) {
             //     return ($rootScope.user.roles.indexOf('admin') > -1) ? true : false;
             // }
