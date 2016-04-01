@@ -5,36 +5,74 @@ module.exports = function(app, FormModel, uuid) {
     app.delete('/api/assignment/form/:formId', deleteForm);
     app.post('/api/assignment/user/:userId/form', createForm);
 
-    var fm = FormModel;
+    var FormModel = FormModel;
 
     function getFormsForUser(req, res) {
         var uid = req.params.userId;
-        res.json(fm.findFormsByUserId(uid));
+        FormModel
+            .findFormsByUserId(uid)
+            .then(function(forms) {
+                console.log("Forms for user: %j", forms);
+                res.json(forms);
+            }, function(err) {
+                console.log("unable to find all forms");
+                res.status(400).send("Unable to find forms for user.")
+            });
     }
 
     function getFormById(req, res) {
         var fid = req.params.formId;
-        res.json(fm.findFormById(fid));
+        FormModel
+            .findFormById(fid)
+            .then(function(form) {
+                res.json(form);
+            }, function(err) {
+                console.log("error fetching form by id %j", err);
+                res.json(400).send("Unable to find form with that id.");
+            });
     }
 
     function putForm(req, res) {
         var fid = req.params.formId;
         var updates = req.body;
         updates._id = fid;
-        res.json(fm.updateForm(updates));
+        FormModel
+            .updateForm(updates)
+            .then(function(success) {
+                console.log("form update success: %j", success);
+                res.status(200).json(success);
+            }, function(err) {
+                console.log("Error updating form: %j", err);
+                res.status(200).send("Unable to update this form.");
+            });
     }
 
     function deleteForm(req, res) {
         var fid = req.params.formId;
-        res.json(fm.deleteFormById(fid));
+        FormModel
+            .deleteFormById(fid)
+            .then(function(good) {
+                res.send(200);
+            }, function(err) {
+                console.log("Unable to delete the form: %j", err);
+                res.status(400).send("Unable to delete form.");
+            });
     }
 
     function createForm(req, res) {
         var newForm = req.body;
         var uid = req.params.userId;
-        var fid = uuid.v4();
-        newForm._id = fid;
         newForm.userId = uid;
-        res.json(fm.createForm(newForm));
+        FormModel
+            .createForm(newForm)
+            .then(function(form) {
+                console.log("form create success");
+                console.log("%j", form);
+                res.json(form);
+            }, function (err) {
+                console.log('error in form creation');
+                console.log("%j", err);
+                res.status(400).send("Unable to create form");
+            });
     }
 };

@@ -1,6 +1,6 @@
-module.exports = function(db, mongoose) {
-    var FormSchema = require("./form.schema.server.js")(mongoose);
-    var Form = mongoose.model("Form", FormSchema);
+module.exports = function(db, mongoose, Form) {
+    // var FormSchema = require("./form.schema.server.js")(mongoose);
+    // var Form = mongoose.model("Form", FormSchema);
 
     var api = {
         createForm: createForm,
@@ -14,7 +14,7 @@ module.exports = function(db, mongoose) {
     return api;
 
     function findFormsByUserId(userId) {
-        Form.find({userId: userId});
+        return Form.find({userId: userId});
     }
 
     function findAllForms() {

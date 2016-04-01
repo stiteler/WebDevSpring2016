@@ -1,6 +1,6 @@
-module.exports = function(db, mongoose, FormModel) {
-    var FormSchema = require("./form.schema.server.js")(mongoose);
-    var Form = mongoose.model("Form", FormSchema);
+module.exports = function(db, mongoose, FormModel, Form, Field) {
+    // var FormSchema = require("./form.schema.server.js")(mongoose);
+    // var Form = mongoose.model("Form", FormSchema);
     // var FieldSchema = require("./field.schema.server.js")(mongoose);
     // var Field = mongoose.model("Field", FieldSchema);
 
@@ -14,9 +14,10 @@ module.exports = function(db, mongoose, FormModel) {
     return api;
 
     function addField(formId, field) {
+        var newField = new Field(field);
         Form.findById(formId)
             .then(function(err, form) {
-                form.fields.push(field);
+                form.fields.push(newField);
                 form.save();
             });
     }
