@@ -38,7 +38,7 @@ module.exports = function(db, mongoose, FormModel, Form, Field) {
         var deferred = q.defer();
         
         Form
-            .findById(formId)
+            .findById(mongoose.Types.ObjectId(formId))
             .then(function(form) {
                 form.fields.pull({_id: fieldId});
                 form.save();
@@ -55,6 +55,8 @@ module.exports = function(db, mongoose, FormModel, Form, Field) {
     function updateField(formId, fieldId, updates) {
         // not sure if this selects a form or a field.. in test.
         var deferred = q.defer();
+        // scrub for _id updates, causes errors.
+        delete updates._id;
 
         Form.findById(formId, function(err, found) {
             if(!err) {

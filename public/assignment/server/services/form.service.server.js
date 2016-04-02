@@ -34,9 +34,9 @@ module.exports = function(app, FormModel) {
     function putForm(req, res) {
         var fid = req.params.formId;
         var updates = req.body;
-        updates._id = fid;
+        // updates._id = fid;
         FormModel
-            .updateForm(updates)
+            .updateForm(fid, updates)
             .then(function(success) {
                 res.status(200).json(success);
             }, function(err) {

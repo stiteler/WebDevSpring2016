@@ -41,7 +41,7 @@ module.exports = function(db, mongoose, User) {
         delete updates._id;
         return User
             .findByIdAndUpdate(
-                uid,
+                mongoose.Types.ObjectId(uid),
                 {$set: updates});
     }
 

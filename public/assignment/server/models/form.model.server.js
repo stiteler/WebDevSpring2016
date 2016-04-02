@@ -33,10 +33,12 @@ module.exports = function(db, mongoose, Form) {
         return Form.create(form);
     }
 
-    function updateForm(updates) {
+    function updateForm(formId, updates) {
+        // scrub for _id updates, causes errors.
+        delete updates._id;
         return Form
             .findByIdAndUpdate(
-                updates._id,
+                mongoose.Types.ObjectId(formId),
                 {$set: updates});
     }
 
