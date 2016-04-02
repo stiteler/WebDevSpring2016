@@ -13,7 +13,7 @@ module.exports = function(db, mongoose, FormModel, Form, Field) {
     function addField(formId, field) {
         var deferred = q.defer()
         var newField = new Field(field);
-        console.log("NEW FIELD: ******* %j", field);
+
         Form.findById(formId)
             .then(function(form) {
                 form.fields.push(newField);
@@ -23,27 +23,25 @@ module.exports = function(db, mongoose, FormModel, Form, Field) {
                 console.log("Unable to add new field");
                 deferred.reject(err);
             });
+
         return deferred.promise;
     }
 
     function getFieldsByFormId(formId) {
         return Form.findById(formId)
             .then(function(form) {
-                for(var i in form.fields) {
-                    console.log("%j", form.fields[i]);
-                }
                 return form.fields;
             });
     }
 
     function deleteField(formId, fieldId) {
         var deferred = q.defer();
+        
         Form
             .findById(formId)
             .then(function(form) {
                 form.fields.pull({_id: fieldId});
                 form.save();
-                console.log("after delete: %j", form.fields);
                 deferred.resolve(form.fields);
             }, function(err) {
                 console.log("Couldn't delete field: %j", err);
@@ -62,6 +60,7 @@ module.exports = function(db, mongoose, FormModel, Form, Field) {
             if(!err) {
                 var field = found.fields.id(fieldId);
 
+                // mongoose doesn't support .update() on subdocuments.
                 for (var key in updates) {
                     if (updates.hasOwnProperty(key)) {
                         field[key] = updates[key];
@@ -69,7 +68,6 @@ module.exports = function(db, mongoose, FormModel, Form, Field) {
                 }
                 found.save()
 
-                // var result = field.update(updates);
                 deferred.resolve(found.fields);
             } else {
                 deferred.reject(err);

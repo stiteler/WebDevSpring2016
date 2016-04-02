@@ -20,7 +20,9 @@
 
         function isAdmin() {
             // not supported in assignment4, will show up later.
-            return true;
+            // with passport stuff.
+            // admin page has not even been required to be refactored yet.
+            return false;
             // if (isLoggedIn()) {
             //     return ($rootScope.user.roles.indexOf('admin') > -1) ? true : false;
             // }

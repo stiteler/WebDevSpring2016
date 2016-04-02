@@ -12,7 +12,6 @@ module.exports = function(app, FormModel) {
         FormModel
             .findFormsByUserId(uid)
             .then(function(forms) {
-                console.log("Forms for user: %j", forms);
                 res.json(forms);
             }, function(err) {
                 console.log("unable to find all forms");
@@ -39,7 +38,6 @@ module.exports = function(app, FormModel) {
         FormModel
             .updateForm(updates)
             .then(function(success) {
-                console.log("form update success: %j", success);
                 res.status(200).json(success);
             }, function(err) {
                 console.log("Error updating form: %j", err);
@@ -66,8 +64,6 @@ module.exports = function(app, FormModel) {
         FormModel
             .createForm(newForm)
             .then(function(form) {
-                console.log("form create success");
-                console.log("%j", form);
                 res.json(form);
             }, function (err) {
                 console.log('error in form creation');
