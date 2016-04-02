@@ -1,8 +1,5 @@
+var q = require('q');
 module.exports = function(db, mongoose, FormModel, Form, Field) {
-    // var FormSchema = require("./form.schema.server.js")(mongoose);
-    // var Form = mongoose.model("Form", FormSchema);
-    // var FieldSchema = require("./field.schema.server.js")(mongoose);
-    // var Field = mongoose.model("Field", FieldSchema);
 
     var api = {
         getFieldsByFormId: getFieldsByFormId,
@@ -14,45 +11,86 @@ module.exports = function(db, mongoose, FormModel, Form, Field) {
     return api;
 
     function addField(formId, field) {
+        var deferred = q.defer()
         var newField = new Field(field);
+        console.log("NEW FIELD: ******* %j", field);
         Form.findById(formId)
-            .then(function(err, form) {
+            .then(function(form) {
                 form.fields.push(newField);
                 form.save();
+                deferred.resolve(form.fields);
+            }, function(err) {
+                console.log("Unable to add new field");
+                deferred.reject(err);
             });
+        return deferred.promise;
     }
 
     function getFieldsByFormId(formId) {
-        Form.findById(formId)
-            .then(function(err, form) {
+        return Form.findById(formId)
+            .then(function(form) {
+                for(var i in form.fields) {
+                    console.log("%j", form.fields[i]);
+                }
                 return form.fields;
             });
     }
 
     function deleteField(formId, fieldId) {
-        Form.findById(formId, function(err, found) {
-            found.fields.pull({_id: fieldId});
-        });
+        var deferred = q.defer();
+        Form
+            .findById(formId)
+            .then(function(form) {
+                form.fields.pull({_id: fieldId});
+                form.save();
+                console.log("after delete: %j", form.fields);
+                deferred.resolve(form.fields);
+            }, function(err) {
+                console.log("Couldn't delete field: %j", err);
+                deferred.reject();
+            });
+
+        return deferred.promise;
+
     }
 
     function updateField(formId, fieldId, updates) {
         // not sure if this selects a form or a field.. in test.
-        Form
-            .find({_id: formId, 'fields._id': fieldId})
-            .then(function(err, field) {
-                console.log("inside update field");
-                console.log(field);
-                field.update(updates);
-            });
+        var deferred = q.defer();
+
+        Form.findById(formId, function(err, found) {
+            if(!err) {
+                var field = found.fields.id(fieldId);
+
+                for (var key in updates) {
+                    if (updates.hasOwnProperty(key)) {
+                        field[key] = updates[key];
+                    }
+                }
+                found.save()
+
+                // var result = field.update(updates);
+                deferred.resolve(found.fields);
+            } else {
+                deferred.reject(err);
+            }
+        });
+
+        return deferred.promise;
     }
 
     function getField(formId, fieldId) {
-        Form
-            .find({_id: formId, 'fields._id': fieldId})
-            .then(function(err, field) {
-                console.log("inside getField");
-                console.log(field);
-                console.log("not returning, in test.")
-            });
+        var deferred = q.defer();
+
+        var form = Form.findById(formId, function(err, found) {
+            if(!err) {
+                var field = found.fields.id(fieldId);
+                deferred.resolve(field);
+            } else {
+                deferred.reject(err);
+            }
+        });
+
+        return deferred.promise;
     }
 };

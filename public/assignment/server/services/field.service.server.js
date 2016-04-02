@@ -1,47 +1,57 @@
-module.exports = function(app, FormModel, uuid) {
+module.exports = function(app, FieldModel, FormModel) {
     app.get('/api/assignment/form/:formId/field', getFieldsByFormId);
     app.get('/api/assignment/form/:formId/field/:fieldId', getField);
     app.delete('/api/assignment/form/:formId/field/:fieldId', deleteField);
     app.post('/api/assignment/form/:formId/field', createField);
     app.put('/api/assignment/form/:formId/field/:fieldId', updateField);
 
-    var fm = FormModel;
-
     function getFieldsByFormId(req, res) {
         var fid = req.params.formId;
-        var form = fm.findFormById(fid);
-        console.log('in get fields by form id');
-        console.log(form);
-        if (form) {
-            res.json(form.fields);
-        } else {
-            res.json([]);
-        }
+        FieldModel
+            .getFieldsByFormId(fid)
+            .then(function(fields) {
+                res.json(fields);
+            }, function(err) {
+                console.log("error retrieving fields by form id: %j", fields);
+                res.status(400).send("Error retrieving fields for this form.");
+            });
     }
 
     function getField(req, res) {
         var formId = req.params.formId;
         var fieldId = req.params.fieldId;
 
-        res.json(fm.getField(formId, fieldId));
+        FieldModel.getField(formId, fieldId)
+            .then(function(fields) {
+                res.json(fields);
+            }, function(err) {
+                console.log("error getting field: %j", err);
+                res.status(400).send("Unable to retrieve field");
+            });
     }
 
     function createField(req, res) {
         var field = req.body;
-        field._id = uuid.v4();
         var formId = req.params.formId;
-        fm.addField(formId, field);
-        res.send(200);
+        FieldModel
+            .addField(formId, field)
+            .then(function(fields) {
+                res.json(fields);
+            }, function(err) {
+                res.status(400).send("Unable to create new field");
+            });
     }
 
     function deleteField(req, res) {
         var formId = req.params.formId;
         var fieldId = req.params.fieldId;
-        if (fm.deleteField(formId, fieldId)) {
-            res.send(200);
-        } else {
-            res.send(400);
-        }
+        FieldModel
+            .deleteField(formId, fieldId)
+            .then(function(fields) {
+                res.json(fields);
+            }, function(err) {
+                res.status(400).send(err);
+            });
     }
 
     function updateField(req, res) {
@@ -49,8 +59,14 @@ module.exports = function(app, FormModel, uuid) {
         var fieldId = req.params.fieldId;
         var updates = req.body;
 
-        var updated = fm.updateField(formId, fieldId, updates);
-        res.json(updated);
+        FieldModel
+            .updateField(formId, fieldId, updates)
+            .then(function(fields) {
+                res.json(fields);
+            }, function(err) {
+                console.log("Failed to update field");
+                res.status(400).send("Unable to update field.");
+            });
     }
 
 };

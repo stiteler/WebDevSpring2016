@@ -10,12 +10,13 @@
             createFieldForForm: createFieldForForm,
             getFieldsForForm: getFieldsForForm,
             getFieldForForm: getFieldForForm,
-            deleteFieldFromForm, deleteFieldFromForm,
+            deleteFieldFromForm: deleteFieldFromForm,
             updateField: updateField,
         };
         return api;
 
         function createFieldForForm(formId, field) {
+            console.log("field in create field for form: %j", field);
             return $http({
                 method: 'POST',
                 url: '/api/assignment/form/' + formId + '/field',
