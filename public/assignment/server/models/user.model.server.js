@@ -37,15 +37,15 @@ module.exports = function(db, mongoose, User) {
         return User.create(user);
     }
 
-    function updateUser(updates) {
+    function updateUser(uid, updates) {
+        delete updates._id;
         return User
             .findByIdAndUpdate(
-                updates._id,
+                uid,
                 {$set: updates});
     }
 
     function deleteUserById(userId) {
-        User
-            .findByIdAndRemove(userId);
+        User.findByIdAndRemove(userId);
     }
 };

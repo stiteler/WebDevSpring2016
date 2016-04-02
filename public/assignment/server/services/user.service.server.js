@@ -8,8 +8,8 @@ module.exports = function(app, UserModel) {
     function updateUser(req, res) {
         var uid = req.params.id;
         var updates = req.body;
-        updates._id = uid;
-        UserModel.updateUser(updates)
+        // updates._id = uid;
+        UserModel.updateUser(uid, updates)
             .then(function(success) {
                 res.json(success);
             }, function(err) {
