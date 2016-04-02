@@ -12,17 +12,21 @@
             var newUser = {
                 username: $scope.username,
                 password: $scope.password,
-                email: $scope.email,
+                emails: [$scope.email],
+                phones: [],
                 firstName: '',
                 lastName: '',
-                roles: ['student'],
             };
+            console.log("Email is:");
+            console.log($scope.email);
 
             UserService.createUser(newUser)
                 .then(function (created) {
                     console.log('CREATE USER:');
                     console.log(created.data);
                     if (created.data) {
+                        console.log("New user:");
+                        console.log(created.data);
                         UserService.setCurrentUser(created.data);
                         UtilsService.navigate('/profile');
                     }
