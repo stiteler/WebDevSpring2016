@@ -22,10 +22,13 @@
         init();
 
         function update() {
+            var upid = userId;
             var updated = _unrenderActive();
+            // make mongo happy
+            delete updated._id;
 
             UserService
-                .updateUser(model.active._id, updated)
+                .updateUser(upid, updated)
                 .then(function (result) {
                     UserService.setCurrentUser(angular.copy(updated));
                 });
