@@ -2,6 +2,11 @@
 var express = require('express');
 var bodyParser = require('body-parser');
 var mongoose = require('mongoose');
+var passport = require('passport');
+var session = require('express-session');
+var multer = require('multer');
+var cookieParser = require('cookie-parser');
+
 var app = express();
 // var request = require('request');
 
@@ -27,13 +32,25 @@ if (typeof process.env.OPENSHIFT_HOMEDIR != 'undefined') {
   dir = __dirname;
 }
 
+
+// middleware:
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended:true}));
 // require multer.
+multer();
 app.use(function(req, res, next) {
     console.log(req.originalUrl);
     next();
 });
+app.use(session({
+	secret: 'test-secret',
+	resave: true,
+	saveUninitialized: true,
+}));
+app.use(cookieParser());
+app.use(passport.initialize());
+app.use(passport.session());
+
 
 // forward to client side, for now
 app.get('/assignment/', function(req, res) {
