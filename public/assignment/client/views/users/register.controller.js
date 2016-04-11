@@ -14,6 +14,7 @@
                 password: $scope.password,
                 emails: [$scope.email],
                 phones: [],
+                roles: [],
                 firstName: '',
                 lastName: '',
             };

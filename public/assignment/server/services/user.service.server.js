@@ -86,7 +86,7 @@ module.exports = function(app, UserModel) {
     // Model CRUD
     function register (req, res) {
         var newUser = req.body;
-        newUser.roles = ['admin'];
+        newUser.roles = ['student'];
 
         UserModel
             .findUserByUsername(newUser.username)
@@ -176,20 +176,6 @@ module.exports = function(app, UserModel) {
         }
     }
 
-    // function login(req, res) {
-    //     var username = req.query.username;
-    //     var password = req.query.password;
-
-    //     UserModel
-    //         .findUserByCredentials(username, password)
-    //         .then(function(user) {
-    //             console.log(user);
-    //             res.status(200).json(user);
-    //         }, function(err) {
-    //             res.status(403).json(err);
-    //         });
-    // }
-
     function getUserByUsername(req, res) {
         var username = req.query.username;
         UserModel
@@ -221,6 +207,16 @@ module.exports = function(app, UserModel) {
 
     function deleteUser(req, res) {
         var uid = req.params.id;
-        res.json(UserModel.deleteUserById(uid));
+        console.log("INSIDE deleteUser service");
+        console.log(uid);
+        UserModel
+            .deleteUserById(uid)
+            .then(function(success) {
+                console.log('DELETE SUCCESS')
+                res.send(200);
+            }, function(err) {
+                console.log("Error deleting user by Id");
+                console.log(err);
+            });
     }
 };

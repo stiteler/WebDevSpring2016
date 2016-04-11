@@ -46,6 +46,7 @@ module.exports = function(db, mongoose, User) {
     }
 
     function deleteUserById(userId) {
-        User.findByIdAndRemove(userId);
+        console.log("DELETING BY ID: %s", userId);
+        return User.findByIdAndRemove(userId);
     }
 };

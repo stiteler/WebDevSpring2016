@@ -15,14 +15,21 @@
         </thead>
         <tbody>
             <tr>
-                <td><input type="text" class="input-sm form-control" placeholder="username"></td>
-                <td><input type="password" class="input-sm form-control" placeholder="password"></td>
-                <td><input type="text" class="input-sm form-control" placeholder="first"></td>
-                <td><input type="text" class="input-sm form-control" placeholder="last"></td>
-                <td><input type="text" class="input-sm form-control" placeholder="role1, role2"></td>
+                <td><input ng-model="model.selected.username"
+                     type="text" class="input-sm form-control" placeholder="username"></td>
+                <td><input ng-model="model.selected.password" 
+                    type="text" class="input-sm form-control" placeholder="password"></td>
+                <td><input ng-model="model.selected.firstName" 
+                    type="text" class="input-sm form-control" placeholder="first"></td>
+                <td><input ng-model="model.selected.lastName" 
+                    type="text" class="input-sm form-control" placeholder="last"></td>
+                <td><input ng-model="model.selected.roles" 
+                    type="text" class="input-sm form-control" placeholder='role1, role2'></td>
                 <td>
                     <span ng-click="model.addUser()" class="glyphicon glyphicon-plus-sign gi-admin-table"></span>
                     <span ng-click="model.updateUser()" class="glyphicon glyphicon-ok-sign gi-admin-table"></span>
+                    <a ng-click="model.clearSelected()" href="">clear</a>
+                    <!-- <span ng-click="model.clearSelected" class="glyphicon glyphicon-remove gi-admin-table"></span> -->
                 </td>
             </tr>
             <tr ng-repeat="user in model.users">
@@ -30,10 +37,12 @@
                 <td>{{user.password}}</td>
                 <td>{{user.firstName}}</td>
                 <td>{{user.lastName}}</td>
-                <td><span ng-repeat="role in user.roles">{{role}}</span></td>
+                <!-- <td><span ng-repeat="role in user.roles">{{role}}</span></td> -->
+                <td>{{user.roles}}</td>
+
                 <td>
-                    <span ng-click="model.deleteUser(user)" class="glyphicon glyphicon-pencil gi-admin-table"></span>
-                    <span ng-click="model.editUser(user)" class="glyphicon glyphicon-remove gi-admin-table"></span>
+                    <span ng-click="model.editUser(user)" class="glyphicon glyphicon-pencil gi-admin-table"></span>
+                    <span ng-click="model.deleteUser(user)" class="glyphicon glyphicon-remove gi-admin-table"></span>
                 </td>
             </tr>
         </tbody>
