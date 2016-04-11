@@ -5,7 +5,7 @@
         .module('FormBuilderApp')
         .factory('UtilsService', UtilsService);
 
-    function UtilsService($rootScope, $location) {
+    function UtilsService($rootScope, $location, UserService) {
         var api = {
             isActive: isActive,
             navigate: navigate,
@@ -22,10 +22,10 @@
             // not supported in assignment4, will show up later.
             // with passport stuff.
             // admin page has not even been required to be refactored yet.
-            return false;
-            // if (isLoggedIn()) {
-            //     return ($rootScope.user.roles.indexOf('admin') > -1) ? true : false;
-            // }
+            // return true;
+            if (isLoggedIn()) {
+                return ($rootScope.user.roles.indexOf('admin') > -1) ? true : false;
+            }
         }
 
         function isActive(location) {

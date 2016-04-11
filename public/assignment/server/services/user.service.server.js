@@ -3,14 +3,16 @@ var LocalStrategy = require('passport-local').Strategy;
 var bcrypt = require("bcrypt-nodejs");
 
 module.exports = function(app, UserModel) {
-    app.post('/api/assignment/user', createUser);
-    app.get('/api/assignment/user', getUser);
-    app.get('/api/assignment/user/:id', getUserById);
-    app.put('/api/assignment/user/:id', updateUser);
-    app.delete('/api/assignment/user/:id', deleteUser);
+    var auth = authorized;
+
+    // CRUD endpoints
+    app.post('/api/assignment/user', auth, createUser);
+    app.get('/api/assignment/user', auth, getUser);
+    app.get('/api/assignment/user/:id', auth, getUserById);
+    app.put('/api/assignment/user/:id', auth, updateUser);
+    app.delete('/api/assignment/user/:id', auth, deleteUser);
 
     // auth endpoints
-    var auth = authorized;
     app.post('/api/assignment/login', passport.authenticate('local'), login);
     app.post('/api/assignment/logout', logout);
     app.post('/api/assignment/register', register);
@@ -23,7 +25,7 @@ module.exports = function(app, UserModel) {
 
     function localStrategy(username, password, done) {
         UserModel
-            .findUserByCredentials({username: username, password: password})
+            .findUserByCredentials(username, password)
             .then(
                 function(user) {
                     if (!user) { return done(null, false); }
@@ -61,7 +63,12 @@ module.exports = function(app, UserModel) {
     };
 
     function loggedin(req, res) {
-        res.send(req.isAuthenticated() ? req.user : '0');
+        if(req.isAuthenticated()) {
+            res.send(req.user);
+        } else {
+            res.send(null);
+        }
+        // res.send(req.isAuthenticated() ? req.user : '0');
     }
 
     function logout(req, res) {
@@ -79,16 +86,27 @@ module.exports = function(app, UserModel) {
     // Model CRUD
     function register (req, res) {
         var newUser = req.body;
+        newUser.roles = ['admin'];
+
         UserModel
-            .finduserByUsername(newUser.username)
+            .findUserByUsername(newUser.username)
             .then(
                 function(user){
                     if(user) {
-                        res.json(null);
+                        res.status(400).send('Username taken');
                     } else {
                         // encrypt the password when registering
-                        user.password = bcrypt.hashSync(newUser.password);
-                        return userModel.createDeveloper(developer);
+                        // newUser.password = bcrypt.hashSync(newUser.password);
+
+                        // actually registered the user, send it back to client.
+                        UserModel.createUser(newUser)
+                            .then(function(created) {
+                                res.json(created);
+                            }, function(err) {
+                                console.log("createUser service error");
+                                console.log(err);
+                                res.status(400).json({"error": "Unable to create user at this time"});
+                            });
                     }
                 },
                 function(err){

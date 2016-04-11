@@ -36,7 +36,6 @@ if (typeof process.env.OPENSHIFT_HOMEDIR != 'undefined') {
 // middleware:
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended:true}));
-// require multer.
 multer();
 app.use(function(req, res, next) {
     console.log(req.originalUrl);

@@ -11,8 +11,18 @@
         model.update = update;
 
         if (UtilsService.isLoggedIn()) {
-            var userId = UserService.getCurrentUser()._id;
+            // var userId = UserService.getCurrentUser()._id;
+            // UserService.getCurrentUser()
+            //     .then(function(user) {
+            //         if(user) {
+            //             console.log('found user: ');
+            //             console.log(user);
+            //             var userId = user._id;
+            //         }
+            //     })
+            // get current user
         } else {
+            console.log("Not logged in");
             $location.url('/home');
         }
 
@@ -39,20 +49,27 @@
         // certainly could validate this info, but I don't know why we need multple anyways
         // as per the schema.
         function renderActive() {
-            var current = angular.copy(UserService.getCurrentUser());
-            var realArrayEmails = [];
-            for (var i in current.emails) {
-                realArrayEmails.push(current.emails[i]);
-            }
+            UserService
+                .getCurrentUser()
+                .then(function(resp) {
+                    var current = resp.data;
+                    console.log("render active:");
+                    console.log(current);
+                    var realArrayEmails = [];
+                    for (var i in current.emails) {
+                        realArrayEmails.push(current.emails[i]);
+                    }
 
-            var realArrayPhones = [];
-            for (var i in current.phones) {
-                realArrayPhones.push(current.phones[i]);
-            }
+                    var realArrayPhones = [];
+                    for (var i in current.phones) {
+                        realArrayPhones.push(current.phones[i]);
+                    }
 
-            current.emails = realArrayEmails.join(',');
-            current.phones = realArrayPhones.join(',');
-            model.active = current;
+                    current.emails = realArrayEmails.join(',');
+                    current.phones = realArrayPhones.join(',');
+                    model.active = current;
+                });
+
         }
 
         function _unrenderActive() {

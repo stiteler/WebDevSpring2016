@@ -17,8 +17,6 @@
                 firstName: '',
                 lastName: '',
             };
-            console.log("Email is:");
-            console.log($scope.email);
 
             UserService.createUser(newUser)
                 .then(function (created) {

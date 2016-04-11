@@ -24,7 +24,10 @@
         }
 
         function getCurrentUser() {
-            return $rootScope.user;
+            return $http({
+                method: 'GET',
+                url: '/api/assignment/loggedin',
+            });
         }
 
         function findUserByUsername(username) {
@@ -38,13 +41,18 @@
         }
 
         function findUserByCredentials(username, password) {
-            return $http.get(
-                        '/api/assignment/user',
-                        {
-                            params: {
-                                'username': username, 'password': password
-                            }
-                        });
+            // return $http.get(
+            //             '/api/assignment/user',
+            //             {
+            //                 params: {
+            //                     'username': username, 'password': password
+            //                 }
+            //             });
+            return $http({
+                method: 'POST',
+                url: '/api/assignment/login',
+                data: {username: username, password: password}
+            });
         }
 
         function findAllUsers() {
@@ -58,7 +66,7 @@
         function createUser(user) {
             return $http({
                 method: 'POST',
-                url: '/api/assignment/user',
+                url: '/api/assignment/register',
                 data: user
             });
         }
