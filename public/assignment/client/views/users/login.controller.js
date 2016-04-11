@@ -14,6 +14,7 @@
             var pw = $scope.password;
 
             UserService
+                // this does "login"
                 .findUserByCredentials(un, pw)
                 .then(function(resp) {
                     if (resp.data) {

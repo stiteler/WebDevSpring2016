@@ -93,15 +93,20 @@ module.exports = function(app, UserModel) {
             .then(
                 function(user){
                     if(user) {
+                        console.log("username taken");
                         res.status(400).send('Username taken');
                     } else {
                         // encrypt the password when registering
                         // newUser.password = bcrypt.hashSync(newUser.password);
 
-                        // actually registered the user, send it back to client.
+                        // actually registered the user, login and send it back to client.
                         UserModel.createUser(newUser)
                             .then(function(created) {
-                                res.json(created);
+                                // login the new user.
+                                passport.authenticate('local')(req, res, function () {
+                                    console.log("after adding new user authenticated");
+                                    res.json(created);
+                                });
                             }, function(err) {
                                 console.log("createUser service error");
                                 console.log(err);
