@@ -7,34 +7,34 @@
             <tr>
                 <td><i class="fa fa-fw fa-sort-down"></i>Username</td>
                 <td><i class="fa fa-fw fa-sort-down"></i>Password</td>
-                <td><i class="fa fa-fw fa-sort-down"></i>Role</td>
-                <td><i class="fa fa-fw fa-sort-down"></i>Action</td>
+                <td><i class="fa fa-fw fa-sort-down"></i>First Name</td>
+                <td><i class="fa fa-fw fa-sort-down"></i>Last Name</td>
+                <td><i class="fa fa-fw fa-sort-down"></i>Roles</td>
+                <td><i class="fa fa-fw fa-sort-down"></i>Actions</td>
             </tr>
         </thead>
         <tbody>
             <tr>
-                <td><input type="text" class="input-sm form-control" id="admin_username" name="admin_username" placeholder="userame"></td>
-                <td><input type="password" class="input-sm form-control" id="admin_password" name="admin_password" placeholder="password"></td>
-                <td><input type="text" class="input-sm form-control" id="admin_roles" name="admin_roles" placeholder="role1, role2"></td>
-                <td><span class="glyphicon glyphicon-plus-sign gi-admin-table"></span><span class="glyphicon glyphicon-ok-sign gi-admin-table"></span></td>
+                <td><input type="text" class="input-sm form-control" placeholder="username"></td>
+                <td><input type="password" class="input-sm form-control" placeholder="password"></td>
+                <td><input type="text" class="input-sm form-control" placeholder="first"></td>
+                <td><input type="text" class="input-sm form-control" placeholder="last"></td>
+                <td><input type="text" class="input-sm form-control" placeholder="role1, role2"></td>
+                <td>
+                    <span ng-click="model.addUser()" class="glyphicon glyphicon-plus-sign gi-admin-table"></span>
+                    <span ng-click="model.updateUser()" class="glyphicon glyphicon-ok-sign gi-admin-table"></span>
+                </td>
             </tr>
-            <tr>
-                <td>alice</td>
-                <td></td>
-                <td>student</td>
-                <td><span class="glyphicon glyphicon-pencil gi-admin-table"></span><span class="glyphicon glyphicon-remove gi-admin-table"></span></td>
-            </tr>
-            <tr>
-                <td>bob</td>
-                <td></td>
-                <td>faculty | admin</td>
-                <td><span class="glyphicon glyphicon-pencil gi-admin-table"></span><span class="glyphicon glyphicon-remove gi-admin-table"></span></td>
-            </tr>
-            <tr>
-                <td>charlie</td>
-                <td></td>
-                <td></td>
-                <td><span class="glyphicon glyphicon-pencil gi-admin-table"></span><span class="glyphicon glyphicon-remove gi-admin-table"></span></td>
+            <tr ng-repeat="user in model.users">
+                <td>{{user.username}}</td>
+                <td>{{user.password}}</td>
+                <td>{{user.firstName}}</td>
+                <td>{{user.lastName}}</td>
+                <td><span ng-repeat="role in user.roles">{{role}}</span></td>
+                <td>
+                    <span ng-click="model.deleteUser(user)" class="glyphicon glyphicon-pencil gi-admin-table"></span>
+                    <span ng-click="model.editUser(user)" class="glyphicon glyphicon-remove gi-admin-table"></span>
+                </td>
             </tr>
         </tbody>
     </table>

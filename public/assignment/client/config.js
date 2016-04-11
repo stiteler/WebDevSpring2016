@@ -14,7 +14,9 @@
             controllerAs: 'model',
         })
         .when('/admin', {
-            templateUrl: 'views/admin/admin.view.html'
+            templateUrl: 'views/admin/admin.view.html',
+            controller: 'AdminController',
+            controllerAs: 'model',
         })
         .when('/forms', {
             templateUrl: 'views/forms/forms.view.html',
