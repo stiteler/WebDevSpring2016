@@ -10,21 +10,26 @@
 
         model.update = update;
 
-        if (UtilsService.isLoggedIn()) {
-            // var userId = UserService.getCurrentUser()._id;
-            // UserService.getCurrentUser()
-            //     .then(function(user) {
-            //         if(user) {
-            //             console.log('found user: ');
-            //             console.log(user);
-            //             var userId = user._id;
-            //         }
-            //     })
-            // get current user
-        } else {
-            console.log("Not logged in");
+        if (!UtilsService.isLoggedIn()) {
+            console.log('Not Logged In.');
             $location.url('/home');
         }
+ 
+        // if (UtilsService.isLoggedIn()) {
+        //     // var userId = UserService.getCurrentUser()._id;
+        //     // UserService.getCurrentUser()
+        //     //     .then(function(user) {
+        //     //         if(user) {
+        //     //             console.log('found user: ');
+        //     //             console.log(user);
+        //     //             var userId = user._id;
+        //     //         }
+        //     //     })
+        //     // get current user
+        // } else {
+        //     console.log("Not logged in");
+        //     $location.url('/home');
+        // }
 
         function init() {
             renderActive();
@@ -32,7 +37,8 @@
         init();
 
         function update() {
-            var upid = userId;
+            // var upid = userId;
+            var upid = model.active._id;
             var updated = _unrenderActive();
             // make mongo happy
             delete updated._id;

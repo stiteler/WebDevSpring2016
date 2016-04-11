@@ -16,8 +16,23 @@
             getUserByUserId: getUserByUserId,
             setCurrentUser: setCurrentUser,
             getCurrentUser: getCurrentUser,
+            logout: logout,
         };
         return api;
+
+        function logout() {
+            $http({
+                method: 'POST',
+                url: '/api/assignment/logout'
+            })
+            .then(function(ok) {
+                console.log("LOGOUT OK");
+                $rootScope.user = null;
+            }, function(bad) {
+                console.log("Unable to logout.");
+                console.log(bad);
+            })
+        }
 
         function setCurrentUser(user) {
             $rootScope.user = user;

@@ -5,7 +5,7 @@
         .module('FormBuilderApp')
         .controller('HeaderController', HeaderController);
 
-    function HeaderController($scope, $rootScope, UtilsService) {
+    function HeaderController($scope, $rootScope, UserService, UtilsService) {
         $scope.isActive = UtilsService.isActive;
         $scope.loggedIn = UtilsService.isLoggedIn;
         $scope.isAdmin = UtilsService.isAdmin;
@@ -18,7 +18,8 @@
         })();
 
         function logout() {
-            $rootScope.user = null;
+            // $rootScope.user = null;
+            UserService.logout();
         }
     }
 }());
