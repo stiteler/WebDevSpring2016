@@ -5,12 +5,36 @@
     <table class="table table-striped">
         <thead>
             <tr>
-                <td><i class="fa fa-fw fa-sort-down"></i>Username</td>
-                <td><i class="fa fa-fw fa-sort-down"></i>Password</td>
-                <td><i class="fa fa-fw fa-sort-down"></i>First Name</td>
-                <td><i class="fa fa-fw fa-sort-down"></i>Last Name</td>
-                <td><i class="fa fa-fw fa-sort-down"></i>Roles</td>
-                <td><i class="fa fa-fw fa-sort-down"></i>Actions</td>
+                <td ng-switch="model.sortBy">
+                    <span ng-click="model.setSortBy('-username')" 
+                       ng-switch-when="+username" class="fa fa-fw fa-sort-up"></span>
+                    <span ng-click="model.setSortBy('+username')"
+                       ng-switch-when="-username" class="fa fa-fw fa-sort-down"></span>
+                    <span ng-switch-default class="fa fa-fw fa-sort-up fa-unclickable"></span>
+
+                    <span ng-click="model.toggleSort('username')">Username</span>
+                </td>
+                <td><span class="no-icon">Password</span></td>
+                <td ng-switch="model.sortBy">
+                    <span ng-click="model.setSortBy('-firstName')" 
+                       ng-switch-when="+firstName" class="fa fa-fw fa-sort-up"></span>
+                    <span ng-click="model.setSortBy('+firstName')"
+                       ng-switch-when="-firstName" class="fa fa-fw fa-sort-down"></span>
+                    <span ng-switch-default class="fa fa-fw fa-sort-up fa-unclickable"></span>
+
+                    <span ng-click="model.toggleSort('firstName')">First Name</span>
+                </td>
+                <td ng-switch="model.sortBy">
+                    <span ng-click="model.setSortBy('-lastName')" 
+                       ng-switch-when="+lastName" class="fa fa-fw fa-sort-up"></span>
+                    <span ng-click="model.setSortBy('+lastName')"
+                       ng-switch-when="-lastName" class="fa fa-fw fa-sort-down"></span>
+                    <span ng-switch-default class="fa fa-fw fa-sort-up fa-unclickable"></span>
+
+                    <span ng-click="model.toggleSort('lastName')">Last Name</span>
+                </td>
+                <td><span class="no-icon">Roles</span></td>
+                <td><span class="no-icon">Actions</span></td>
             </tr>
         </thead>
         <tbody>
@@ -32,7 +56,7 @@
                     <!-- <span ng-click="model.clearSelected" class="glyphicon glyphicon-remove gi-admin-table"></span> -->
                 </td>
             </tr>
-            <tr ng-repeat="user in model.users">
+            <tr ng-repeat="user in model.users | orderBy:model.sortBy">
                 <td>{{user.username}}</td>
                 <td>{{user.password}}</td>
                 <td>{{user.firstName}}</td>

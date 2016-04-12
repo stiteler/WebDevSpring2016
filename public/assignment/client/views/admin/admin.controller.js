@@ -13,11 +13,25 @@
         model.addUser = addUser;
         model.updateUser = updateUser;
         model.clearSelected = clearSelected;
+        model.setSortBy = setSortBy;
+        model.sortBy = '';
+        model.toggleSort = toggleSort;
 
         function init() {
             _refresh();
         }
         init();
+
+        function setSortBy(value) {
+            model.sortBy = value;
+        }
+
+        function toggleSort(field) {
+            // if current sort is NOT already this field, turn it on.
+            if(model.sortBy.indexOf(field) < 0) {
+                model.sortBy = '+' + field;
+            }
+        }
 
         function clearSelected() {
             console.log("clear clicked");

@@ -29,3 +29,25 @@ a#unclickable {
     color: #A0A0A0;
     text-decoration: none;
 }
+
+.fa-sort-down,.fa-sort-up,.fa-lock {
+    font-size: 2em;
+}
+
+.fa-sort-up {
+    position: relative;
+    top: 11px;
+}
+
+.fa.fa-unclickable {
+    color: #A0A0A0;
+}
+
+.table-responsive > .table > thead > tr > td {
+    vertical-align: middle;
+}
+
+.no-icon {
+    position: relative;
+    top: 4px;
+}
