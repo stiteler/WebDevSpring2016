@@ -5,7 +5,7 @@
         .module('FormBuilderApp')
         .controller('AdminController', AdminController);
 
-    function AdminController(UserService, $location) {
+    function AdminController(AdminService, $location) {
         var model = this;
 
         model.deleteUser = deleteUser;
@@ -40,7 +40,7 @@
 
         function deleteUser(user) {
             console.log("delete clicked");
-            UserService
+            AdminService
                 .deleteUserById(user._id)
                 .then(function(resp) {
                     console.log("DELETE OK");
@@ -64,7 +64,7 @@
                 roles: []
             };
 
-            UserService
+            AdminService
                 .createUser(model.selected)
                 .then(function(success) {
                     _refresh();
@@ -75,7 +75,7 @@
         }
 
         function updateUser() {
-            UserService
+            AdminService
                 .updateUser(model.selected._id, model.selected)
                 .then(function(success) {
                     _refresh();
@@ -84,7 +84,7 @@
 
         function _refresh() {
             model.selected = null;
-            UserService
+            AdminService
                 .findAllUsers()
                 .then(function(resp){
                     if(resp.data) {
