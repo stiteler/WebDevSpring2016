@@ -18,8 +18,11 @@ thead {
     padding-bottom: 5px;
 }
 
-i.gi-form-table {
-    pointer-events: all;
+.gi-flip {
+    transform: scaleX(-1);
+    -moz-transform: scaleX(-1);
+    -webkit-transform: scaleX(-1);
+    -ms-transform: scaleX(-1);
 }
 
 .table-borderless tbody tr td{
