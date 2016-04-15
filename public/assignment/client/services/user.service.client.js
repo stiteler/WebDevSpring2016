@@ -56,13 +56,6 @@
         }
 
         function findUserByCredentials(username, password) {
-            // return $http.get(
-            //             '/api/assignment/user',
-            //             {
-            //                 params: {
-            //                     'username': username, 'password': password
-            //                 }
-            //             });
             return $http({
                 method: 'POST',
                 url: '/api/assignment/login',

@@ -1,18 +1,13 @@
 <h1 class="page-header">Forms</h1>
 
-<!-- Begin Tabs -->
 <ul class="nav nav-tabs">
     <li role="presentation" class="active"><a data-toggle="tab" href="#forms-pane">Forms</a></li>
-    <!-- <li role="presentation"><a data-toggle="tab" href="#fields-pane">Fields</a></li> -->
-    <!-- li role="presentation"><a href="#/fields">Fields</a></li -->
-    <li ng-show="isSelected" role="presentation"><a ng-href="#/form/{{active._id}}/fields">Fields</a></li>
-    <li ng-show="!isSelected" role="presentation"><a id="unclickable">Fields</a></li>
+    <li ng-show="model.isSelected" role="presentation"><a ng-href="#/form/{{active._id}}/fields">Fields</a></li>
+    <li ng-show="!model.isSelected" role="presentation"><a id="unclickable">Fields</a></li>
 </ul>
 
-<!-- Begin Tab Content -->
 <div class="tab-content">
     <div class="tab-pane fade in active" id="forms-pane">
-        <!-- Begin FORMS Table -->
         <div class="table-responsive">
             <table class="table table-striped">
                 <thead>
@@ -23,28 +18,23 @@
                 </thead>
                 <tbody>
                     <tr>
-                        <td><input ng-model="active.title" 
+                        <td><input ng-model="model.active.title" 
                             type="text" class="input-sm form-control"
                             placeholder="name" id="input-form-name"></td>
                         <td>
-                            <span ng-click="addForm()" class="glyphicon glyphicon-plus-sign gi-form-table"></span>
-                            <span ng-click="updateForm()" class="glyphicon glyphicon-ok-sign gi-form-table"></span>
+                            <span ng-click="model.addForm()" class="glyphicon glyphicon-plus-sign gi-form-table"></span>
+                            <span ng-click="model.updateForm()" class="glyphicon glyphicon-ok-sign gi-form-table"></span>
                         </td>
                     </tr>
-                    <tr ng-repeat="form in forms">
+                    <tr ng-repeat="form in model.forms">
                         <td>{{form.title}}</td>
                         <td>
-                            <span ng-click="deleteForm(form._id)" class="glyphicon glyphicon-remove gi-form-table"></span>
-                            <span ng-click="selectForm(form._id)"  class="glyphicon glyphicon-pencil gi-form-table"></span>
+                            <span ng-click="model.deleteForm(form._id)" class="glyphicon glyphicon-remove gi-form-table"></span>
+                            <span ng-click="model.selectForm(form._id)"  class="glyphicon glyphicon-pencil gi-form-table"></span>
                         </td>
                     </tr>
                 </tbody>
             </table>
         </div>
-        <!-- End Users Table -->
     </div>
-    <!-- Not dynamic yet!
-    <div class="tab-pane fade" id="fields-pane">
-        fields
-    </div> -->
 </div>

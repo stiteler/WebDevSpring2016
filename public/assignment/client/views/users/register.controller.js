@@ -5,14 +5,20 @@
         .module('FormBuilderApp')
         .controller('RegisterController', RegisterController);
 
-    function RegisterController($scope, UserService, UtilsService) {
-        $scope.register = register;
+    function RegisterController(UserService, UtilsService) {
+        var model = this;
+        model.register = register;
 
         function register() {
+            if (model.password !== model.verifyPassword) {
+                model.error = "Passwords must match."
+                return;
+            }
+
             var newUser = {
-                username: $scope.username,
-                password: $scope.password,
-                emails: [$scope.email],
+                username: model.username,
+                password: model.password,
+                emails: [model.email],
                 phones: [],
                 roles: [],
                 firstName: '',

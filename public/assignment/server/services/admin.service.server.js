@@ -45,17 +45,6 @@ module.exports = function(app, UserModel) {
         res.json(UserModel.findUserById(uid));
     }
 
-    // function getUser(req, res) {
-    //     // need to switch on context
-    //     if (req.query.username && req.query.password) {
-    //         return login(req, res);
-    //     } else if (req.query.username) {
-    //         return getUserByUsername(req, res);
-    //     } else {
-    //         return getAllUsers(req, res);
-    //     }
-    // }
-
     function getUserByUsername(req, res) {
         var username = req.query.username;
         UserModel

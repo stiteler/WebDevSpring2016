@@ -6,10 +6,12 @@
         .controller('FormController', FormController);
 
     function FormController($scope, FormService, UtilsService, UserService) {
-        $scope.deleteForm = deleteForm;
-        $scope.addForm = addForm;
-        $scope.selectForm = selectForm;
-        $scope.updateForm = updateForm;
+        var model = this;
+
+        model.deleteForm = deleteForm;
+        model.addForm = addForm;
+        model.selectForm = selectForm;
+        model.updateForm = updateForm;
 
         var initialActive = {
             title: ''
@@ -17,7 +19,7 @@
 
         function init() {
             if (UtilsService.isLoggedIn()) {
-                $scope.user = UserService.getCurrentUser();
+                model.user = UserService.getCurrentUser();
                 refreshForms();
             } else {
                 UtilsService.navigate('#/home');
@@ -27,12 +29,12 @@
         init();
 
         function refreshActive() {
-            $scope.isSelected = false;
-            $scope.active = angular.copy(initialActive);
+            model.isSelected = false;
+            model.active = angular.copy(initialActive);
         }
 
         function deleteForm(formId) {
-            var userId = $scope.user._id;
+            var userId = model.user._id;
 
             // catch an error here someday.
             FormService
@@ -42,13 +44,13 @@
         }
 
         function addForm() {
+            console.log("Adding new form.")
             var newForm = {
-                title: $scope.active.title,
+                title: model.active.title,
                 fields: [],
-                // _id: (new Date()).getTime(),
             };
 
-            var userId = $scope.user._id;
+            var userId = model.user._id;
 
             FormService
                 .createFormForUser(userId, newForm)
@@ -60,9 +62,9 @@
         }
 
         function updateForm() {
-            var active = $scope.active;
+            var active = model.active;
             var formId = active._id;
-            var userId = $scope.user._id;
+            var userId = model.user._id;
 
             // error handle this someday
             FormService
@@ -73,11 +75,11 @@
         }
 
         function refreshForms() {
-            var userId = $scope.user._id;
+            var userId = model.user._id;
             FormService
                 .findAllFormsForUser(userId)
                 .then(function (forms) {
-                    $scope.forms = forms.data;
+                    model.forms = forms.data;
                 });
 
         }
@@ -85,18 +87,18 @@
         function selectForm(formId) {
             // I don't need to do this.. just pass in the object right?
             // TODO Refactor
-            var selected = $scope.active;
+            var selected = model.active;
 
-            for (var i in $scope.forms) {
-                if ($scope.forms[i]) {
-                    var form = $scope.forms[i];
+            for (var i in model.forms) {
+                if (model.forms[i]) {
+                    var form = model.forms[i];
                     if (form._id === formId) {
                         selected = form;
                     }
                 }
             }
-            $scope.isSelected = true;
-            $scope.active = selected;
+            model.isSelected = true;
+            model.active = selected;
         }
 
     }
