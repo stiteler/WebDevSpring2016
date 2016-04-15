@@ -63,7 +63,7 @@
             // User is Authenticated
             if (user !== '0')
             {
-                $rootScope.currentUser = user;
+                $rootScope.user = user;
                 deferred.resolve();
             }
             // User is Not Authenticated
