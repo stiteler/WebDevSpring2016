@@ -55,26 +55,43 @@
         // certainly could validate this info, but I don't know why we need multple anyways
         // as per the schema.
         function renderActive() {
-            UserService
-                .getCurrentUser()
-                .then(function(resp) {
-                    var current = resp.data;
-                    console.log("render active:");
-                    console.log(current);
-                    var realArrayEmails = [];
-                    for (var i in current.emails) {
-                        realArrayEmails.push(current.emails[i]);
-                    }
+            var current = UserService
+                .getLoggedInUser();
 
-                    var realArrayPhones = [];
-                    for (var i in current.phones) {
-                        realArrayPhones.push(current.phones[i]);
-                    }
+            var realArrayEmails = [];
+            for (var i in current.emails) {
+                realArrayEmails.push(current.emails[i]);
+            }
 
-                    current.emails = realArrayEmails.join(',');
-                    current.phones = realArrayPhones.join(',');
-                    model.active = current;
-                });
+            var realArrayPhones = [];
+            for (var i in current.phones) {
+                realArrayPhones.push(current.phones[i]);
+            }
+
+            current.emails = realArrayEmails.join(',');
+            current.phones = realArrayPhones.join(',');
+            model.active = current;
+
+            // UserService
+            //     .getCurrentUser()
+            //     .then(function(resp) {
+            //         var current = resp.data;
+            //         console.log("render active:");
+            //         console.log(current);
+            //         var realArrayEmails = [];
+            //         for (var i in current.emails) {
+            //             realArrayEmails.push(current.emails[i]);
+            //         }
+
+            //         var realArrayPhones = [];
+            //         for (var i in current.phones) {
+            //             realArrayPhones.push(current.phones[i]);
+            //         }
+
+            //         current.emails = realArrayEmails.join(',');
+            //         current.phones = realArrayPhones.join(',');
+            //         model.active = current;
+            //     });
 
         }
 

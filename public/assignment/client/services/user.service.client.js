@@ -16,6 +16,7 @@
             getUserByUserId: getUserByUserId,
             setCurrentUser: setCurrentUser,
             getCurrentUser: getCurrentUser,
+            getLoggedInUser: getLoggedInUser,
             logout: logout,
         };
         return api;
@@ -43,6 +44,10 @@
                 method: 'GET',
                 url: '/api/assignment/loggedin',
             });
+        }
+
+        function getLoggedInUser() {
+            return $rootScope.user;
         }
 
         function findUserByUsername(username) {

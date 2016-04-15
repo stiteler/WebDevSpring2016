@@ -18,13 +18,17 @@
         };
 
         function init() {
-            if (UtilsService.isLoggedIn()) {
-                model.user = UserService.getCurrentUser();
-                refreshForms();
-            } else {
-                UtilsService.navigate('#/home');
-            }
+            model.user = UserService.getLoggedInUser();
+            refreshForms();
             refreshActive();
+            
+            // if (UtilsService.isLoggedIn()) {
+            //     model.user = UserService.getCurrentUser();
+            //     refreshForms();
+            // } else {
+            //     UtilsService.navigate('#/home');
+            // }
+            // refreshActive();
         }
         init();
 

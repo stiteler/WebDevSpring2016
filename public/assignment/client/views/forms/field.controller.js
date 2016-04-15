@@ -45,18 +45,26 @@
         model.copyField = copyField;
 
         function init() {
-            if (UtilsService.isLoggedIn()) {
-                model.user = UserService.getCurrentUser();
-                model.formId = $routeParams.formId;
 
-                model.fieldTypes = _getFieldTypes();
-                model.selectedFieldType = model.fieldTypes[0];
+            _refreshFields();
+            model.user = UserService.getCurrentUser();
+            model.formId = $routeParams.formId;
+            model.fieldTypes = _getFieldTypes();
+            model.selectedFieldType = model.fieldTypes[0];
 
-                _refreshFields();
 
-            } else {
-                UtilsService.navigate('#/home');
-            }
+            // if (UtilsService.isLoggedIn()) {
+            //     model.user = UserService.getCurrentUser();
+            //     model.formId = $routeParams.formId;
+
+            //     model.fieldTypes = _getFieldTypes();
+            //     model.selectedFieldType = model.fieldTypes[0];
+
+            //     _refreshFields();
+
+            // } else {
+            //     UtilsService.navigate('#/home');
+            // }
         }
         init();
 

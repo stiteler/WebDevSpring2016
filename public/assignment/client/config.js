@@ -63,12 +63,14 @@
             // User is Authenticated
             if (user !== '0')
             {
+                console.log("user found");
                 $rootScope.user = user;
                 deferred.resolve();
             }
             // User is Not Authenticated
             else
             {
+                console.log("No user found");
                 $rootScope.error = 'You need to log in.';
                 deferred.reject();
                 $location.url('/');
