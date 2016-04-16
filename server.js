@@ -32,7 +32,7 @@ if (typeof process.env.OPENSHIFT_HOMEDIR != 'undefined') {
   dir = __dirname;
 }
 
-
+var isAdmin = require('./public/assignment/server/middleware/isAdmin.js')
 // middleware:
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended:true}));
@@ -42,13 +42,14 @@ app.use(function(req, res, next) {
     next();
 });
 app.use(session({
-	secret: 'test-secret',
+	secret: process.env.PASSPORT_SESSION_SECRET,
 	resave: true,
 	saveUninitialized: true,
 }));
 app.use(cookieParser());
 app.use(passport.initialize());
 app.use(passport.session());
+app.use(isAdmin);
 
 
 // forward to client side, for now

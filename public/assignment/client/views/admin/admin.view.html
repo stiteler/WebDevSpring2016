@@ -12,7 +12,7 @@
                        ng-switch-when="-username" class="fa fa-fw fa-sort-down"></span>
                     <span ng-switch-default class="fa fa-fw fa-sort-up fa-unclickable"></span>
 
-                    <span ng-click="model.toggleSort('username')">Username</span>
+                    <a ng-click="model.toggleSort('username')" href="">Username</a>
                 </td>
                 <td><span class="no-icon">Password</span></td>
                 <td ng-switch="model.sortBy">
@@ -22,7 +22,7 @@
                        ng-switch-when="-firstName" class="fa fa-fw fa-sort-down"></span>
                     <span ng-switch-default class="fa fa-fw fa-sort-up fa-unclickable"></span>
 
-                    <span ng-click="model.toggleSort('firstName')">First Name</span>
+                    <a ng-click="model.toggleSort('firstName')" href="">First Name</a>
                 </td>
                 <td ng-switch="model.sortBy">
                     <span ng-click="model.setSortBy('-lastName')" 
@@ -31,7 +31,7 @@
                        ng-switch-when="-lastName" class="fa fa-fw fa-sort-down"></span>
                     <span ng-switch-default class="fa fa-fw fa-sort-up fa-unclickable"></span>
 
-                    <span ng-click="model.toggleSort('lastName')">Last Name</span>
+                    <a ng-click="model.toggleSort('lastName')" href="">Last Name</a>
                 </td>
                 <td><span class="no-icon">Roles</span></td>
                 <td><span class="no-icon">Actions</span></td>

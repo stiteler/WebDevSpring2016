@@ -5,7 +5,7 @@ var bcrypt = require("bcrypt-nodejs");
 module.exports = function(app, UserModel) {
     var auth = authorized;
 
-    // CRUD endpoints
+    // CRUD endpoints, no longer needed with admin.
     app.post('/api/assignment/user', auth, createUser);
     app.get('/api/assignment/user', auth, getUser);
     app.get('/api/assignment/user/:id', auth, getUserById);
