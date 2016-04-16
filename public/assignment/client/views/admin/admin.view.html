@@ -53,8 +53,6 @@
                     <span ng-click="model.addUser()" class="glyphicon glyphicon-plus gi-admin-table"></span>
                     <span ng-click="model.updateUser()" class="glyphicon glyphicon-ok gi-admin-table"></span>
                     <span ng-click="model.clearSelected()" class="glyphicon glyphicon-repeat gi-admin-table gi-flip"></span>
-                    <!-- <a ng-click="model.clearSelected()" href="">clear</a> -->
-                    <!-- <span ng-click="model.clearSelected" class="glyphicon glyphicon-remove gi-admin-table"></span> -->
                 </td>
             </tr>
             <tr ng-repeat="user in model.users | orderBy:model.sortBy">
@@ -62,7 +60,6 @@
                 <td></td>
                 <td>{{user.firstName}}</td>
                 <td>{{user.lastName}}</td>
-                <!-- <td><span ng-repeat="role in user.roles">{{role}}</span></td> -->
                 <td>{{model.renderRoles(user.roles)}}</td>
 
                 <td>

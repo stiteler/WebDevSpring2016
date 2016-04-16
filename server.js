@@ -37,10 +37,10 @@ var isAdmin = require('./public/assignment/server/middleware/isAdmin.js')
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended:true}));
 multer();
-app.use(function(req, res, next) {
-    console.log(req.originalUrl);
-    next();
-});
+// app.use(function(req, res, next) {
+//     console.log(req.originalUrl);
+//     next();
+// });
 app.use(session({
 	secret: process.env.PASSPORT_SESSION_SECRET,
 	resave: true,

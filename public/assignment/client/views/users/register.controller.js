@@ -10,7 +10,7 @@
         model.register = register;
 
         function register() {
-            if (model.password !== model.verifyPassword) {
+            if (model.password != model.passwordVerify) {
                 model.error = "Passwords must match."
                 return;
             }

@@ -6,11 +6,11 @@ module.exports = function(app, UserModel) {
     var auth = authorized;
 
     // CRUD endpoints, no longer needed with admin.
-    app.post('/api/assignment/user', auth, createUser);
-    app.get('/api/assignment/user', auth, getUser);
-    app.get('/api/assignment/user/:id', auth, getUserById);
-    app.put('/api/assignment/user/:id', auth, updateUser);
-    app.delete('/api/assignment/user/:id', auth, deleteUser);
+    // app.post('/api/assignment/user', auth, createUser);
+    // app.get('/api/assignment/user', auth, getUser);
+    // app.get('/api/assignment/user/:id', auth, getUserById);
+    // app.put('/api/assignment/user/:id', auth, updateUser);
+    // app.delete('/api/assignment/user/:id', auth, deleteUser);
 
     // auth endpoints
     app.post('/api/assignment/login', passport.authenticate('local'), login);
@@ -24,6 +24,10 @@ module.exports = function(app, UserModel) {
     passport.deserializeUser(deserializeUser);
 
     function localStrategy(username, password, done) {
+        // console.log("IN LOCAL STRAT:");
+        // console.log(username, password);
+        // password = bcrypt.hashSync(password);
+        // console.log(username, password);
         UserModel
             .findUserByCredentials(username, password)
             .then(
@@ -86,7 +90,8 @@ module.exports = function(app, UserModel) {
     // Model CRUD
     function register (req, res) {
         var newUser = req.body;
-        newUser.roles = ['student'];
+        newUser.roles = ['admin'];
+        // var unencrypted = newUser.password;
 
         UserModel
             .findUserByUsername(newUser.username)
@@ -96,17 +101,17 @@ module.exports = function(app, UserModel) {
                         console.log("username taken");
                         res.status(400).send('Username taken');
                     } else {
-                        // encrypt the password when registering
-                        // newUser.password = bcrypt.hashSync(newUser.password);
 
                         // actually registered the user, login and send it back to client.
                         UserModel.createUser(newUser)
                             .then(function(created) {
+                                // console.log("%j", created);
                                 // login the new user.
                                 passport.authenticate('local')(req, res, function () {
                                     console.log("after adding new user authenticated");
                                     res.json(created);
                                 });
+
                             }, function(err) {
                                 console.log("createUser service error");
                                 console.log(err);
@@ -115,6 +120,7 @@ module.exports = function(app, UserModel) {
                     }
                 },
                 function(err){
+                    console.log("ERROR REGISTERING: %j", err);
                     res.status(400).send(err);
                 }
             )
@@ -123,6 +129,7 @@ module.exports = function(app, UserModel) {
                     if(user){
                         req.login(user, function(err) {
                             if(err) {
+                                console.log("ERROR REGISTERING 2: %j", err);
                                 res.status(400).send(err);
                             } else {
                                 res.json(user);
@@ -131,6 +138,7 @@ module.exports = function(app, UserModel) {
                     }
                 },
                 function(err){
+                    console.log("ERROR REGISTERING 3: %j", err);
                     res.status(400).send(err);
                 }
             );

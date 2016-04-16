@@ -52,6 +52,7 @@
         function editUser(user) {
             console.log("edit clicked");
             model.selected = angular.copy(user);
+            model.originalCopy = angular.copy(user);
         }
 
         function addUser() {
@@ -79,6 +80,11 @@
             var toUpdate = angular.copy(model.selected)
             toUpdate.roles = unrenderRoles(toUpdate.roles);
 
+            if(model.originalCopy.password == model.selected.password) {
+                // pasword not changed:
+                delete toUpdate.password;
+            } // else it will get rehashed.
+
             AdminService
                 .updateUser(toUpdate._id, toUpdate)
                 .then(function(success) {
@@ -95,6 +101,7 @@
         }
 
         function unrenderRoles(roles) {
+            console.log(roles);
             var unrendered = roles.split(', ');
             console.log(unrendered);
             // string to array
@@ -102,8 +109,9 @@
 
         }
 
-        function _refresh() {
+        function _refresh() { 
             model.selected = null;
+            model.originalCopy = null;
             AdminService
                 .findAllUsers()
                 .then(function(resp){

@@ -15,6 +15,10 @@ module.exports = function(app, UserModel) {
     function updateUser(req, res) {
         var uid = req.params.id;
         var updates = req.body;
+        // if(updates.password) {
+        //     updates.password = bcrypt.hashSync(updates.password);
+        // }
+
         // updates._id = uid;
         UserModel.updateUser(uid, updates)
             .then(function(success) {
@@ -28,6 +32,11 @@ module.exports = function(app, UserModel) {
 
     function createUser(req, res) {
         var newUser = req.body;
+        console.log("admin create:");
+        console.log(newUser);
+        
+        // newUser.password = bcrypt.hashSync(newUser.password);
+
         UserModel
             .createUser(newUser)
             .then(function(user) {
