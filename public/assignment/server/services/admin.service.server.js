@@ -35,7 +35,7 @@ module.exports = function(app, UserModel) {
         console.log("admin create:");
         console.log(newUser);
         
-        // newUser.password = bcrypt.hashSync(newUser.password);
+        newUser.password = bcrypt.hashSync(newUser.password);
 
         UserModel
             .createUser(newUser)
