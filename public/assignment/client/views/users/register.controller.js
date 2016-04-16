@@ -25,15 +25,17 @@
                 lastName: '',
             };
 
-            UserService.createUser(newUser)
+            UserService
+                .createUser(newUser)
                 .then(function (created) {
-                    console.log('CREATE USER:');
-                    console.log(created.data);
                     if (created.data) {
-                        console.log("New user:");
-                        console.log(created.data);
-                        UserService.setCurrentUser(created.data);
-                        UtilsService.navigate('/profile');
+                        UserService
+                            .findUserByCredentials(newUser.username, newUser.password)
+                            .then(function() {
+                                UserService.setCurrentUser(created.data);
+                                UtilsService.navigate('/profile');
+                            });
+
                     }
                 });
         }

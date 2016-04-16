@@ -18,27 +18,29 @@ module.exports = function(app, UserModel) {
     app.post('/api/assignment/register', register);
     app.get('/api/assignment/loggedin', loggedin);
 
-
     passport.use(new LocalStrategy(localStrategy));
     passport.serializeUser(serializeUser);
     passport.deserializeUser(deserializeUser);
 
     function localStrategy(username, password, done) {
-        // console.log("IN LOCAL STRAT:");
-        // console.log(username, password);
-        // password = bcrypt.hashSync(password);
-        // console.log(username, password);
         UserModel
-            .findUserByCredentials(username, password)
+            .findUserByUsername(username)
             .then(
                 function(user) {
-                    if (!user) { return done(null, false); }
-                    return done(null, user);
+                    console.log("Inside local strat:");
+                    console.log(username, password);
+                    // if the user exists, compare passwords with bcrypt.compareSync
+                    if(user && bcrypt.compareSync(password, user.password)) {
+                        return done(null, user);
+                    } else {
+                        return done(null, false);
+                    }
                 },
                 function(err) {
                     if (err) { return done(err); }
                 }
             );
+
     }
 
     function serializeUser(user, done) {
@@ -102,19 +104,20 @@ module.exports = function(app, UserModel) {
                         res.status(400).send('Username taken');
                     } else {
 
+                        newUser.password = bcrypt.hashSync(newUser.password);
+
                         // actually registered the user, login and send it back to client.
                         UserModel.createUser(newUser)
                             .then(function(created) {
-                                // console.log("%j", created);
+                                console.log("%j", created);
                                 // login the new user.
-                                passport.authenticate('local')(req, res, function () {
-                                    console.log("after adding new user authenticated");
-                                    res.json(created);
-                                });
+                                // passport.authenticate('local')(req, res, function () {
+                                //     console.log("after adding new user authenticated");
+                                //     res.json(created);
+                                // });
+                                res.json(created);
 
                             }, function(err) {
-                                console.log("createUser service error");
-                                console.log(err);
                                 res.status(400).json({"error": "Unable to create user at this time"});
                             });
                     }

@@ -7,6 +7,7 @@ module.exports = function(app, db, mongoose) {
     var Field = mongoose.model("Field", FieldSchema);
 	var UserSchema = require("./models/user.schema.server.js")(mongoose);
     var User = mongoose.model("User", UserSchema);
+    // User.plugin(passportLocalMongoose);
 
     // load models
     var UserModel = require('./models/user.model.server.js')(db, mongoose, User);
