@@ -90,8 +90,8 @@ module.exports = function(app, UserModel) {
     // Model CRUD
     function register (req, res) {
         var newUser = req.body;
-        newUser.roles = ['admin'];
-        // var unencrypted = newUser.password;
+        newUser.roles = ['student'];
+
 
         UserModel
             .findUserByUsername(newUser.username)
@@ -107,14 +107,7 @@ module.exports = function(app, UserModel) {
                         // actually registered the user, login and send it back to client.
                         UserModel.createUser(newUser)
                             .then(function(created) {
-                                console.log("%j", created);
-                                // login the new user.
-                                // passport.authenticate('local')(req, res, function () {
-                                //     console.log("after adding new user authenticated");
-                                //     res.json(created);
-                                // });
                                 res.json(created);
-
                             }, function(err) {
                                 res.status(400).json({"error": "Unable to create user at this time"});
                             });
