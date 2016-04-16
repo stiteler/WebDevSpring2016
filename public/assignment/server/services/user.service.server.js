@@ -27,8 +27,6 @@ module.exports = function(app, UserModel) {
             .findUserByUsername(username)
             .then(
                 function(user) {
-                    console.log("Inside local strat:");
-                    console.log(username, password);
                     // if the user exists, compare passwords with bcrypt.compareSync
                     if(user && bcrypt.compareSync(password, user.password)) {
                         return done(null, user);
