@@ -63,7 +63,7 @@
                 <td>{{user.firstName}}</td>
                 <td>{{user.lastName}}</td>
                 <!-- <td><span ng-repeat="role in user.roles">{{role}}</span></td> -->
-                <td>{{user.roles}}</td>
+                <td>{{model.renderRoles(user.roles)}}</td>
 
                 <td>
                     <span ng-click="model.editUser(user)" class="glyphicon glyphicon-cog gi-admin-table"></span>

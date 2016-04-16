@@ -16,6 +16,7 @@
         model.setSortBy = setSortBy;
         model.sortBy = '';
         model.toggleSort = toggleSort;
+        model.renderRoles = renderRoles;
 
         function init() {
             _refresh();
@@ -61,11 +62,11 @@
                 phones: [],
                 firstName: model.selected.firstName,
                 lastName: model.selected.lastName,
-                roles: []
+                roles: unrenderRoles(model.selected.roles)
             };
 
             AdminService
-                .createUser(model.selected)
+                .createUser(newUser)
                 .then(function(success) {
                     _refresh();
                 }, function(err) {
@@ -75,11 +76,30 @@
         }
 
         function updateUser() {
+            var toUpdate = angular.copy(model.selected)
+            toUpdate.roles = unrenderRoles(toUpdate.roles);
+
             AdminService
-                .updateUser(model.selected._id, model.selected)
+                .updateUser(toUpdate._id, toUpdate)
                 .then(function(success) {
                     _refresh();
                 });
+        }
+
+        function renderRoles(roles) {
+            var rolesArray = [];
+            for (var i in roles) {
+                rolesArray.push(roles[i]);
+            }
+            return rolesArray.join(', ');
+        }
+
+        function unrenderRoles(roles) {
+            var unrendered = roles.split(', ');
+            console.log(unrendered);
+            // string to array
+            return unrendered;
+
         }
 
         function _refresh() {
@@ -88,6 +108,7 @@
                 .findAllUsers()
                 .then(function(resp){
                     if(resp.data) {
+                        console.log(resp.data);
                         model.users = resp.data;
                     }
                 });
