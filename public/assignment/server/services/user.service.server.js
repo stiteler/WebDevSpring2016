@@ -18,9 +18,9 @@ module.exports = function(app, UserModel) {
     app.post('/api/assignment/register', register);
     app.get('/api/assignment/loggedin', loggedin);
 
-    passport.use(new LocalStrategy(localStrategy));
-    passport.serializeUser(serializeUser);
-    passport.deserializeUser(deserializeUser);
+    // passport.use(new LocalStrategy(localStrategy));
+    // passport.serializeUser(serializeUser);
+    // passport.deserializeUser(deserializeUser);
 
     function localStrategy(username, password, done) {
         UserModel
@@ -40,6 +40,25 @@ module.exports = function(app, UserModel) {
             );
 
     }
+
+    // function localStrategy(username, password, done) {
+    //     UserModel
+    //         .findUserByUsername(username)
+    //         .then(
+    //             function(user) {
+    //                 // if the user exists, compare passwords with bcrypt.compareSync
+    //                 if(user && bcrypt.compareSync(password, user.password)) {
+    //                     return done(null, user);
+    //                 } else {
+    //                     return done(null, false);
+    //                 }
+    //             },
+    //             function(err) {
+    //                 if (err) { return done(err); }
+    //             }
+    //         );
+
+    // }
 
     function serializeUser(user, done) {
         done(null, user);

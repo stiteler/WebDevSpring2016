@@ -7,7 +7,7 @@ module.exports = function(app, db, mongoose) {
     var User = mongoose.model("ProjectUser", UserSchema);
 
     // models
-    var UserModel = require('./models/user.model.server.js')(User);
+    var UserModel = require('./models/user.model.server.js')(User, mongoose);
     var RecommendModel = require('./models/recommend.model.server.js')(UserModel, mongoose);
 
     // services

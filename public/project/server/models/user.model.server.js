@@ -1,4 +1,4 @@
-module.exports = function(User) {
+module.exports = function(User, mongoose) {
     var bcrypt = require("bcrypt-nodejs");
     var q = require("q");
     
@@ -38,14 +38,16 @@ module.exports = function(User) {
         return User.create(user);
     }
 
-    function updateUser(updates) {
+    function updateUser(userId, updates) {
         delete updates._id;
         if(updates.password) {
             updates.password = bcrypt.hashSync(updates.password);
         }
+        console.log("UPDATES:");
+        console.log(updates);
         return User
             .findByIdAndUpdate(
-                mongoose.Types.ObjectId(uid),
+                mongoose.Types.ObjectId(userId),
                 {$set: updates});
     }
 

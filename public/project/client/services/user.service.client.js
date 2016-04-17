@@ -47,7 +47,7 @@
         function getUserSession() {
             return $http({
                 method: 'GET',
-                url: '/api/assignment/loggedin',
+                url: '/api/project/loggedin',
             });
         }
 
@@ -62,7 +62,7 @@
         function logout() {
             $http({
                 method: 'POST',
-                url: '/api/assignment/logout'
+                url: '/api/project/logout'
             })
             .then(function(ok) {
                 console.log("LOGOUT OK");
@@ -112,7 +112,7 @@
         function register(user) {
             return $http({
                 method: 'POST',
-                url: '/api/assignment/register',
+                url: '/api/project/register',
                 data: user
             });
         }

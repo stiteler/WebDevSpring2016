@@ -25,6 +25,8 @@
                 UserService
                 .findUserByUsername(username)
                 .then(function(resp) {
+                    console.log("response from prof. controller lookup");
+                    console.log(resp.data);
                     model.profile = resp.data;
                     _updateModels();
 
@@ -84,7 +86,6 @@
             RecommendService
                 .getRecommendsForUserId(model.profile._id)
                 .then(function(resp) {
-                    console.log("RECOMMENDS FOR USER:")
                     console.log(resp.data);
                     model.recos = resp.data;
                 });

@@ -11,6 +11,7 @@ module.exports = function(app, UserModel) {
 
         UserModel.updateUser(uid, updates)
             .then(function(success) {
+                console.log("UPDATE SUCCESS: %j", success);
                 res.json(success);
             }, function(err) {
                 console.log("updateUser service error: %j", err);
@@ -35,6 +36,7 @@ module.exports = function(app, UserModel) {
         UserModel
             .findUserByUsername(username)
             .then(function(user) {
+                console.log("FOUND USER IN GET BY USERNAME: %j", user);
                 res.json(user);
             }, function(err) {
                 console.log("error fetching user by username: %j", err);

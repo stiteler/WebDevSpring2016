@@ -38,6 +38,8 @@
             UserService
                 .updateUser(model.profile._id, updates)
                 .then(function(resp) {
+                    console.log("Update response (client)");
+                    console.log(resp.data);
                     $location.path('/profile');
                 });
         }

@@ -29,6 +29,8 @@
             UserService.register(newUser)
                 .then(function (created) {
                     if (created.data) {
+                        console.log("NEW USER AFTER REGISTER:");
+                        console.log(created.data);
                         UserService.setCurrentUser(created.data);
                         $location.path('/profile');
                     }
