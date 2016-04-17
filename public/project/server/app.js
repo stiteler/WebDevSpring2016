@@ -1,12 +1,18 @@
-// this file is required by server.js
-// module.exports = function(app, request) {
-module.exports = function(app) {
+module.exports = function(app, db, mongoose) {
     // var https = require('https');
     // var request = require('request');
 
-    var UserModel = require('./models/user.model.js')(app);
-    var RecommendModel = require('./models/recommend.model.js')(app, UserModel);
+    // schema
+    var UserSchema = require("./models/user.schema.server.js")(mongoose);
+    var User = mongoose.model("ProjectUser", UserSchema);
+
+    // models
+    var UserModel = require('./models/user.model.server.js')(User);
+    var RecommendModel = require('./models/recommend.model.server.js')(app, UserModel);
+
+    // services
     var UserService = require('./services/user.service.server.js')(app, UserModel);
     var RecommendService = require('./services/recommend.service.server.js')(app, UserModel, RecommendModel);
+    var ConnectionService = require('./services/connection.service.server.js')(app, UserModel);
     var embedly = require('./services/embedly.service.server.js')(app);
 }

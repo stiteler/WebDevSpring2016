@@ -7,32 +7,51 @@ module.exports = function(app, UserModel) {
     return api;
 
     function findRecommendsByUserId(userId) {
-        var user = UserModel.findUserById(userId);
-        if(user) {
-            return user.recommends;
-        }
+        var def = q.defer();
+
+        UserModel
+            .findUserById(mongoose.Types.ObjectId(userId))
+            .then(function(user) {
+                def.resolve(user.recommends);
+            }, function(err) {
+                console.log("Error finding recommends for user: %j", err);
+                def.reject();
+            });
+
+        return def.promise;
     }
 
     function createRecommend(recommendeeId, recommend) {
-        var recommendee = UserModel.findUserById(recommendeeId);
-        var recommender = UserModel.findUserById(recommend.recommenderId);
-        recommend.recommenderUsername = recommender.username;
-        recommend._id = (new Date()).getTime();
-        recommendee.recommends.push(recommend);
-        return recommend;
+        var def = q.defer();
+
+        UserModel
+            .findUserById(mongoose.Types.ObjectId(recommendeeId))
+            .then(function(user) {
+                user.recommends.push(recommend);
+                user.save();
+                deferred.resolve(user.recommends);
+            }, function(err) {
+                console.log("Error creating recommend: %j", err);
+                deferred.reject();
+            })
+
+        return def.promise;
     }
 
     function deleteRecommend(userId, recommendId) {
-        var recommendee = UserModel.findUserById(userId);
-        var recos = recommendee.recos;
-        for (var i in recos) {
-            if(recos[i]) {
-                var reco = recos[i];
-                if(reco._id === recommendId) {
-                    var index = recos.indexOf(reco);
-                    recos.splice(index, 1);
-                }
-            }
-        }
+        var def = q.defer();
+
+        UserModel
+            .findUserById(userId)
+            .then(function(user) {
+                user.recommends.pull({_id: recommendId});
+                user.save();
+                deferred.resolve(user.recommends);
+            }, function(err) {
+                console.log("Error deleting recommend: %j", err);
+                deferred.reject();
+            });
+
+        return def.promise;
     }
 };

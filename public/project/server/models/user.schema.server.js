@@ -1,5 +1,6 @@
 module.exports = function(mongoose) {
     var RecommendSchema = require("./recommend.schema.server.js")(mongoose);
+    
     var UserSchema = mongoose.Schema({
         username: {type: String, unique: true},
         password: String,
