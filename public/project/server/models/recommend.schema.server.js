@@ -7,6 +7,6 @@ module.exports = function(mongoose) {
 
     }, {collection: 'project-recommendations'});
 
-    return FormSchema;
+    return RecommendSchema;
 
 };

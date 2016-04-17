@@ -7,7 +7,7 @@ module.exports = function(mongoose) {
         firstName: String,
         lastName: String,
         email: String,
-        roles: [String] // recruiter || user
+        roles: [String],
         region: String,
         flair1: String,
         flair2: String,
