@@ -16,7 +16,7 @@
 
         function login() {
             UserService
-                .findUserByCredentials(model.username, model.password)
+                .login(model.username, model.password)
                 .then(function(resp) {
                     if (resp.data) {
                         UserService.setCurrentUser(resp.data);

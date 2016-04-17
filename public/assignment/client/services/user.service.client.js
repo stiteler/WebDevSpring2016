@@ -32,7 +32,7 @@
             }, function(bad) {
                 console.log("Unable to logout.");
                 console.log(bad);
-            })
+            });
         }
 
         function setCurrentUser(user) {

@@ -9,9 +9,12 @@
         var users = findAllUsers();
 
         var api = {
-            findUserByCredentials: findUserByCredentials,
+            login: login,
+            logout: logout,
+            register: register,
+            // findUserByCredentials: findUserByCredentials,
             findAllUsers: findAllUsers,
-            createUser: createUser,
+            // createUser: createUser,
             deleteUserById: deleteUserById,
             updateUser: updateUser,
             getUserByUserId: getUserByUserId,
@@ -41,6 +44,36 @@
             return $rootScope.user;
         }
 
+        function getUserSession() {
+            return $http({
+                method: 'GET',
+                url: '/api/assignment/loggedin',
+            });
+        }
+
+        function login(username, password) {
+            return $http({
+                url: '/api/project/login',
+                method: "POST",
+                data: {'username': username, 'password': password}
+             });
+        }
+
+        function logout() {
+            $http({
+                method: 'POST',
+                url: '/api/assignment/logout'
+            })
+            .then(function(ok) {
+                console.log("LOGOUT OK");
+                $rootScope.user = null;
+                $location.path("/home");
+            }, function(bad) {
+                console.log("Unable to logout.");
+                console.log(bad);
+            });
+        }
+
         function findUserByUsername(username) {
             return $http({
                 method: 'GET',
@@ -51,13 +84,13 @@
             });
         }
 
-        function findUserByCredentials(username, password) {
-            return $http({
-                url: '/api/project/user',
-                method: "GET",
-                params: {'username': username, 'password': password}
-             });
-        }
+        // function findUserByCredentials(username, password) {
+        //     return $http({
+        //         url: '/api/project/user',
+        //         method: "GET",
+        //         params: {'username': username, 'password': password}
+        //      });
+        // }
 
         function findAllUsers() {
             return $http.get('/api/project/user');
@@ -67,10 +100,19 @@
             return $http.get('/api/project/user/' + userId);
         }
 
+        // decprecated with register
         function createUser(user) {
             return $http({
                 method: 'POST',
                 url: '/api/project/user',
+                data: user
+            });
+        }
+
+        function register(user) {
+            return $http({
+                method: 'POST',
+                url: '/api/assignment/register',
                 data: user
             });
         }

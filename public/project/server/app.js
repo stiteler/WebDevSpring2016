@@ -8,7 +8,7 @@ module.exports = function(app, db, mongoose) {
 
     // models
     var UserModel = require('./models/user.model.server.js')(User);
-    var RecommendModel = require('./models/recommend.model.server.js')(app, UserModel);
+    var RecommendModel = require('./models/recommend.model.server.js')(UserModel, mongoose);
 
     // services
     var SecurityService = require("./services/security.service.server.js")(app, UserModel);

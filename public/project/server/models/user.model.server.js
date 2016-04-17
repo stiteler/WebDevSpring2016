@@ -1,4 +1,4 @@
-module.exports = function(app, User) {
+module.exports = function(User) {
     var bcrypt = require("bcrypt-nodejs");
     var q = require("q");
     

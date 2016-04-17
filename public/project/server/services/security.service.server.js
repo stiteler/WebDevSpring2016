@@ -62,6 +62,7 @@ module.exports = function(app, UserModel) {
     }
 
 	function localStrategy(username, password, done) {
+        console.log("Local strategy project side.");
         UserModel
             .findUserByUsername(username)
             .then(

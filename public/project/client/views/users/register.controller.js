@@ -26,7 +26,7 @@
                 lastName: ''
             };
 
-            UserService.createUser(newUser)
+            UserService.register(newUser)
                 .then(function (created) {
                     if (created.data) {
                         UserService.setCurrentUser(created.data);
