@@ -2,3 +2,4 @@ node_modules
 server.sh
 *.idea
 *.swp
+run.sh
