@@ -25,8 +25,9 @@
         init();
 
         function logout() {
-            UserService.setCurrentUser(null);
-            $location.path('/home')
+            UserService.logout();
+            // UserService.setCurrentUser(null);
+            // $location.path('/home')
         }
 
         function isAdmin() {
