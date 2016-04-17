@@ -92,7 +92,6 @@ module.exports = function(app, UserModel) {
         var newUser = req.body;
         newUser.roles = ['student'];
 
-
         UserModel
             .findUserByUsername(newUser.username)
             .then(
@@ -199,7 +198,7 @@ module.exports = function(app, UserModel) {
                 res.json(users);
             }, function(err) {
                 res.status(400).json({error: "Unable to find users"});
-            })
+            });
     }
 
     function getUserById(req, res) {

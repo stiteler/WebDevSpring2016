@@ -5,7 +5,7 @@ module.exports = function(mongoose) {
         recommenderUsername: String,
         blurb: String,
 
-    }, {collection: 'assignment-form'});
+    }, {collection: 'project-recommendations'});
 
     return FormSchema;
 

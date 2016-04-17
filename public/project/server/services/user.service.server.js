@@ -1,6 +1,6 @@
 module.exports = function(app, UserModel) {
-    app.post('/api/project/user', createUser);
-    app.get('/api/project/user', getUser);
+    // app.post('/api/project/user', createUser); // repl. by register?
+    app.get('/api/project/user', getAllUsers);
     app.get('/api/project/user/:id', getUserById);
     app.put('/api/project/user/:id', updateUser);
     app.delete('/api/project/user/:id', deleteUser);
@@ -8,58 +8,72 @@ module.exports = function(app, UserModel) {
     function updateUser(req, res) {
         var uid = req.params.id;
         var updates = req.body;
-        updates._id = uid;
-        res.json(UserModel.updateUser(updates));
+
+        UserModel.updateUser(uid, updates)
+            .then(function(success) {
+                res.json(success);
+            }, function(err) {
+                console.log("updateUser service error: %j", err);
+                res.status(400).json({"error": "Unable to update user at this time"});
+            });
     }
 
     function createUser(req, res) {
         var newUser = req.body;
-        res.json(UserModel.createUser(newUser));
-    }
-
-    function getUser(req, res) {
-        console.log('in getUser');
-        console.log(req.params);
-        console.log(req.query);
-        console.log(req.body);
-        // need to switch on context
-        if (req.query.username && req.query.password) {
-            return login(req, res);
-        } else if (req.query.username) {
-            return getUserByUsername(req, res);
-        } else {
-            return getAllUsers(req, res);
-        }
-    }
-
-    function login(req, res) {
-        var username = req.query.username;
-        var password = req.query.password;
-        user = UserModel.findUserByCredentials(username, password);
-        if (user) {
-            res.json(user);
-        } else {
-            res.status(403).json({error: "Invalid username/password combination."});
-        }
+        UserModel
+            .createUser(newUser)
+            .then(function(user) {
+                res.json(user);
+            }, function(err) {
+                console.log("createUser service error: %j", err);
+                res.status(400).json({"error": "Unable to create user at this time"});
+            });
     }
 
     function getUserByUsername(req, res) {
         var username = req.query.username;
-        res.json(UserModel.findUserByUsername(username));
+        UserModel
+            .findUserByUsername(username)
+            .then(function(user) {
+                res.json(user);
+            }, function(err) {
+                console.log("error fetching user by username: %j", err);
+                res.statuts(400).json({error: "Unable to find user with that username"});
+            });
     }
 
     function getAllUsers(req, res) {
-        res.json(UserModel.findAllUsers());
+        UserModel
+            .findAllUsers()
+            .then(function(users) {
+                res.json(users);
+            }, function(err) {
+                res.status(400).json({error: "Unable to find users"});
+            });
     }
 
     function getUserById(req, res) {
         var uid = req.params.id;
-        res.json(UserModel.findUserById(uid));
-
+        UserModel
+            .findUserById(uid)
+            .then(function(user) {
+                res.json(user);
+            }, function(err) {
+                console.log("Error getting User By Id: %j", err);
+                res.status(400).json("Unable to find User");
+            });
     }
 
     function deleteUser(req, res) {
         var uid = req.params.id;
-        res.json(UserModel.deleteUserById(uid));
+
+        UserModel
+            .deleteUserById(uid)
+            .then(function(success) {
+                res.send(200);
+            }, function(err) {
+                console.log("Error deleting user by Id");
+                res.status(400).send("Unable to delete user.");
+            });
     }
 }
