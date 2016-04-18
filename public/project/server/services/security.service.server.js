@@ -1,6 +1,7 @@
 // var passport = require('passport');
 var LocalStrategy = require('passport-local').Strategy;
 var bcrypt = require("bcrypt-nodejs");
+var gravatar = require('gravatar');
 
 module.exports = function(app, UserModel, AssignmentUserModel, passport) {
     // app.post('/api/project/login', passport.authenticate('local'), login);
@@ -34,6 +35,8 @@ module.exports = function(app, UserModel, AssignmentUserModel, passport) {
     function register (req, res) {
         var newUser = req.body;
         newUser.roles = ['user'];
+        newUser.imageUrl = _gravatarUrl(newUser.email);
+        console.log(newUser.imageUrl);
 
         UserModel
             .findUserByUsername(newUser.username)
@@ -76,6 +79,13 @@ module.exports = function(app, UserModel, AssignmentUserModel, passport) {
                 }
             );
     }
+
+    function _gravatarUrl(email) {
+        var imageUrl = gravatar.url(email, {size: '300', default: 'retro'});
+        console.log("Generated gravatar image: " + imageUrl);
+        return imageUrl;
+    }
+
 
     function loggedin(req, res) {
         if(req.isAuthenticated()) {

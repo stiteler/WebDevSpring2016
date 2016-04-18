@@ -11,13 +11,15 @@
         model.save = save;
 
         function init() {
-            if (UserService.isLoggedIn()) {
-                    model.profile = UserService.getCurrentUser();
-                } else {
-                    $location.path('/home');
-                }
-
+            model.profile = UserService.getCurrentUser();
         }
+        //     if (UserService.isLoggedIn()) {
+        //             model.profile = UserService.getCurrentUser();
+        //         } else {
+        //             $location.path('/home');
+        //         }
+
+        // }
         init();
 
         function save() {

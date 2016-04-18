@@ -35,13 +35,17 @@
 
         function isLoggedIn() {
             if($rootScope.user) {
+                console.log("USER SERVICE LOGGED IN");
                 return true;
             } else {
+                console.log("USER SERVICE NOT LOGGED IN");
                 return false;
             }
         }
 
         function setCurrentUser(user) {
+            console.log("SET CURRENT USER: ");
+            console.log(user);
             $rootScope.user = user;
         }
 

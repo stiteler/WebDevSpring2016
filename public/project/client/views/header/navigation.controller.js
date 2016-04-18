@@ -14,13 +14,14 @@
         model.isActive = isActive;
         model.user = UserService.getCurrentUser;
 
-        function init() {
-            if (UserService.isLoggedIn()) {
-                model.user = UserService.getCurrentUser();
-                console.log(model.user);
-            }
-        }
-        init();
+        // function init() {
+        //     // model.user = UserService.getCurrentUser();
+        //     // console.log("MODEL USER IN HEADER: " + model.user.username);
+        //     // if (UserService.isLoggedIn()) {
+        //     //     model.user = UserService.getCurrentUser();
+        //     // }
+        // }
+        // init();
 
         function logout() {
             UserService.logout();

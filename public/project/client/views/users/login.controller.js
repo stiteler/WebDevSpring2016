@@ -19,7 +19,8 @@
                 .login(model.username, model.password)
                 .then(function(resp) {
                     if (resp.data) {
-                        UserService.setCurrentUser(resp.data);
+                        // done in resolve.
+                        // UserService.setCurrentUser(resp.data);
                         $location.path('/profile');
                     }
                 },

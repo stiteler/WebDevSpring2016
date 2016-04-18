@@ -31,7 +31,13 @@
                     if (created.data) {
                         console.log("NEW USER AFTER REGISTER:");
                         console.log(created.data);
-                        UserService.setCurrentUser(created.data);
+                        // UserService.setCurrentUser(created.data);
+                        UserService
+                            .login(newUser.username, newUser.password)
+                            .then(function() {
+                                UserService.setCurrentUser(created.data);
+                                $location.url("/profile");
+                            });
                         $location.path('/profile');
                     }
                 }, function(err) {

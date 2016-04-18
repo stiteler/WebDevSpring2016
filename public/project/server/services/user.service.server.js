@@ -1,5 +1,6 @@
 module.exports = function(app, UserModel, EventModel) {
     var auth = authorized;
+    var gravatar = require('gravatar');
 
     // app.post('/api/project/user', createUser); // repl. by register?
     app.get('/api/project/user', auth, getUser);
@@ -65,6 +66,10 @@ module.exports = function(app, UserModel, EventModel) {
 
     function createUser(req, res) {
         var newUser = req.body;
+        console.log("IN CREATE USER");
+        newUser.imageUrl = _gravatarUrl(newUser.email);
+        console.log(newUser.imageUrl);
+
         UserModel
             .createUser(newUser)
             .then(function(user) {
@@ -73,6 +78,12 @@ module.exports = function(app, UserModel, EventModel) {
                 console.log("createUser service error: %j", err);
                 res.status(400).json({"error": "Unable to create user at this time"});
             });
+    }
+
+    function _gravatarUrl(email) {
+        var imageUrl = gravatar.url(email);
+        console.log("Generated gravatar image: " + imageUrl);
+        return imageUrl;
     }
 
     function getUserByUsername(req, res) {
