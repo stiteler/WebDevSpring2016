@@ -147,7 +147,7 @@
         }
 
         function getRecosForFlair(flair) {
-            if(model.recos[flair]) {
+            if(model.recos && model.recos.hasOwnProperty(flair)) {
                 return model.recos[flair];
             } else {
                 return [];

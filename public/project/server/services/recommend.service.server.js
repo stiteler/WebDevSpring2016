@@ -30,7 +30,6 @@ module.exports = function(app, UserModel, RecommendModel, EventModel) {
                 }
             }
         }
-        console.log("DONE MAPPING: %j", recoMap);
 
         // when done, render each list of recos:
         for (var key in recoMap) {
@@ -38,7 +37,6 @@ module.exports = function(app, UserModel, RecommendModel, EventModel) {
                 recoMap[key] = _renderRecos(recoMap[key]);
             }
         }
-        console.log("DONE RENDERING: %j", recoMap);
 
         return recoMap;
     }
@@ -58,7 +56,6 @@ module.exports = function(app, UserModel, RecommendModel, EventModel) {
                 }
 
                 rendered.push(render);
-                console.log("JUST PUSHED: %j", render);
             }
             return rendered;
         }
@@ -77,7 +74,6 @@ module.exports = function(app, UserModel, RecommendModel, EventModel) {
                 }
 
                 rendered.push(render);
-                console.log("JUST PUSHED: %j", render);
             }
         }
         var remaining = recos.length - 5;
@@ -96,7 +92,7 @@ module.exports = function(app, UserModel, RecommendModel, EventModel) {
                     timestamp: Date.now(),
                     userA: newReco.recommenderId,
                     userB: recommendeeId,
-                    event: 'recommend',
+                    action: 'recommend',
                     context: newReco.recommendation
                 };
                 EventModel.addEvent(e);

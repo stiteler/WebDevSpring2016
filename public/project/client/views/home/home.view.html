@@ -1,35 +1,39 @@
 <div class="container">
+  <div ng-if="model.user">
+    <h1>Recent Events</h1>
 
+    <div ng-if="model.errorMessage" class="alert alert-dismissible alert-warning">
+        <button type="button" ng-click="model.clearError()" class="close" data-dismiss="alert">×</button>
+        <strong>{{model.errorMessage}}</strong>
+      </div>
 
-  <div ng-repeat="event in model.events" class="jumbotron">
-  {{event.timestamp}}
+    <div ng-repeat="event in model.events">
+      <div ng-switch="event.action" class="container-fluid well well-sm">
+        <div ng-switch-when="connect">
+          <h1>
+            <a href="#/profile/{{event.userA}}">@{{event.userA}}</a>
+            connected with 
+            <a href="#/profile/{{event.userB}}">@{{event.userB}}</a>
+          </h1>
+        </div>
+        <div ng-switch-when="recommend" class="container-fluid well well-sm">
+          <h1>
+            <a href="#/profile/{{event.userA}}">@{{event.userA}}</a>
+            recommended 
+            <a href="#/profile/{{event.userB}}">@{{event.userB}}</a>
+            for their
+            <a href="javascript:void(0)">{{event.context}}</a> flair.
+          </h1>
+        </div>
+    </div>
+  </div>
 
-      <!-- <h1>Hello, TA!</h1>
-      <p>
-          If you're reading this live it's in the prototype stage.
-
-          Some login credentials are: 
-          <p><code>'alice:alice', 'bob:bob', 'c:c'</code></p>
-
-        </p>
-        <h2>Prototype Features:</h2>
-        <p>
-
-          <ul>
-            <li><h3>Search Filtering by Flair</h3></li>
-            <li><h3>Overhauled look/feel of Recommendations</h3></li>
-            <li><h3>Profile is now editable! (try editing media here!)</h3></li>
-          </ul>
-        </p>
-        <h2>Major Features Todo:</h2>
-        <p>
-
-          <ul>
-            <li><h3>Implement Connections between Users</h3></li>
-            <li><h3>Enhanced Search for Recruiter Role</h3></li>
-            <li><h3>User Feed (Shown On this home page)</h3></li>
-          </ul>
-        </p> -->
-
+  <div ng-if="!model.user" class="jumbotron">
+    <h1>Welcome</h1>
+     <p>Create your profile today to start dropping some flair.  Flairdrop
+     is a miniature social network that lets you quickly connect with others who share your flair.
+     </p>
+    <p><a href="#/register" class="btn btn-primary btn-lg">Register</a>
+    <a href="#/login" class="btn btn-primary btn-lg">Login</a></p>
   </div>
 </div>

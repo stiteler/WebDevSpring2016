@@ -114,7 +114,7 @@ module.exports = function(app, UserModel, EventModel) {
                     timestamp: Date.now(),
                     userA: ida,
                     userB: idb,
-                    event: 'connect',
+                    action: 'connect',
                 };
                 EventModel.addEvent(e);
 
