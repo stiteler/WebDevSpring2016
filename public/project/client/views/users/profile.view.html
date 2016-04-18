@@ -26,8 +26,10 @@
           <p ngIf="model.profile.industry">Industry: {{model.profile.industry}} </p>
           <p ngIf="model.profile.organization">Organization: {{model.profile.organization}}</p>
           <p ngIf="model.profile.region">Region: {{model.profile.region}}</p>
-          <a ng-show="!model.connected" ng-click="model.connect()" class="btn btn-raised btn-info btn-block">Connect</a>
-          <a ng-show="model.connected" ng-click="model.connect()" class="btn btn-raised btn-primary btn-block">Recommend</a>
+          <div ng-If="!model.isSelf()">
+            <a ng-show="!model.connected" ng-click="model.connect()" class="btn btn-raised btn-info btn-block">Connect</a>
+            <a ng-show="model.connected" ng-click="model.recommend()" class="btn btn-raised btn-primary btn-block">Recommend</a>
+          </div>
         </div>
       </div>
     </div>

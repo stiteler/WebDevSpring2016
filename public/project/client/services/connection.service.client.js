@@ -15,21 +15,26 @@
         return api;
 
         function isConnected(a, b) {
-            $http({
+            return $http({
                 method: 'GET',
-                url: '/api/project/user/'+a+'/connect'+b,
-            })
-            .then(function(resp) {
-                return resp.data.connected;
+                url: '/api/project/user/'+a+'/connect/'+b,
             });
+            // .then(function(resp) {
+            //     console.log("RESPONSE FROM CONNECT TEST:", resp.data);
+            //     if(resp.data.connected) {
+            //         return true
+            //     } else {
+            //         return false;
+            //     }
+            // });
         }
 
         function deleteConnection(a, b) {
-            return $http.delete('/api/project/user/'+a+'/connect'+b);
+            return $http.delete('/api/project/user/'+a+'/connect/'+b);
         }
 
         function createConnection(a, b) {
-            return $http.post('/api/project/user/'+a+'/connect'+b);
+            return $http.post('/api/project/user/'+a+'/connect/'+b);
         }
 
         function getConnections(userId) {

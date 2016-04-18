@@ -14,6 +14,7 @@
         model.isSelf = isSelf;
         model.visitRecommender = visitRecommender;
         model.renderProfileImage = renderProfileImage;
+        model.connected = false;
 
         function init() {
             // if routeParams indicate a certain username:
@@ -23,6 +24,7 @@
                 .findUserByUsername(username)
                 .then(function(resp) {
                     model.profile = resp.data;
+                    testConnected();
                     _updateModels();
 
                 }, function(err) {
@@ -53,7 +55,7 @@
             return model.imageUrl;
         }
 
-        function isConnected() {
+        function testConnected() {
             var uid = UserService.getCurrentUser()._id;
             var pid = model.profile._id;
 
@@ -62,11 +64,14 @@
                 return false;
             }
 
-            model.connected = ConnectionService
-                .isConnected(uid, pid);
+            ConnectionService
+                .isConnected(uid, pid)
+                .then(function(response) {
+                    model.connected = response.data.connected;
+                });
 
             console.log("Is Connected?");
-            console.log(isConnected);
+            console.log(model.connected);
         }
 
         // just as a PoC this needs to use the ConnectionService

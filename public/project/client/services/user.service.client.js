@@ -35,10 +35,10 @@
 
         function isLoggedIn() {
             if($rootScope.user) {
-                console.log("USER SERVICE LOGGED IN");
+                // console.log("USER SERVICE LOGGED IN");
                 return true;
             } else {
-                console.log("USER SERVICE NOT LOGGED IN");
+                // console.log("USER SERVICE NOT LOGGED IN");
                 return false;
             }
         }
