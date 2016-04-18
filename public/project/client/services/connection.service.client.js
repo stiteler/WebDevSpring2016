@@ -19,14 +19,6 @@
                 method: 'GET',
                 url: '/api/project/user/'+a+'/connect/'+b,
             });
-            // .then(function(resp) {
-            //     console.log("RESPONSE FROM CONNECT TEST:", resp.data);
-            //     if(resp.data.connected) {
-            //         return true
-            //     } else {
-            //         return false;
-            //     }
-            // });
         }
 
         function deleteConnection(a, b) {

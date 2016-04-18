@@ -4,7 +4,6 @@ module.exports = function(mongoose) {
         recommendation: String,
         recommenderUsername: String,
         blurb: String,
-
     }, {collection: 'project-recommendations'});
 
     return RecommendSchema;

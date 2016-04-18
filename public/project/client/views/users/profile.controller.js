@@ -11,10 +11,13 @@
 
         model.getRecosForFlair = getRecosForFlair;
         model.connect = connect;
+        model.removeConnection = removeConnection;
         model.isSelf = isSelf;
         model.visitRecommender = visitRecommender;
         model.renderProfileImage = renderProfileImage;
         model.connected = false;
+        model.recommend = recommend;
+
 
         function init() {
             // if routeParams indicate a certain username:
@@ -82,7 +85,7 @@
             ConnectionService
                 .createConnection(uid, pid)
                 .then(function(resp) {
-                    console.log("Connection sucessful.");
+                    console.log("CONNECT OK");
                     model.connected = true;
                     _updateModels();
                 }, function(err) {
@@ -92,21 +95,74 @@
 
         }
 
+        function removeConnection() {
+            var uid = UserService.getCurrentUser()._id;
+            var pid = model.profile._id;
+
+            ConnectionService
+                .deleteConnection(uid, pid)
+                .then(function(resp) {
+                    console.log("DISCONNECT OK");
+                    model.connected = false;
+                    _updateModels();
+                }, function(err) {
+                    model.errorMessage = err.data;
+                    console.log("Unable to connect");
+                });
+        }
+
+        function recommend(reco) {
+            var user = UserService.getCurrentUser();
+            var pid = model.profile._id;
+
+            var newReco = {
+                recommenderId: user._id,
+                recommendation: reco,
+                recommenderUsername: user.username,
+            };
+
+            RecommendService
+                .createRecommend(pid, newReco)
+                .then(function(success) {
+                    console.log("RECOMEND OK.");
+                    _updateModels();
+                });
+        }
+
+        // function removeRecommend(reco) {
+        //     var uid = UserService.getCurrentUser()._id;
+
+        //     RecommendService
+        //         .deleteRecommendation(userId, recoId)
+        // }
+        // }
+
         function visitRecommender(reco) {
-            $location.path("/profile/"+reco.recommenderUsername);
+            console.log("IN VISIT RECO:");
+            console.log(reco);
+
+            if(reco.link) {
+                $location.path("/profile/"+reco.link);
+            }
         }
 
         function getRecosForFlair(flair) {
-            var these = [];
-            for (var i in model.recos) {
-                if(model.recos[i]) {
-                    var obj = model.recos[i];
-                    if(model.recos[i].recommendation == flair) {
-                        these.push(obj);
-                    }
-                }
+            if(model.recos[flair]) {
+                return model.recos[flair];
+            } else {
+                return [];
             }
-            return these;
+            // var these = [];
+            // for (var i in model.recos) {
+            //     if(model.recos[i]) {
+            //         var obj = model.recos[i];
+            //         if(model.recos[i].recommendation == flair) {
+            //             these.push(obj);
+            //         }
+            //     }
+            // }
+            // return these;
+            // return _renderRecos(these);
         }
 
         function _updateModels() {

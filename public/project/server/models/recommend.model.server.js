@@ -29,9 +29,25 @@ module.exports = function(UserModel, mongoose) {
         UserModel
             .findUserById(mongoose.Types.ObjectId(recommendeeId))
             .then(function(user) {
+                // users shouldn't recommend themselves and
+                // recommenderId::recommend pairs can't be duplicated.
+                if(user._id == recommend.recommenderId) {
+                    def.reject("Can't recommend Self.");
+                }
+
+                for(var i in user.recommends) {
+                    var reco = user.recommends[i];
+                    if(reco.recommenderId == recommend.recommenderId &&
+                         reco.recommend == recommend.recommend) {
+                        def.reject("Duplicate Recommendation.");
+                        return;
+                    }
+                }
+
                 user.recommends.push(recommend);
                 user.save();
                 deferred.resolve(user.recommends);
+
             }, function(err) {
                 console.log("Error creating recommend: %j", err);
                 deferred.reject();

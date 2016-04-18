@@ -28,7 +28,7 @@
           <p ngIf="model.profile.region">Region: {{model.profile.region}}</p>
           <div ng-If="!model.isSelf()">
             <a ng-show="!model.connected" ng-click="model.connect()" class="btn btn-raised btn-info btn-block">Connect</a>
-            <a ng-show="model.connected" ng-click="model.recommend()" class="btn btn-raised btn-primary btn-block">Recommend</a>
+            <a ng-show="model.connected" ng-click="model.removeConnection()" class="btn btn-raised btn-primary btn-block">Remove Connection</a>
           </div>
         </div>
       </div>
@@ -45,19 +45,23 @@
         </div>
         <div class="panel-body">
 
-          <h2><a href="#">{{model.profile.flair1}}</a></h2>
+          <h2><a href="#">#{{model.profile.flair1}}</a></h2>
 
           <div class="container-fluid">
 
-            <div class="col-md-3" 
-                  ng-repeat="reco in model.getRecosForFlair(model.profile.flair1)">
-              <a ng-click="model.visitRecommender(reco)" class="btn btn-raised btn-info">
-              "{{reco.blurb}}" - {{reco.recommenderUsername}}</a>
+            <div>
+              <a ng-If="!model.isSelf()" 
+                 ng-click="model.recommend(model.profile.flair1)"
+                 class="btn btn-primary btn-fab btn-fab-mini" 
+                 href="javascript:void(0)">
+                 <i class="material-icons">thumb_up</i>
+              </a>
+              <a ng-click="model.visitRecommender(reco)" 
+                 class="btn btn-raised btn-info" 
+                 href="javascript:void(0)"
+                 ng-repeat="reco in model.getRecosForFlair(model.profile.flair1)">{{reco.recommenderUsername}}</a>
             </div>
-
           </div>
-
-
         </div>
       </div>
     </div>
@@ -72,14 +76,20 @@
         </div>
         <div class="panel-body container-fluid">
           
-          <h2><a href="#">{{model.profile.flair2}}</a></h2>
+          <h2><a href="#">#{{model.profile.flair2}}</a></h2>
 
           <div class="container-fluid">
-
-            <div class="col-md-3" 
-                  ng-repeat="reco in model.getRecosForFlair(model.profile.flair2)">
-              <a ng-click="model.visitRecommender(reco)" class="btn btn-raised btn-info">
-              "{{reco.blurb}}" - {{reco.recommenderUsername}}</a>
+            <div>
+              <a ng-If="!model.isSelf()" 
+                ng-click="model.recommend(model.profile.flair2)"
+                class="btn btn-primary btn-fab btn-fab-mini" 
+                href="javascript:void(0)">
+                 <i class="material-icons">thumb_up</i>
+              </a>
+              <a ng-click="model.visitRecommender(reco)" 
+                class="btn btn-raised btn-info" 
+                ng-repeat="reco in model.getRecosForFlair(model.profile.flair2)"
+                href="javascript:void(0)">{{reco.recommenderUsername}}</a>
             </div>
 
           </div>
@@ -99,14 +109,21 @@
         </div>
         <div class="panel-body">
 
-          <h2><a href="#">{{model.profile.flair3}}</a></h2>
+          <h2><a href="#">#{{model.profile.flair3}}</a></h2>
 
           <div class="container-fluid">
 
-            <div class="col-md-3" 
-                  ng-repeat="reco in model.getRecosForFlair(model.profile.flair3)">
-              <a ng-click="model.visitRecommender(reco)" class="btn btn-raised btn-info">
-              "{{reco.blurb}}" - {{reco.recommenderUsername}}</a>
+            <div>
+              <a ng-If="!model.isSelf()" 
+                ng-click="model.recommend(model.profile.flair3)"
+                href="javascript:void(0)"
+                class="btn btn-primary btn-fab btn-fab-mini">
+                 <i class="material-icons">thumb_up</i>
+              </a>
+              <a href="javascript:void(0)"
+                ng-click="model.visitRecommender(reco)" 
+                class="btn btn-raised btn-info" 
+                ng-repeat="reco in model.getRecosForFlair(model.profile.flair3)">{{reco.recommenderUsername}}</a>
             </div>
 
           </div>
