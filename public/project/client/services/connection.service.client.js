@@ -5,36 +5,37 @@
         .module('FlairdropApp')
         .factory('ConnectionService', ConnectionService);
 
-    function ConnectionService() {
+    function ConnectionService($http) {
         var conns = _getConnections();
 
         var api = {
-           createConnection: createConnection,
-           removeConnection: removeConnection,
+            isConnected: isConnected,
+            createConnection: createConnection,
+            deleteConnection: deleteConnection,
+            getConnections: getConnections,
         };
         return api;
 
-        function isConnected(from, to) {
-            // to be implemented later.
+        function isConnected(a, b) {
+            $http({
+                method: 'GET',
+                url: '/api/project/user/'+a+'/connect'+b,
+            })
+            .then(function(resp) {
+                return resp.data.connected;
+            });
         }
 
-        function removeConnectionById(cid) {
-            return;
+        function deleteConnection(a, b) {
+            return $http.delete('/api/project/user/'+a+'/connect'+b);
         }
 
-        function createConnection(from, to) {
-            var newConn = {
-                _id: (new Date()).getTime(),
-                from: from,
-                to: to
-            }
-            conns.push(newConn);
+        function createConnection(a, b) {
+            return $http.post('/api/project/user/'+a+'/connect'+b);
         }
 
-        function _getConnections() {
-            // for PoC only recommendations for alice.
-            // recommendations are also unique in recommender::recommendee::flair
-            return [];
+        function getConnections(userId) {
+            return $http.get('/api/project/user/'+userId+'/connect');
         }
     }
 }());
