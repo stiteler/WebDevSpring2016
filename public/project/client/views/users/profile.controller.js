@@ -5,7 +5,7 @@
         .module('FlairdropApp')
         .controller('ProfileController', ProfileController);
 
-    function ProfileController($sce, $rootScope, $routeParams, $location, RecommendService, UserService, EmbedlyService) {
+    function ProfileController($sce, $rootScope, $routeParams, $location, ConnectionService, RecommendService, UserService, EmbedlyService) {
         var model = this;
         var rs = RecommendService;
 
@@ -30,15 +30,9 @@
                 });
             }
             else if (UserService.isLoggedIn()) {
-                UserService
-                    .getUserSession()
-                    .then(function(response) {
-                        console.log("Response from get Session");
-                        console.log(response.data);
-                        model.profile = response.data;
-                        UserService.setCurrentUser(response.data);
-                        _updateModels();
-                    });
+                model.profile = UserService.getCurrentUser();
+                _updateModels();
+
                 } else {
                     $location.path('/home');
                 }
@@ -59,11 +53,38 @@
             return model.imageUrl;
         }
 
+        function isConnected() {
+            var uid = UserService.getCurrentUser()._id;
+            var pid = model.profile._id;
+
+            if(pid == uid) {
+                // looking at own profile: 
+                return false;
+            }
+
+            model.connected = ConnectionService
+                .isConnected(uid, pid);
+
+            console.log("Is Connected?");
+            console.log(isConnected);
+        }
+
         // just as a PoC this needs to use the ConnectionService
         function connect() {
-            // TODO: Impl through connect service.
-            $rootScope.connected = true;
-            _updateModels();
+            var uid = UserService.getCurrentUser()._id;
+            var pid = model.profile._id;
+
+            ConnectionService
+                .createConnection(uid, pid)
+                .then(function(resp) {
+                    console.log("Connection sucessful.");
+                    model.connected = true;
+                    _updateModels();
+                }, function(err) {
+                    model.errorMessage = err.data;
+                    console.log("Unable to connect");
+                });
+
         }
 
         function visitRecommender(reco) {
@@ -93,8 +114,7 @@
                 });
 
             // TODO
-            model.connected = $rootScope.connected ? true : false;
-
+            // model.connected = $rootScope.connected ? true : false;
             _updateMedia();
         }
 

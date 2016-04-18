@@ -11,6 +11,7 @@ module.exports = function(mongoose) {
         region: String,
         flair1: String,
         flair2: String,
+        flair3: String,
         media: String,
         beacon: String,
         industry: String,
@@ -23,47 +24,3 @@ module.exports = function(mongoose) {
 
     return ProjectUserSchema;
 };
-
-// {  
-//       "_id":123,
-//       "firstName":"Alice",
-//       "lastName":"Wunderland",
-//       "username":"alice",
-//       "password":"alice",
-//       "roles":[  
-//          "user"
-//       ],
-//       "email":"alice@wonderland.com",
-//       "region":"wonderland",
-//       "flair1":"magic",
-//       "flair2":"riddles",
-//       "flair3":"walking",
-//       "media":"https://www.youtube.com/watch?v=WovwuOFBUuY",
-//       "beacon":"networking",
-//       "industry":"Entertainment",
-//       "organization":"Yellow Brick Road, Inc.",
-//       "imageUrl":"http://www.thewrap.com/wp-content/uploads/2013/11/JOHNNY-DEPP-ALICE-IN-WONDERLAND-6181.jpg",
-//       "recommends": [
-//          {
-//             "recommenderId":120,
-//             "recommendation": "magic",
-//             "recommenderUsername": "c",
-//             "blurb": "She's great at magic!",
-//             "_id": 123
-//          },
-//          {
-//             "recommenderId":124,
-//             "recommendation": "walking",
-//             "recommenderUsername": "don",
-//             "blurb": "follows yellow roads",
-//             "_id": 126
-//          },
-//          {
-//             "recommenderId":125,
-//             "recommendation": "magic",
-//             "recommenderUsername": "bob",
-//             "blurb": "brilliant patronus",
-//             "_id": 129
-//          }
-//       ],
-//    },

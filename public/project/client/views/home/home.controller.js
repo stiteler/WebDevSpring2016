@@ -3,16 +3,11 @@
 
     angular
         .module('FlairdropApp')
-        .controller('ProfileController', ProfileController);
+        .controller('HomeController', HomeController);
 
-    function ProfileController($scope, $http) {
+    function HomeController(EventService) {
         var vm = this;
 
-        function init() {
-            vm.$scope = $scope;
-            vm.$http = $http;
-        }
-        init();
 
     }
 }());
