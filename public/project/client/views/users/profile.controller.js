@@ -16,17 +16,12 @@
         model.renderProfileImage = renderProfileImage;
 
         function init() {
-            // model.sessionUser = $rootScope.user;
-            // just for PoC I'm setting this to be Alice.
-
             // if routeParams indicate a certain username:
             var username = $routeParams.username;
             if(username) {
                 UserService
                 .findUserByUsername(username)
                 .then(function(resp) {
-                    console.log("response from prof. controller lookup");
-                    console.log(resp.data);
                     model.profile = resp.data;
                     _updateModels();
 
@@ -35,8 +30,15 @@
                 });
             }
             else if (UserService.isLoggedIn()) {
-                    model.profile = UserService.getCurrentUser();
-                    _updateModels();
+                UserService
+                    .getUserSession()
+                    .then(function(response) {
+                        console.log("Response from get Session");
+                        console.log(response.data);
+                        model.profile = response.data;
+                        UserService.setCurrentUser(response.data);
+                        _updateModels();
+                    });
                 } else {
                     $location.path('/home');
                 }
@@ -45,13 +47,12 @@
         init();
         
         function isSelf() {
-            // if user is looking at own profile.
             var current = UserService.getCurrentUser();
             if (current && model.profile._id == current._id) {
                 return true;
             } else {
                 return false;
-            }
+            }                   
         }
 
         function renderProfileImage() {
@@ -86,6 +87,7 @@
             RecommendService
                 .getRecommendsForUserId(model.profile._id)
                 .then(function(resp) {
+                    console.log("Recommends for this profile:");
                     console.log(resp.data);
                     model.recos = resp.data;
                 });

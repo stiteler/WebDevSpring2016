@@ -77,7 +77,7 @@ var AssignmentUserSchema = require("./public/assignment/server/models/user.schem
 var AssignmentUser = mongoose.model("AssignmentUser", AssignmentUserSchema);
 var AssignmentUserModel = require('./public/assignment/server/models/user.model.server.js')(db, mongoose, AssignmentUser);
 
-var Serializer = require("./public/security/security.service.server.js")(app, ProjectUserModel, AssignmentUserModel, passport);
+var UserSerializer = require("./public/security/security.service.server.js")(app, ProjectUserModel, AssignmentUserModel, passport);
 
 // project
 require("./public/project/server/app.js")(app, db, mongoose, passport, ProjectUserModel);

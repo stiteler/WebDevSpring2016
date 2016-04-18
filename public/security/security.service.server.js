@@ -1,21 +1,20 @@
 module.exports = function(app, ProjectUserModel, AssignmentUserModel, passport) {
-    console.log("SERIALIZERS LOADED");
     passport.serializeUser(serializeUser);
     passport.deserializeUser(deserializeUser);
 
     function serializeUser(user, done) {
-        console.log("SERIALIZING USER: %j", user);
         done(null, user);
     }
 
     function deserializeUser(user, done) {
         // this has to be done for the sake of 
         // two app spaces.
-        console.log("DESERIALIZE:");
-        console.log("USER IS: %j", user);
-        console.log(user.hasOwnProperty('recommends'));
+
+        // could add a user type, if this was production code,
+        // but since this is already a hack, might as well
+        // just go with it and pick a property that is always
+        // on the project user, and not the assignment user.
         if(user.hasOwnProperty('recommends')) {
-            console.log("Deserializing a project user");
             ProjectUserModel
             .findUserById(user._id)
             .then(
@@ -27,8 +26,6 @@ module.exports = function(app, ProjectUserModel, AssignmentUserModel, passport) 
                 }
             );
         } else {
-            // this is a request for the assignment user.
-            console.log("Deserializing an assignment user");
             AssignmentUserModel
             .findUserById(user._id)
             .then(

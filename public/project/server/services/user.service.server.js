@@ -1,9 +1,44 @@
 module.exports = function(app, UserModel) {
+    var auth = authorized;
+
     // app.post('/api/project/user', createUser); // repl. by register?
-    app.get('/api/project/user', getAllUsers);
-    app.get('/api/project/user/:id', getUserById);
-    app.put('/api/project/user/:id', updateUser);
-    app.delete('/api/project/user/:id', deleteUser);
+    app.get('/api/project/user', auth, getUser);
+    app.get('/api/project/user/:id', auth, getUserById);
+    app.put('/api/project/user/:id', auth, updateUser);
+    app.delete('/api/project/user/:id', auth, deleteUser);
+
+    function authorized (req, res, next) {
+        if (!req.isAuthenticated()) {
+            res.send(401);
+        } else {
+            next();
+        }
+    };
+
+    function getUser(req, res) {
+        console.log('in getUser');
+        console.log(req.params);
+        console.log(req.query);
+        console.log(req.body);
+        // need to switch on context
+        if (req.query.username) {
+            return getUserByUsername(req, res);
+        } else {
+            return getAllUsers(req, res);
+        }
+    }
+
+    function getUserByUsername(req, res) {
+        var username = req.query.username;
+        UserModel
+        .findUserByUsername(username)
+        .then(function(user) {
+            res.json(user);
+        }, function(err) {
+            console.log("Error finding user by username: %j", err);
+            res.status(400).send("Can't find user with that username");
+        });
+    }
 
     function updateUser(req, res) {
         var uid = req.params.id;

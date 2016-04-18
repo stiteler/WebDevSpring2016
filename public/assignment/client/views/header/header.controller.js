@@ -5,15 +5,17 @@
         .module('FormBuilderApp')
         .controller('HeaderController', HeaderController);
 
-    function HeaderController($scope, $rootScope, UserService, UtilsService) {
-        $scope.isActive = UtilsService.isActive;
-        $scope.loggedIn = UtilsService.isLoggedIn;
-        $scope.isAdmin = UtilsService.isAdmin;
-        $scope.logout = logout;
+    function HeaderController($rootScope, UserService, UtilsService) {
+        var model = this;
+
+        model.isActive = UtilsService.isActive;
+        model.loggedIn = UtilsService.isLoggedIn;
+        model.isAdmin = UtilsService.isAdmin;
+        model.logout = logout;
 
         (function () {
             if (UtilsService.isLoggedIn()) {
-                $scope.user = $rootScope.user;
+                model.user = $rootScope.user;
             }
         })();
 

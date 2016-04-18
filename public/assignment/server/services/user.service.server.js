@@ -5,17 +5,8 @@ var bcrypt = require("bcrypt-nodejs");
 module.exports = function(app, UserModel, passport, ProjectUserModel) {
     var auth = authorized;
 
-    // CRUD endpoints, no longer needed with admin.
-    // app.post('/api/assignment/user', auth, createUser);
-    // app.get('/api/assignment/user', auth, getUser);
-    // app.get('/api/assignment/user/:id', auth, getUserById);
-    // app.put('/api/assignment/user/:id', auth, updateUser);
-    // app.delete('/api/assignment/user/:id', auth, deleteUser);
-
     // auth endpoints
-    // app.post('/api/assignment/login', passport.authenticate('assign'), login);
     app.post('/api/assignment/login', passport.authenticate('assignment'), login);
-
     app.post('/api/assignment/logout', logout);
     // app.post('/api/assignment/register', register);
     app.post('/api/assignment/register', register, passport.authenticate('assignment'), login);
@@ -43,63 +34,6 @@ module.exports = function(app, UserModel, passport, ProjectUserModel) {
             );
       }
     ));
-    // passport.serializeUser(serializeUser);
-    // passport.deserializeUser(deserializeUser);
-
-
-    // function localStrategy(username, password, done) {
-    //     UserModel
-    //         .findUserByUsername(username)
-    //         .then(
-    //             function(user) {
-    //                 // if the user exists, compare passwords with bcrypt.compareSync
-    //                 if(user && bcrypt.compareSync(password, user.password)) {
-    //                     return done(null, user);
-    //                 } else {
-    //                     return done(null, false);
-    //                 }
-    //             },
-    //             function(err) {
-    //                 if (err) { return done(err); }
-    //             }
-    //         );
-    // }
-
-    // function serializeUser(user, done) {
-    //     console.log("SERIALIZING USER");
-    //     done(null, user);
-    // }
-
-    // function deserializeUser(user, done) {
-    //     console.log("DESERIALIZING USER");
-    //     console.log("USER IS: %j", user);
-    //     if(user.region) {
-    //         console.log("DESERIALIZING PROJECT USER");
-    //         ProjectUserModel
-    //         .findUserById(user._id)
-    //         .then(
-    //             function(user){
-    //                 done(null, user);
-    //             },
-    //             function(err){
-    //                 done(err, null);
-    //             }
-    //         );
-    //     } else {
-    //         // this is a request for the assignment user.
-    //         console.log("DESERIALIZING a USER")
-    //         UserModel
-    //         .findUserById(user._id)
-    //         .then(
-    //             function(user){
-    //                 done(null, user);
-    //             },
-    //             function(err){
-    //                 done(err, null);
-    //             }
-    //         );
-    //     }
-    // }
 
     function authorized (req, res, next) {
         if (!req.isAuthenticated()) {

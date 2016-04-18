@@ -20,6 +20,7 @@
             getUserByUserId: getUserByUserId,
             setCurrentUser: setCurrentUser,
             getCurrentUser: getCurrentUser,
+            getUserSession: getUserSession,
             isLoggedIn: isLoggedIn,
             findUserByUsername: findUserByUsername,
         };
