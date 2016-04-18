@@ -37,16 +37,8 @@
             if($rootScope.user) {
                 return true;
             } else {
-                getUserSession
-                    .then(function(resp) {
-                        var result = resp.data;
-                        if(result.data && result.data != '0') {
-                            return true;
-                        }
-                    });
+                return false;
             }
-
-            return false;
         }
 
         function setCurrentUser(user) {

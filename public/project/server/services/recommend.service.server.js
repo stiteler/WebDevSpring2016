@@ -1,4 +1,4 @@
-module.exports = function(app, UserModel, RecommendModel) {
+module.exports = function(app, UserModel, RecommendModel, EventModel) {
     app.post('/api/project/user/:id/recommend', createRecommend);
     app.get('/api/project/user/:id/recommend', getAllRecos);
     app.delete('/api/project/user/:id/recommend/:rid', deleteRecommend);

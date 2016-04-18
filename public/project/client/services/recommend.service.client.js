@@ -25,7 +25,6 @@
             return $http.delete('/api/project/user/'+userId+'/recommend'+recoId);
         }
 
-
         function getRecommendsForUserId(userId) {
             return $http.get('/api/project/user/'+userId+'/recommend');
         }

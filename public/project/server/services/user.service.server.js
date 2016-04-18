@@ -1,4 +1,4 @@
-module.exports = function(app, UserModel) {
+module.exports = function(app, UserModel, EventModel) {
     var auth = authorized;
 
     // app.post('/api/project/user', createUser); // repl. by register?

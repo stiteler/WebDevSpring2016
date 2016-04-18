@@ -1,4 +1,4 @@
-module.exports = function(app, UserModel) {
+module.exports = function(app, UserModel, EventModel) {
     var q = require('q');
 
     app.post('/api/project/user/:ida/connect/:idb', createConnection);
