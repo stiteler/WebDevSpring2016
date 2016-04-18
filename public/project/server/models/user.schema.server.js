@@ -1,7 +1,7 @@
 module.exports = function(mongoose) {
     var RecommendSchema = require("./recommend.schema.server.js")(mongoose);
     
-    var UserSchema = mongoose.Schema({
+    var ProjectUserSchema = mongoose.Schema({
         username: {type: String, unique: true},
         password: String,
         firstName: String,
@@ -21,7 +21,7 @@ module.exports = function(mongoose) {
     }, {collection: 'project-user'});
 
 
-    return UserSchema;
+    return ProjectUserSchema;
 };
 
 // {  

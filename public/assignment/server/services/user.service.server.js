@@ -1,8 +1,8 @@
-var passport = require('passport');
+// var passport = require('passport');
 var LocalStrategy = require('passport-local').Strategy;
 var bcrypt = require("bcrypt-nodejs");
 
-module.exports = function(app, UserModel) {
+module.exports = function(app, UserModel, passport, ProjectUserModel) {
     var auth = authorized;
 
     // CRUD endpoints, no longer needed with admin.
@@ -13,24 +13,27 @@ module.exports = function(app, UserModel) {
     // app.delete('/api/assignment/user/:id', auth, deleteUser);
 
     // auth endpoints
-    app.post('/api/assignment/login', passport.authenticate('local'), login);
+    // app.post('/api/assignment/login', passport.authenticate('assign'), login);
+    app.post('/api/assignment/login', passport.authenticate('assignment'), login);
+
     app.post('/api/assignment/logout', logout);
-    app.post('/api/assignment/register', register);
+    // app.post('/api/assignment/register', register);
+    app.post('/api/assignment/register', register, passport.authenticate('assignment'), login);
     app.get('/api/assignment/loggedin', loggedin);
 
-    // passport.use(new LocalStrategy(localStrategy));
-    // passport.serializeUser(serializeUser);
-    // passport.deserializeUser(deserializeUser);
-
-    function localStrategy(username, password, done) {
+    passport.use('assignment', new LocalStrategy(
+      function(username, password, done) {
+        console.log("In ASSIGNMENT LOCAL STRAT");
+        console.log(username, password);
         UserModel
             .findUserByUsername(username)
             .then(
                 function(user) {
-                    // if the user exists, compare passwords with bcrypt.compareSync
                     if(user && bcrypt.compareSync(password, user.password)) {
+                        console.log("PASSWORD MATCH");
                         return done(null, user);
                     } else {
+                        console.log("PASSWORD DOESN'T MATCH FOR USER: %j", user);
                         return done(null, false);
                     }
                 },
@@ -38,8 +41,11 @@ module.exports = function(app, UserModel) {
                     if (err) { return done(err); }
                 }
             );
+      }
+    ));
+    // passport.serializeUser(serializeUser);
+    // passport.deserializeUser(deserializeUser);
 
-    }
 
     // function localStrategy(username, password, done) {
     //     UserModel
@@ -57,25 +63,43 @@ module.exports = function(app, UserModel) {
     //                 if (err) { return done(err); }
     //             }
     //         );
-
     // }
 
-    function serializeUser(user, done) {
-        done(null, user);
-    }
+    // function serializeUser(user, done) {
+    //     console.log("SERIALIZING USER");
+    //     done(null, user);
+    // }
 
-    function deserializeUser(user, done) {
-        UserModel
-            .findUserById(user._id)
-            .then(
-                function(user){
-                    done(null, user);
-                },
-                function(err){
-                    done(err, null);
-                }
-            );
-    }
+    // function deserializeUser(user, done) {
+    //     console.log("DESERIALIZING USER");
+    //     console.log("USER IS: %j", user);
+    //     if(user.region) {
+    //         console.log("DESERIALIZING PROJECT USER");
+    //         ProjectUserModel
+    //         .findUserById(user._id)
+    //         .then(
+    //             function(user){
+    //                 done(null, user);
+    //             },
+    //             function(err){
+    //                 done(err, null);
+    //             }
+    //         );
+    //     } else {
+    //         // this is a request for the assignment user.
+    //         console.log("DESERIALIZING a USER")
+    //         UserModel
+    //         .findUserById(user._id)
+    //         .then(
+    //             function(user){
+    //                 done(null, user);
+    //             },
+    //             function(err){
+    //                 done(err, null);
+    //             }
+    //         );
+    //     }
+    // }
 
     function authorized (req, res, next) {
         if (!req.isAuthenticated()) {
@@ -100,6 +124,7 @@ module.exports = function(app, UserModel) {
     }
 
     function login(req, res) {
+        console.log("IN ASSIGNMENT LOGIN");
         var user = req.user;
         delete user.password;
         res.json(user);
@@ -107,8 +132,9 @@ module.exports = function(app, UserModel) {
 
 
     // Model CRUD
-    function register (req, res) {
+    function register (req, res, next) {
         var newUser = req.body;
+        var original = newUser.password;
         newUser.roles = ['student'];
 
         UserModel
@@ -125,7 +151,11 @@ module.exports = function(app, UserModel) {
                         // actually registered the user, login and send it back to client.
                         UserModel.createUser(newUser)
                             .then(function(created) {
-                                res.json(created);
+                                console.log("Calling Next:");
+                                req.user = newUser;
+                                req.user.password = original
+                                next();
+                                // res.json(created);
                             }, function(err) {
                                 res.status(400).json({"error": "Unable to create user at this time"});
                             });

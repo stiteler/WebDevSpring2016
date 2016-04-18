@@ -29,6 +29,10 @@
                 .createUser(newUser)
                 .then(function (created) {
                     if (created.data) {
+                        UserService.setCurrentUser(created.data);
+                        console.log("After register:");
+                        // console.log(created.data);
+                        // UtilsService.navigate('/profile');
                         UserService
                             .findUserByCredentials(newUser.username, newUser.password)
                             .then(function() {
