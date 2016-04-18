@@ -47,6 +47,15 @@ module.exports = function(app, UserModel, EventModel) {
         UserModel.updateUser(uid, updates)
             .then(function(success) {
                 console.log("UPDATE SUCCESS: %j", success);
+
+                // log the event:
+                var e = {
+                    timestamp: Date.now(),
+                    userA: uid,
+                    event: 'update',
+                };
+                EventModel.addEvent(e);
+
                 res.json(success);
             }, function(err) {
                 console.log("updateUser service error: %j", err);

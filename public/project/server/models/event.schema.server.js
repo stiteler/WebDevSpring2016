@@ -4,6 +4,7 @@ module.exports = function(mongoose) {
         action: String,
         userA: mongoose.Schema.Types.ObjectId,
         userB: mongoose.Schema.Types.ObjectId,
+        context: String
     }, {collection: 'project-event'});
 
     return EventSchema;

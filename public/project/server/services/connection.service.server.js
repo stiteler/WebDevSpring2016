@@ -52,6 +52,10 @@ module.exports = function(app, UserModel, EventModel) {
         var ida = req.params.ida;
         var idb = req.params.idb;
 
+        if (ida == idb) {
+            res.status(400).send("Can't connect to yourself");
+        }
+
         UserModel
             .findUserById(ida)
             .then(function(user) {
@@ -77,6 +81,16 @@ module.exports = function(app, UserModel, EventModel) {
         q.all([defa, defb])
             .then(function() {
                 console.log("Connection added");
+
+                // log the event:
+                var e = {
+                    timestamp: Date.now(),
+                    userA: ida,
+                    userB: idb,
+                    event: 'connect',
+                };
+                EventModel.addEvent(e);
+
                 res.send(200);
             }, function(err) {
                 console.log("Couldn't complete transaction: %j", err);
