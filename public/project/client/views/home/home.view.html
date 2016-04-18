@@ -1,8 +1,10 @@
 <div class="container">
-  <div class="jumbotron">
-    <div col="col-md-10">
 
-      <h1>Hello, TA!</h1>
+
+  <div ng-repeat="event in model.events" class="jumbotron">
+  {{JSON.stringify(event)}}
+
+      <!-- <h1>Hello, TA!</h1>
       <p>
           If you're reading this live it's in the prototype stage.
 
@@ -27,8 +29,7 @@
             <li><h3>Enhanced Search for Recruiter Role</h3></li>
             <li><h3>User Feed (Shown On this home page)</h3></li>
           </ul>
-        </p>
+        </p> -->
 
-    </div>
   </div>
 </div>

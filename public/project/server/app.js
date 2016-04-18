@@ -15,6 +15,7 @@ module.exports = function(app, db, mongoose, passport, UserModel) {
     var AssignmentUserModel = require('../../assignment/server/models/user.model.server.js');
 
     // services
+    var EventService = require("./services/event.service.server.js")(app, UserModel, EventModel);
     var SecurityService = require("./services/security.service.server.js")(app, UserModel, AssignmentUserModel, passport);
     var UserService = require('./services/user.service.server.js')(app, UserModel, EventModel);
     var RecommendService = require('./services/recommend.service.server.js')(app, UserModel, RecommendModel, EventModel);

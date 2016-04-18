@@ -1,16 +1,18 @@
 module.exports = function(app, UserModel, EventModel) {
     app.get('/api/project/event', getMostRecent);
 
-    function getEvents() {
+    function getMostRecent() {
         EventModel
             .getMostRecent(10)
             .then(function(events) {
 
                 var preparedEvents = [];
-                for(var i : events) {
+                for(var i in events) {
                     if (events[i]) {
+
                         // prepare the events for render.
                         var e = events[i];
+                        console.log("event: %j", e);
                         preparedEvents.push(_renderEvent(e));
                     }
                 }
