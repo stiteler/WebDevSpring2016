@@ -10,12 +10,17 @@ module.exports = function(User, mongoose) {
         deleteUserById: deleteUserById,
         findUserByUsername: findUserByUsername,
         findUserByCredentials: findUserByCredentials,
+        findUsersByIds: findUsersByIds
     };
     return api;
 
     // we only need this without mongo for now.
     function findAllUsers() {
         return User.find();
+    }
+
+    function findUsersByIds(ids) {
+        return User.find({'_id': {$in: ids}});
     }
 
     function findUserById(userId) {

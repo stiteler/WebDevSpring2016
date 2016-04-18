@@ -34,7 +34,19 @@
         }
 
         function isLoggedIn() {
-            return $rootScope.user ? true : false;
+            if($rootScope.user) {
+                return true;
+            } else {
+                getUserSession
+                    .then(function(resp) {
+                        var result = resp.data;
+                        if(result.data && result.data != '0') {
+                            return true;
+                        }
+                    });
+            }
+
+            return false;
         }
 
         function setCurrentUser(user) {
@@ -84,14 +96,6 @@
                 }
             });
         }
-
-        // function findUserByCredentials(username, password) {
-        //     return $http({
-        //         url: '/api/project/user',
-        //         method: "GET",
-        //         params: {'username': username, 'password': password}
-        //      });
-        // }
 
         function findAllUsers() {
             return $http.get('/api/project/user');
