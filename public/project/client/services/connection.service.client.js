@@ -30,7 +30,8 @@
         }
 
         function getConnections(userId) {
-            return $http.get('/api/project/user/'+userId+'/connect');
+            // gets all connections for currently logged in user.
+            return $http.get('/api/project/connect');
         }
     }
 }());

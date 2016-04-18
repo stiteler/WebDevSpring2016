@@ -1,0 +1,39 @@
+<div class="container">
+  <div>
+    <h1>Your Connections</h1>
+
+    <div ng-if="model.errorMessage" class="alert alert-dismissible alert-warning">
+        <button type="button" ng-click="model.clearError()" class="close" data-dismiss="alert">×</button>
+        <strong>{{model.errorMessage}}</strong>
+      </div>
+
+    <div ng-repeat="connection in model.connections" 
+        class="container-fluid well well-sm">
+      <div class="col-xs-12 col-sm-12 col-md-9 col-lg-2">
+        <h2>
+          <a href="#/profile/{{connection.username}}">{{connection.username}}</a>
+        </h2>
+        <p>Region: {{connection.region}}</p>
+        <span class="label label-info">Looking for {{connection.beacon}}</span>
+      </div>
+      <div class="col-xs-12 col-sm-12 col-md-3 col-lg-8 container-fluid">
+          <h3>
+            <span class="label label-info">#{{connection.flair1}}</span>
+            <span class="label label-info">#{{connection.flair2}}</span>
+            <span class="label label-info">#{{connection.flair3}}</span>
+          </h3>
+        </div>
+        <div class="col-xs-12 col-sm-12 col-md-3 col-lg-2 pull-right">
+          <a href="#/profile/{{result.username}}"
+             class="btn btn-raised btn-info btn-block">
+             View
+          </a>
+           <a href="javascript:void(0)"
+              ng-click="model.deleteConnection(connection);"
+              class="btn btn-raised btn-info btn-block">
+              Remove
+          </a>
+        </div>
+    </div>
+  </div>
+</div>

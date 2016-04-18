@@ -35,6 +35,14 @@
                   loggedin: checkLoggedin
                 }
             })
+            .when('/profile/connection', {
+                templateUrl: 'views/users/connection.view.html',
+                controller: 'ConnectionController',
+                controllerAs: 'model',
+                resolve : {
+                  loggedin: checkLoggedin
+                }
+            })
             .when('/profile/:username', {
                 templateUrl: 'views/users/profile.view.html',
                 controller: 'ProfileController',

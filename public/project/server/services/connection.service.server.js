@@ -3,7 +3,8 @@ module.exports = function(app, UserModel, EventModel) {
 
     app.post('/api/project/user/:ida/connect/:idb', createConnection);
     app.delete('/api/project/user/:ida/connect/:idb', deleteConnection);
-    app.get('/api/project/user/:id/connect', getConnections);
+    // app.get('/api/project/user/:id/connect', getConnectionsById);
+    app.get('/api/project/connect', getConnections);
     app.get('/api/project/user/:ida/connect/:idb', isConnected);
 
     function isConnected(req, res) {
@@ -24,7 +25,7 @@ module.exports = function(app, UserModel, EventModel) {
         });
     }
 
-    function getConnections(req, res) {
+    function getConnectionsById(req, res) {
         var uid = req.params.id;
         UserModel
         .findUserById(uid)
@@ -44,6 +45,32 @@ module.exports = function(app, UserModel, EventModel) {
             res.status(400).send("Unable to find that user");
         });
     }
+
+
+    function getConnections(req, res) {
+        if(req.user) {
+            var uid = req.user._id;
+            UserModel
+            .findUserById(uid)
+            .then(function(user) {
+                console.log("GetConnections: USER: %j", user);
+                UserModel
+                .findUsersByIds(user.connections)
+                .then(function(users) {
+                    console.log("Finding users matching connections: %j", user.connections);
+                    res.json(users);
+                }, function(err) {
+                    console.log("Error finding users by connections: %j", err);
+                    res.status(400).send("Unable to find connections");
+                });
+            }, function(err) {
+                console.log("Can't find user in getConnections: %j", err);
+                res.status(400).send("Unable to find that user");
+            });
+        }
+
+    }
+
 
     function createConnection(req, res) {
         var defa = q.defer();
