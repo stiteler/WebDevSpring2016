@@ -6,8 +6,6 @@
         .factory('ConnectionService', ConnectionService);
 
     function ConnectionService($http) {
-        var conns = _getConnections();
-
         var api = {
             isConnected: isConnected,
             createConnection: createConnection,
