@@ -121,7 +121,7 @@
               best encompass their skillset.  I used to be a recruiter in the Biotechnology and Pharmaceutical industries, and Linked-in was a useful
               tool, however the sheer amount of bloat on each user's profile was overwhelming.  It was often hard to find people on the platform 
               when searching for a core set of skills, it seemed everyone had the skills I was looking for, but few mastered them.  By limiting user
-              expression, flairdrop is optimized for professionals who seek to stand out in their category.
+              expression, flairdrop is optimized for professionals who seek to stand out in their category.  TL:DR: flairdrop aims to emulate the business card and handshake relationship created at an in person networking event. 
             </p>
 
               <h2>Design</h2>
@@ -136,16 +136,66 @@
             </p>
             <h2>Features</h2>
               <ul>
-              <li><p>Something</p></li>
-              <li><p>Something Else</p></li>
+              <li><p><strong>Profile:</strong> Every user has access to a flairdrop profile page.  This is where they update their three flair selections.
+                Flair should take some consideration by users as it's the primary way others can find them, including recruiters. They can also
+                include some basic information, like their region, name, industry, and a beacon, which lets others know they are looking for either
+                work, connections, recommendations, or nothing at all.</p></li>
+
+              <li><p><strong>Search:</strong> Basic users can search for other users by flair, allowing them to find others with similiar skills,
+                or others who's skillset might complement their own well.</p></li>
+
+              <li><p><strong>Connect:</strong> Once a user finds another user that they like, they can connect to that person which
+                enables some additional features for the relationship. Every user can see their connections in a connections
+                view, which allows them to browse and remove connections.</p></li>
+
+              <li><p><strong>Recommend:</strong> Once a user is connected to another user, they can recommend them for their flair.  This is indicated
+                by the thumbs up on the flair when viewing another's profile page. Recommendations show up for all users who are
+                visiting a user's profile.</p></li>
+
+              <li><p><strong>Events:</strong> Anytime a user connects or recommends another user, or when any user updates their profile image
+                or their profile media, it shows up in an event stream on the home page of the app.  (To see the event stream),
+                after logging in, you can click the flairdrop logo and it will take you to the home page of the application.
+                In my opinion, combined with the 3rd party media API, this is the most useful and fun feature that I developed
+                such far for flairdrop.  It was an afterthought in my initial prototype, but once implemented, I thought it was
+                really neat to see the changes user's were making to their profiles. </p></li>
+
+              <li><p><strong>Media (3rd part API):</strong> My primary third-party API is <a href="//embed.ly" target="_blank">Embedly's</a>
+                OEmbed API. In short, embed.ly provides embeds for hundreds of different providers.  By utilizing their OEmbed API,
+                I'm able to allow users of flairdrop to embed almost any media from any popular website, be it articles, images, videos, music
+                etc.  See their list of <a href="//embed.ly/providers">supported providers</a> to get a feel for what they can do. In the grand
+                scheme of flairdrop as an application, the custom embedded media gives each user the MOST freedom to show the world what they're 
+                all about.  Users could choose to post a personal interview, a song that they made, an article they wrote, etc. </p>
+              </li>
+
+              <li><p><strong>Other APIs:</strong> Embedly also offers a simple in-html <a href="//embed.ly/display">display api</a> for resizing and cropping images in-situ without custom styling. I'm using this to control the size of profile images to ensure a uniform experience for all users.  Also
+              I'm using the gravatar API offered from wordpress, which looks up an image from the hash of a user's email.  If any user is registered
+              with gravatar, supported by a number of other websites, then their gravatar image will become their default image.  If they aren't registered,
+              then gravatar's api returns a nicely styled and randomized graphic.</p>
+              </li>
+              
+              <li><p><strong>Advanced Recruiter Search:</strong> My second type of user is a role superimposed on top of a normal user.  Currently,
+                recruiters have access to advanced search features.  Namely, they can search by name, region, and beacon, in addition to searching by 
+                flair.  This allows them to find users who they might be interested in for a specific job in a given city or area. This is a prototype
+                to developing a "premium" functionality for flairdrop. 
+              </p></li>
               </ul>
               
-            </p>
             <h2>Future Improvements</h2>
             <p>
-            
+            <ul>
+              <li>Handling unsupported Embed.ly providers.</li>
+              <li>Messaging functionality between connected users, and between recruiters and all users.</li>
+              <li>Administration improvements are required to manage users, since a Recruiter was my second user type, I feel the need
+              for a site admin.  This admin would have the ability to better manage existing users (ie, upgrading them from a regular user
+              to a recruiter, for example).</li>
+              <li>Search improvements (If I ever went to production with this I'd make "user documents" and implement an elasticsearch cluster
+              for indexing and search functionality, which would be an improvement upon default mongo/node search.</li>
+              <li>New User on boarding (Right now profile creation leaves a bit to be desired).</li>
+              <li>Better navigation into the search process (allow linking of flair to a search for that flair for other users).</li>
+              <li>There's almost certainly some bugs I need to fix.</li>
+              <li>FYI: This actual "about me" page is NOT yet optimized for a mobile experience. However, flairdrop is mobile first.</li>
+            </ul>
             </p>
-
           </div>
 
 
