@@ -38,7 +38,7 @@ module.exports = function(UserModel, mongoose) {
                 for(var i in user.recommends) {
                     var reco = user.recommends[i];
                     if(reco.recommenderId == recommend.recommenderId &&
-                         reco.recommend == recommend.recommend) {
+                         reco.recommendation == recommend.recommendation) {
                         def.reject("Duplicate Recommendation.");
                         return;
                     }
