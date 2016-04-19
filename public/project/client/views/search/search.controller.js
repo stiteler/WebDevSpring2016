@@ -13,11 +13,24 @@
         function init() {
             model.user = UserService.getCurrentUser();
             console.log(model.user);
-            model.flairFilters = [
-                {selected: false, value: model.user.flair1}, 
-                {selected: false, value: model.user.flair2}, 
-                {selected: false, value: model.user.flair3},
-            ];
+
+            // suggest user uses their own flair to start searching.
+            model.flairFilters = [];
+            if(model.user.flair1) {
+                model.flairFilters.push({selected: false, value: model.user.flair1})
+            }
+            if(model.user.flair2) {
+                model.flairFilters.push({selected: false, value: model.user.flair2})
+            }
+            if(model.user.flair3) {
+                model.flairFilters.push({selected: false, value: model.user.flair3})
+            }
+
+            // model.flairFilters = [
+            //     {selected: false, value: model.user.flair1}, 
+            //     {selected: false, value: model.user.flair2}, 
+            //     {selected: false, value: model.user.flair3},
+            // ];
 
             query();
         }
