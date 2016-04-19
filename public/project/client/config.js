@@ -68,6 +68,14 @@
                   loggedin: checkLoggedin
                 }
             })
+            .when('/advancedsearch', {
+                templateUrl: 'views/search/advancedsearch.view.html',
+                controller: 'AdvancedSearchController',
+                controllerAs: 'model',
+                resolve : {
+                  loggedin: checkRecruiter
+                }
+            })
             .otherwise({
               redirectTo: '/home'
             });
@@ -77,6 +85,25 @@
                 $.material.init();
             });
         });
+
+    var checkRecruiter = function($q, $timeout, $http, $location, $rootScope)
+    {
+        var deferred = $q.defer();
+    
+        $http.get('/api/project/loggedin').success(function(user)
+        {
+            $rootScope.errorMessage = null;
+            // User is Authenticated
+            if (user !== '0' && user.roles.indexOf('recruiter') != -1)
+            {
+                console.log("recruiter found");
+                $rootScope.user = user;
+                deferred.resolve();
+            }
+        });
+        
+        return deferred.promise;
+    };
 
     var checkLoggedin = function($q, $http, $location, $rootScope)
     {

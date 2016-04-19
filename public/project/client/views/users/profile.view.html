@@ -46,7 +46,7 @@
           <div class="container-fluid">
 
             <div>
-              <a ng-If="!model.isSelf()" 
+              <a ng-If="!model.isSelf() && model.connected" 
                  ng-click="model.recommend(model.profile.flair1)"
                  class="btn btn-primary btn-fab btn-fab-mini" 
                  href="javascript:void(0)">
@@ -76,7 +76,7 @@
 
           <div class="container-fluid">
             <div>
-              <a ng-If="!model.isSelf()" 
+              <a ng-If="!model.isSelf() && model.connected" 
                 ng-click="model.recommend(model.profile.flair2)"
                 class="btn btn-primary btn-fab btn-fab-mini" 
                 href="javascript:void(0)">
@@ -110,7 +110,7 @@
           <div class="container-fluid">
 
             <div>
-              <a ng-If="!model.isSelf()" 
+              <a ng-If="!model.isSelf()&& model.connected" 
                 ng-click="model.recommend(model.profile.flair3)"
                 href="javascript:void(0)"
                 class="btn btn-primary btn-fab btn-fab-mini">

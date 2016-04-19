@@ -14,13 +14,11 @@
             model.user = UserService.getCurrentUser();
             console.log(model.user);
             model.flairFilters = [
-                {selected: true, value: model.user.flair1}, 
-                {selected: true, value: model.user.flair2}, 
-                {selected: true, value: model.user.flair3},
+                {selected: false, value: model.user.flair1}, 
+                {selected: false, value: model.user.flair2}, 
+                {selected: false, value: model.user.flair3},
             ];
 
-            console.log("Flair filters:");
-            console.log(model.flairFilters);
             query();
         }
         init();
@@ -31,7 +29,6 @@
                 model.newFilter = null;
                 query();
             }
-
         }
 
         function query() {
@@ -49,6 +46,12 @@
                             model.flairFilters[i].selected) {
                             filters.push(model.flairFilters[i].value);
                         }
+                    }
+
+                    // if no filters, just show all users.
+                    if(filters.length < 1) {
+                        model.results = all;
+                        return;
                     }
 
                     model.results = [];

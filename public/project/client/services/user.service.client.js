@@ -14,6 +14,7 @@
             register: register,
             // findUserByCredentials: findUserByCredentials,
             findAllUsers: findAllUsers,
+            isRecruiter: isRecruiter,
             // createUser: createUser,
             deleteUserById: deleteUserById,
             updateUser: updateUser,
@@ -30,6 +31,14 @@
             if (isLoggedIn()) {
                 return true;
                 // return ($rootScope.user.roles.indexOf('admin') > -1) ? true : false;
+            }
+        }
+
+        function isRecruiter() {
+            if (isLoggedIn() && $rootScope.user.roles.indexOf('recruiter')) {
+                return true;
+            } else {
+                return false;
             }
         }
 

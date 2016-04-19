@@ -10,6 +10,7 @@
 
         model.logout = logout;
         model.isAdmin = UserService.isAdmin;
+        model.isRecruiter = UserService.isRecruiter;
         model.isLoggedIn = UserService.isLoggedIn;
         model.isActive = isActive;
         model.user = UserService.getCurrentUser;

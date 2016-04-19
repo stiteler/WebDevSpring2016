@@ -15,20 +15,15 @@
         <div class="navbar-collapse collapse navbar-responsive-collapse">
 
         <!-- TODO: Impl. a route to search with query params -->
-<!--           <form ng-show="model.isLoggedIn()" class="navbar-form navbar-left" rol="search">
-            <div class="form-group">
-              <input type="text" class="form-control" placeholder="Find People">
-            </div>
-          </form> -->
-
           <ul class="nav navbar-nav navbar-right">
 
             <li ng-show="model.isLoggedIn()"
                 ng-class="{ active : model.isActive('/search') }">
                     <a href="#/search">Search</a></li>
 
-            <li ng-show="model.isAdmin()">
-                    <a href="#/admin">Admin</a></li>
+            <li ng-show="model.isRecruiter()"
+                ng-class="{ active : model.isActive('/advancedsearch') }">
+              <a href="#/advancedsearch">Recruiter Search</a></li>
 
             <li ng-show="model.isLoggedIn()"
                 ng-class="{ active : model.isActive('/profile') }">

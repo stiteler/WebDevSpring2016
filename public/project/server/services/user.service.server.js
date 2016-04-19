@@ -17,10 +17,6 @@ module.exports = function(app, UserModel, EventModel) {
     };
 
     function getUser(req, res) {
-        console.log('in getUser');
-        console.log(req.params);
-        console.log(req.query);
-        console.log(req.body);
         // need to switch on context
         if (req.query.username) {
             return getUserByUsername(req, res);
