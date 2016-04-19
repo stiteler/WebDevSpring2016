@@ -45,23 +45,47 @@ module.exports = function(app, UserModel, EventModel) {
         var uid = req.params.id;
         var updates = req.body;
 
-        UserModel.updateUser(uid, updates)
+        UserModel
+        .findUserById(uid)
+        .then(function(user) {
+            var currentMedia = user.media;
+            var currentImage = user.imageUrl;
+
+            UserModel.updateUser(uid, updates)
             .then(function(success) {
                 console.log("UPDATE SUCCESS: %j", success);
 
-                // log the event:
-                var e = {
-                    timestamp: Date.now(),
-                    userA: uid,
-                    event: 'update',
-                };
-                EventModel.addEvent(e);
+                // image media/image changed, let the world know.
+                if(currentMedia != updates.media) {
+                    var e = {
+                        timestamp: Date.now(),
+                        userA: uid,
+                        action: 'mediaUpdate',
+                        context: updates.media,
+                    };
+                    console.log("NEW EVENT: %j", e);
+                    EventModel.addEvent(e);
+                }
+
+                if(currentImage != updates.imageUrl) {
+                    var e = {
+                        timestamp: Date.now(),
+                        userA: uid,
+                        action: 'imageUpdate',
+                        context: updates.imageUrl,
+                    };
+                    console.log("NEW EVENT: %j", e);
+                    EventModel.addEvent(e);
+                }
 
                 res.json(success);
             }, function(err) {
                 console.log("updateUser service error: %j", err);
                 res.status(400).json({"error": "Unable to update user at this time"});
             });
+        });
+
+        
     }
 
     function createUser(req, res) {

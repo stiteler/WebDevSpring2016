@@ -5,8 +5,22 @@
 
       <div class="panel panel-default">
         <div class="panel-body">
-
-          <h4><span class="label label-info">looking for {{model.profile.beacon}}</span></h4>
+          <div class="btn-group">
+            <a href="bootstrap-elements.html" data-target="#" class="btn btn-warning btn-raised dropdown-toggle" data-toggle="dropdown">
+              {{model.profile.beacon}}
+              <span class="caret"></span>
+            </a>
+            <ul class="dropdown-menu">
+              <li><a ng-click="model.setBeacon('Work');" 
+                href="javascript:void(0)">Looking for Work</a></li>
+              <li><a ng-click="model.setBeacon('Connections');" 
+                href="javascript:void(0)">Looking for Connections</a></li>
+              <li><a ng-click="model.setBeacon('Recommendations');" 
+                href="javascript:void(0)">Looking For Recommendations</a></li>
+              <li><a ng-click="model.setBeacon('Nothing');" 
+                href="javascript:void(0)">Looking For Nothing</a></li>
+            </ul>
+          </div>
 
 
           <!-- Excuse Width attr for now, going to use an image API later for sizing. -->

@@ -9,18 +9,16 @@
         var model = this;
 
         model.save = save;
+        model.setBeacon = setBeacon;
 
         function init() {
             model.profile = UserService.getCurrentUser();
         }
-        //     if (UserService.isLoggedIn()) {
-        //             model.profile = UserService.getCurrentUser();
-        //         } else {
-        //             $location.path('/home');
-        //         }
-
-        // }
         init();
+
+        function setBeacon(beacon) {
+            model.profile.beacon = beacon;
+        }
 
         function save() {
             var updates = {
@@ -28,6 +26,7 @@
                 lastName: model.profile.lastName,
                 industry: model.profile.industry,
                 organization: model.profile.organization,
+                beacon: model.profile.beacon,
                 region: model.profile.region,
                 flair1: model.profile.flair1,
                 flair2: model.profile.flair2,

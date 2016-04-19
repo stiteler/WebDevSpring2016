@@ -25,6 +25,25 @@
             <a href="javascript:void(0)">{{event.context}}</a> flair.
           </h1>
         </div>
+        <div ng-switch-when="mediaUpdate">
+          <h1>
+            <a href="#/profile/{{event.userA}}">@{{event.userA}}</a>
+            updated their media selection!
+            <div class="panel-body responsive">
+          <div ng-bind-html="event.iframe"></div>
+        </div>
+          </h1>
+        </div>
+        <div ng-switch-when="imageUpdate">
+          <h1>
+            <a href="#/profile/{{event.userA}}">@{{event.userA}}</a>
+            updated their profile picture!
+              <img class="image-responsive center-block" 
+               ng-src="{{event.context}}"
+               alt="@{{event.userA}}'s new Profile Picture">
+          </h1>
+        </div>
+
     </div>
   </div>
 

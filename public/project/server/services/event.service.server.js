@@ -54,6 +54,7 @@ module.exports = function(app, UserModel, EventModel) {
                 var rendered = {
                     userA: mapped['userA'],
                     userB: mapped['userB'],
+                    context: e.context,
                     action: e.action,
                     timestamp: e.timestamp,
                 };
