@@ -30,11 +30,9 @@ module.exports = function(app, UserModel, EventModel) {
         UserModel
         .findUserById(uid)
         .then(function(user) {
-            console.log("GetConnections: USER: %j", user);
             UserModel
             .findUsersByIds(user.connections)
             .then(function(users) {
-                console.log("Finding users matching connections: %j", user.connections);
                 res.json(users);
             }, function(err) {
                 console.log("Error finding users by connections: %j", err);
@@ -53,11 +51,9 @@ module.exports = function(app, UserModel, EventModel) {
             UserModel
             .findUserById(uid)
             .then(function(user) {
-                console.log("GetConnections: USER: %j", user);
                 UserModel
                 .findUsersByIds(user.connections)
                 .then(function(users) {
-                    console.log("Finding users matching connections: %j", user.connections);
                     res.json(users);
                 }, function(err) {
                     console.log("Error finding users by connections: %j", err);

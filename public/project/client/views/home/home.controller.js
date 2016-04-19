@@ -5,11 +5,12 @@
         .module('FlairdropApp')
         .controller('HomeController', HomeController);
 
-    function HomeController(EventService, UserService, EmbedlyService, $q, $sce, $rootScope, $scope) {
+    function HomeController(EventService, UserService, EmbedlyService, $sce, ImageService) {
         var model = this;
-        // model.getMediaIframe = getMediaIframe;
+        model.resize = ImageService.resize;
 
         function init() {
+            model.isLoggedIn = UserService.isLoggedIn;
             model.user = UserService.getCurrentUser();
             updateEvents();
             

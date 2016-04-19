@@ -1,5 +1,5 @@
 <div class="container">
-  <div ng-if="model.user">
+  <div ng-if="model.isLoggedIn();">
     <h1>Recent Events</h1>
 
     <div ng-if="model.errorMessage" class="alert alert-dismissible alert-warning">
@@ -39,15 +39,16 @@
             <a href="#/profile/{{event.userA}}">@{{event.userA}}</a>
             updated their profile picture!
               <img class="image-responsive center-block" 
-               ng-src="{{event.context}}"
+               ng-src="{{model.resize(event.context, 400);}}"
                alt="@{{event.userA}}'s new Profile Picture">
           </h1>
         </div>
 
     </div>
   </div>
+  </div>
 
-  <div ng-if="!model.user" class="jumbotron">
+  <div ng-if="!model.isLoggedIn();" class="jumbotron">
     <h1>Welcome</h1>
      <p>Create your profile today to start dropping some flair.  Flairdrop
      is a miniature social network that lets you quickly connect with others who share your flair.

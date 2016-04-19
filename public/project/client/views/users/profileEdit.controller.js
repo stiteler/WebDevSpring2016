@@ -5,11 +5,12 @@
         .module('FlairdropApp')
         .controller('ProfileEditController', ProfileEditController);
 
-    function ProfileEditController($sce, $routeParams, $location, UserService, EmbedlyService) {
+    function ProfileEditController($sce, $routeParams, $location, UserService, EmbedlyService, ImageService) {
         var model = this;
 
         model.save = save;
         model.setBeacon = setBeacon;
+        model.resize = ImageService.resize;
 
         function init() {
             model.profile = UserService.getCurrentUser();

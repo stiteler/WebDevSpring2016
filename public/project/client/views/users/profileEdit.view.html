@@ -7,7 +7,7 @@
         <div class="panel-body">
           <div class="btn-group">
             <a href="bootstrap-elements.html" data-target="#" class="btn btn-warning btn-raised dropdown-toggle" data-toggle="dropdown">
-              {{model.profile.beacon}}
+              {{model.profile.beacon || 'Beacon'}}
               <span class="caret"></span>
             </a>
             <ul class="dropdown-menu">
@@ -25,7 +25,7 @@
 
           <!-- Excuse Width attr for now, going to use an image API later for sizing. -->
           <img class="image-responsive center-block" 
-               ng-src="{{model.profile.imageUrl}}"
+               ng-src="{{model.resize(model.profile.imageUrl, 200);}}"
                width="300"
                alt="Profile Picture">
 

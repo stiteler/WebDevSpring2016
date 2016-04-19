@@ -5,8 +5,9 @@
         .module('FlairdropApp')
         .controller('ProfileController', ProfileController);
 
-    function ProfileController($sce, $rootScope, $routeParams, $location, ConnectionService, RecommendService, UserService, EmbedlyService) {
+    function ProfileController($sce, $rootScope, $routeParams, $location, ImageService, ConnectionService, RecommendService, UserService, EmbedlyService) {
         var model = this;
+        model.resize = ImageService.resize;
         var rs = RecommendService;
 
         model.getRecosForFlair = getRecosForFlair;
