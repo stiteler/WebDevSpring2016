@@ -14,16 +14,251 @@
     <link 
       href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" 
       rel="stylesheet">
+
+      <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- JS Dependencies -->
+    <!-- Angular JS -->
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.9/angular.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.9/angular-route.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.9/angular-sanitize.min.js"></script>
+
+    <!-- jquery -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+    <!-- bootstrap -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+
+    <!-- embedly platform -->
+    <script async src="//cdn.embedly.com/widgets/platform.js" charset="UTF-8"></script>
+
+    <!-- Style Dependencies-->
+    <!-- Bootstrap CSS -->
+    <link
+      href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css"
+      rel="stylesheet">
+    <!-- FontAwesome for table drop downs -->
+    <link
+      href="//maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css"
+      rel="stylesheet">
+
+    <!-- material bootstrap styles and fonts -->
+    <link rel="stylesheet" type="text/css" href="/project/client/css/bootstrap-material-design.min.css">
+    <link rel="stylesheet" type="text/css" href="/project/client/css/ripples.min.css">
+    <link rel="stylesheet" type="text/css" href="index.css">
+    <link href="//fezvrasta.github.io/snackbarjs/dist/snackbar.min.css" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="//fonts.googleapis.com/css?family=Roboto:300,400,500,700">
+    <link rel="stylesheet" type="text/css" href="//fonts.googleapis.com/icon?family=Material+Icons">
+
+    <!-- bootstrap material -->
+    <script src="/project/client/js/dist/arrive.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/bootstrap-material-design/0.5.9/js/ripples.min.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/bootstrap-material-design/0.5.9/js/material.min.js"></script>
+    <script src="//fezvrasta.github.io/snackbarjs/dist/snackbar.min.js"></script>
+      <!-- Dropdown.js -->
+  <link href="//cdn.rawgit.com/FezVrasta/dropdown.js/master/jquery.dropdown.css" rel="stylesheet">
 </head>
 <body>
-<div class="container">
-    <h1>Chris Stiteler Homepage for CS5610 (graduate) </h1>
-    <img src="https://pbs.twimg.com/profile_images/650838229126660096/r91wuuwN.jpg"/>
-    <p><a target="_blank" href="https://docs.google.com/document/d/1MiYkh0Ejf6_fee5CFbpI-3OzbndUk0AneclBKFG1OnM/edit?usp=sharing">
-        Project Proposal</a></p>
-    <p><a target="_blank" href="https://github.com/stiteler/WebDevSpring2016">Github</a></p>
-    <p><a target="_blank" href="http://webdevspring2016-stitelerchris.rhcloud.com/assignment/client">Assignment</a></p>
-    <p><a target="_blank" href="http://webdevspring2016-stitelerchris.rhcloud.com/project/client">Project</a></p>
+
+<div class="header-panel shadow-z-2">
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-xs-3">
+        <h1>Chris Stiteler</h1>
+      </div>
+    </div>
+  </div>
 </div>
+
+<div class="container-fluid main">
+  <div class="row">
+    <nav class="col-xs-3 menu">
+      <ul>
+        <li class="active withripple" data-target="#about">About Me</li>
+        <li class="withripple" data-target="#project">About Project</li>
+        <li class="withripple" data-target="#project-video">Project Video</li>
+        <li class="withripple" data-target="#project-proposal">Project Proposal 
+          <a href="https://docs.google.com/document/d/1MiYkh0Ejf6_fee5CFbpI-3OzbndUk0AneclBKFG1OnM/edit?usp=sharing">
+          <i class="material-icons">open_in_new</i></a></li>
+
+        <li><a href="http://webdevspring2016-stitelerchris.rhcloud.com/project/client" 
+          target="_blank">View Project <i class="material-icons">open_in_new</i></a>
+        <li><a href="http://webdevspring2016-stitelerchris.rhcloud.com/assignment/client" 
+          target="_blank">View Assignment <i class="material-icons">open_in_new</i></a></li>
+        <li><a href="https://github.com/stiteler/WebDevSpring2016" 
+          target="_blank">Github <i class="material-icons">open_in_new</i></a></li>
+      </ul>
+    </nav>
+
+    <div class="pages col-xs-9">
+      <div class="row">
+        <div class="col-xs-10">
+          <div class="well well-lg page active" id="about">
+            <h1 class="header">About Me</h1>
+            <img src="https://pbs.twimg.com/profile_images/650838229126660096/r91wuuwN.jpg"/>
+            <p>
+              Hello, I am <a href="https://www.linkedin.com/in/chrisstiteler" target="_blank">Chris Stiteler</a>
+              I was a Chemistry major in college, and shortly after graduation I started learning to code for fun.
+              Almost 3 years later and I'm nearing completion of my Master's in Computer Science at Northeastern.
+
+              This portfolio page is comprised of my work for Prof. Jose Annunziato's Web Development course, CS5610, Spring Semester, 2016.
+            </p>
+            <p>
+              Find me <a href="http://twitter.com/_stiteler" target="_blank">@_stiteler</a> or at <a href="http://github.com/stiteler">github.com/stiteler</a>.
+            </p>
+
+            </p>
+          </div>
+
+          <div class="well well-lg page" id="project">
+            <h1 class="header">Flairdrop</h1>
+            <h2>Inspiration</h2>
+            <p>
+              <a href="http://webdevspring2016-stitelerchris.rhcloud.com/project/client" target="_blank">flairdrop</a> is a minimalistic professional
+              social network. Inspired by the terse expressiveness of twitter and the professional atmosphere of linkedin. Flairdop aims to provide
+              a platform for professionals optimized to find others with similar flair.  Each user can choose up to three skills that they feel
+              best encompass their skillset.  I used to be a recruiter in the Biotechnology and Pharmaceutical industries, and Linked-in was a useful
+              tool, however the sheer amount of bloat on each user's profile was overwhelming.  It was often hard to find people on the platform 
+              when searching for a core set of skills, it seemed everyone had the skills I was looking for, but few mastered them.  By limiting user
+              expression, flairdrop is optimized for professionals who seek to stand out in their category.
+            </p>
+
+              <h2>Design</h2>
+            <p> 
+              In lieu of the minimal and professional inspiration of the site I wanted the design to remain simple as well. The layout borrows from
+              a scrapbook, in that every element of every page is built as a "card".  Each page is then built from individual cards of information.  
+              This card concept makes optimizing the site for mobile a great experience, each element can flow as paper as one might reorganize photos
+              in a scrapbook.  The design also utilizes dropshadow effects to make each card pop out from the page.  This is used subtle to emphasize
+              certain aspects of the page that might contain more importance, or that require more immediate attention of the user. It is important
+              to note, however, that though the design is Google's Material design, it's written in bootstrap with a fantastic port from
+              <a href="http://fezvrasta.github.io/bootstrap-material-design/" target="_blank">fezvrasta</a>.
+            </p>
+            <h2>Features</h2>
+              <ul>
+              <li><p>Something</p></li>
+              <li><p>Something Else</p></li>
+              </ul>
+              
+            </p>
+            <h2>Future Improvements</h2>
+            <p>
+            
+            </p>
+
+          </div>
+
+
+          <div class="well well-lg page" id="project-video">
+            <script async src="//cdn.embedly.com/widgets/platform.js" charset="UTF-8"></script>
+            <a class="embedly-card" href="https://vimeo.com/23848422" data-card-width="100%">Forest</a>
+          </div>
+
+          <div class="well well-lg page" id="project-proposal">
+            <iframe src="https://docs.google.com/document/d/1MiYkh0Ejf6_fee5CFbpI-3OzbndUk0AneclBKFG1OnM/pub?embedded=true" width="100%" height="800"></iframe>
+          </div>
+
+
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+  $(function () {
+    $.material.init();
+  });
+</script>
+
+<!-- Open source code -->
+<!-- Borrows from fevrasta's material design home page. -->
+<script>
+  window.page = window.location.hash || "#about";
+
+  $(document).ready(function () {
+    if (window.page != "#about") {
+      $(".menu").find("li[data-target=" + window.page + "]").trigger("click");
+    }
+  });
+
+  $(window).on("resize", function () {
+    $("html, body").height($(window).height());
+    $(".main, .menu").height($(window).height() - $(".header-panel").outerHeight());
+    $(".pages").height($(window).height());
+  }).trigger("resize");
+
+  $(".menu li").click(function () {
+    // Menu
+    if (!$(this).data("target")) return;
+    if ($(this).is(".active")) return;
+    $(".menu li").not($(this)).removeClass("active");
+    $(".page").not(page).removeClass("active").hide();
+    window.page = $(this).data("target");
+    var page = $(window.page);
+    window.location.hash = window.page;
+    $(this).addClass("active");
+
+
+    page.show();
+
+    var totop = setInterval(function () {
+      $(".pages").animate({scrollTop: 0}, 0);
+    }, 1);
+
+    setTimeout(function () {
+      page.addClass("active");
+      setTimeout(function () {
+        clearInterval(totop);
+      }, 1000);
+    }, 100);
+  });
+
+  function cleanSource(html) {
+    var lines = html.split(/\n/);
+
+    lines.shift();
+    lines.splice(-1, 1);
+
+    var indentSize = lines[0].length - lines[0].trim().length,
+        re = new RegExp(" {" + indentSize + "}");
+
+    lines = lines.map(function (line) {
+      if (line.match(re)) {
+        line = line.substring(indentSize);
+      }
+
+      return line;
+    });
+
+    lines = lines.join("\n");
+
+    return lines;
+  }
+
+  // $(".opensource").click(function () {
+  //   $.get(window.location.href, function (data) {
+  //     var html = $(data).find(window.page).html();
+  //     html = cleanSource(html);
+  //     $("#source-modal pre").text(html);
+  //     $("#source-modal").modal();
+  //   });
+  // });
+</script>
+
+<!-- 
+<div class="container-fluid">
+        <div class="jumbotron">
+            <h1>Chris Stiteler Homepage for CS5610 (graduate) </h1>
+            <img src="https://pbs.twimg.com/profile_images/650838229126660096/r91wuuwN.jpg"/>
+            <p><a target="_blank" href="https://docs.google.com/document/d/1MiYkh0Ejf6_fee5CFbpI-3OzbndUk0AneclBKFG1OnM/edit?usp=sharing">
+                Project Proposal</a></p>
+            <p><a target="_blank" href="https://github.com/stiteler/WebDevSpring2016">Github</a></p>
+            <p><a target="_blank" href="http://webdevspring2016-stitelerchris.rhcloud.com/assignment/client">Assignment</a></p>
+            <p><a target="_blank" href="http://webdevspring2016-stitelerchris.rhcloud.com/project/client">Project</a></p>
+        </div>
+</div>
+ -->
+
 
 </body>
