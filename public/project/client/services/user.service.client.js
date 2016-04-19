@@ -35,11 +35,15 @@
         }
 
         function isRecruiter() {
-            if (isLoggedIn() && $rootScope.user.roles.indexOf('recruiter')) {
-                return true;
-            } else {
-                return false;
+            if (isLoggedIn()) {
+                var user = getCurrentUser();
+                if(user.roles.indexOf("recruiter") > -1) {
+                    return true;
+                } else {
+                    return false;
+                }
             }
+            return false;
         }
 
         function isLoggedIn() {
