@@ -48,6 +48,14 @@
         
         function isSelf() {
             var current = UserService.getCurrentUser();
+
+            if(!current) {
+                return false;
+            }
+            
+            if(!model.profile) {
+                return false;
+            }
             if (current && model.profile._id == current._id) {
                 return true;
             } else {
@@ -122,12 +130,20 @@
                 recommenderUsername: user.username,
             };
 
+            if(model.hasOwnProperty(reco)) {
+                model.reco.push(newReco);
+            } else {
+                model.reco = [newReco];
+            }
+            
+
             RecommendService
                 .createRecommend(pid, newReco)
                 .then(function(success) {
                     console.log("RECOMEND OK.");
                     _updateModels();
                 });
+            _updateModels();
         }
 
         // function removeRecommend(reco) {

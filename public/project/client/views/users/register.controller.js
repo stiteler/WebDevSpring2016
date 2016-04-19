@@ -41,7 +41,13 @@
                         $location.path('/profile');
                     }
                 }, function(err) {
-                    model.errorMessage = err.data;
+                    if(err.data.error) {
+                        model.errorMessage = err.data.error;
+                    } else if(err.data) {
+                        model.errorMessage = err.data
+                    } else {
+                        model.errorMessage = "Unable to register.  Please try again later.";
+                    }
                 });
         }
     }

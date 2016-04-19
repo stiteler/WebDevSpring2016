@@ -34,7 +34,7 @@ module.exports = function(app, UserModel, AssignmentUserModel, passport) {
 
     function register (req, res) {
         var newUser = req.body;
-        newUser.roles = ['user', 'recruiter'];
+        newUser.roles = ['user'];
         newUser.imageUrl = _gravatarUrl(newUser.email);
 
         UserModel

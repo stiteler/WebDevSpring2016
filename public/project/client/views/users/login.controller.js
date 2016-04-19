@@ -25,8 +25,14 @@
                     }
                 },
                 function(err) {
-                    model.errorMessage = err.data.error;
-
+                    if(err.data.error) {
+                        model.errorMessage = err.data.error;
+                    } else if(err.data) {
+                        model.errorMessage = err.data
+                    } else {
+                        model.errorMessage = "Unable to login.  Please check your username/password combination and try again.";
+                    }
+                    
                     setTimeout(function () {
                         clearError();
                     }, 3000);
