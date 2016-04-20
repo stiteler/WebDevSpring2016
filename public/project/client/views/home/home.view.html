@@ -29,9 +29,7 @@
           <h1>
             <a href="#/profile/{{event.userA}}">@{{event.userA}}</a>
             updated their media selection!
-            <div class="panel-body responsive">
-          <div ng-bind-html="event.iframe"></div>
-        </div>
+          <div ng-bind-html="event.iframe" ng-If="event.hasOwnProperty('iframe');" class="responsive"></div>
           </h1>
         </div>
         <div ng-switch-when="imageUpdate">
