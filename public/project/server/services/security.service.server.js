@@ -36,6 +36,10 @@ module.exports = function(app, UserModel, AssignmentUserModel, passport) {
         var newUser = req.body;
         newUser.roles = ['user'];
         newUser.imageUrl = _gravatarUrl(newUser.email);
+        newUser.beacon = "Nothing"; // default to nothing, rather than ''.
+        newUser.flair1 = 'Primary Flair';
+        newUser.flair2 = 'Secondary Flair';
+        newUser.flair3 = 'Tertiary Flair';
 
         UserModel
             .findUserByUsername(newUser.username)
